@@ -8,18 +8,16 @@
 
 body {
     min-height: 100vh;
-    background-image: url(https://img.freepik.com/free-photo/bouquet-yellow-white-pink-daisy-flowers-white-wooden-textured-background_23-2148048400.jpg?ga=GA1.1.1479217200.1755049695&semt=ais_hybrid&w=740&q=80);
     background-size: cover;
     background-position: center;
 }
 
 .cabecalho {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     padding: 1.3rem 10%;
-    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,7 +31,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-     background-color: rgba(0, 0, 0, .1);
+    background-color: rgba(0, 0, 0, .1);    
     backdrop-filter: blur(35px); 
     z-index: -1;
     transition: .5s;
@@ -143,4 +141,96 @@ body {
         transition-delay: calc(.10s * var(--i));
 
     }
+}
+
+
+.apresentacao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 5rem 0;
+    margin-bottom: 100px ;
+    background-image: linear-gradient(to left, #F29BA2, #F26D85, #F2DCE2, #f3eae1);
+    background-size: 300% 100%;
+    animation: degrade-animado 5s  infinite alternate;
+}
+
+@keyframes degrade-animado {
+    0% {
+        background-position-x: 0%;
+    }
+    100% {
+        background-position-x: 100%;
+    }
+        
+}
+
+ .texto-apresentacao {
+    max-width: 600px;
+    color: white;
+ }
+
+.divBotoes {
+    display: flex;
+    gap: 1.7rem;
+    margin: 0 auto;
+    border: none;
+    margin-top: 2rem;
+}
+.botao-catalogo, .botao-entrega{
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 45px;
+    box-shadow:1px 8px 15px 2px rgb(0 0 0 / 10%);
+
+}
+ .botao-catalogo {
+    background-image: linear-gradient(90deg, #5bc54c, #7EA672  );
+    border: none;
+ }
+
+.botao-entrega {
+  position: relative;
+  padding: 10px 20px;
+  backdrop-filter: blur(100px); 
+  border: none;
+}
+
+.botao-entrega::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px; /* espessura da borda */
+  background: linear-gradient(90deg, #F29BA2, #F26D85);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+ .botao-catalogo a , .botao-entrega a {
+    text-decoration: none;
+    font-weight: 500;
+    color: white;
+
+ }
+ .botao-entrega a {
+    padding: 10px;
+    color: #F26D85;
+    animation: cor-fonte 5s  infinite alternate;
+ }
+
+ @keyframes cor-fonte {
+    0% {
+            color: #F26D85;
+    }
+    100% {
+        color: white;
+    }
+        
 }
