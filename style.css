@@ -194,9 +194,11 @@ body {
 
 .botao-entrega {
   position: relative;
+  display: inline-block;
   padding: 10px 20px;
   backdrop-filter: blur(100px); 
   border: none;
+  z-index: 0;  
 }
 
 .botao-entrega::before {
@@ -211,6 +213,7 @@ body {
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
+   pointer-events: none; 
 }
 
  .botao-catalogo a , .botao-entrega a {
