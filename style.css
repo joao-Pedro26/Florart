@@ -240,6 +240,10 @@ body {
 /* Estilo do efeito máquina de escrever */
 .texto-apresentacao {
     text-align: center; /* garante alinhamento à esquerda */
+
+}
+.texto-apresentacao > div {
+    height: 7.5vh;
 }
 .texto-apresentacao h1 {
     overflow: hidden; /* esconde o texto que ainda não "apareceu" */
