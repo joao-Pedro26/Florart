@@ -26,12 +26,12 @@
         </nav> 
     </header>
     <main>
+         
         <section class="apresentacao">
             <div class="texto-apresentacao">
             <div>
             <h1 id="titulo-apresentacao"></h1>
             </div>
-
             <h4>Descubra a beleza das flores com nossas artes exclusivas.</h4>
             </div> 
             <div class="divBotoes">
@@ -42,39 +42,66 @@
                     <a href="/">Entrega Expressa</a>
                 </div>
             </div>
+            <div class="divVideo">
+                <video class="video" autoplay muted loop>
+                    <source src="video/videoFlor.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+        <section class="diferenciais">
+            <div>
+                <div class="icon-diferenciais icon1" >
+                    <i class='bxr  bx-truck' id="icon-diferenciais" style="color:#004500" ></i> 
+                </div>
+                <div class="texto-diferenciais">
+                    <h1>Entrega Rápida</h1>
+                    <p>Receba suas flores frescas em até 24 horas.</p>
+                </div>
+            </div>
+            <div>
+                <div class="icon-diferenciais icon2">
+                    <i class='bxr  bx-shield' id="icon-diferenciais" style='color:#d95d73'></i> 
+                </div>
+                <div class="texto-diferenciais ">
+                    <h1>Entrega Rápida</h1>
+                    <p>Receba suas flores frescas em até 24 horas.</p>
+                </div>
+            </div>
+            <div>
+                <div class="icon-diferenciais icon3">
+                    <i class='bxr  bx-gift' id="icon-diferenciais" style='color:#9f6700'></i>  
+                </div>
+                <div class="texto-diferenciais">
+                    <h1>Entrega Rápida</h1>
+                    <p>Receba suas flores frescas em até 24 horas.</p>
+                </div>
+            </div>
+            <div>
+                <div class="icon-diferenciais icon4">
+                    <i class='bxr  bx-clock-1' id="icon-diferenciais" style='color:#b338b3'></i> 
+                </div>
+                <div class="texto-diferenciais">
+                    <h1>Entrega Rápida</h1>
+                    <p>Receba suas flores frescas em até 24 horas.</p>
+                </div>
+            </div>
+        </section>
+        <section class="carousel">
+            <div class="slides">
+                <div class="slide"><img src="https://img.freepik.com/free-photo/cosmos-flowers_1373-83.jpg" alt=""></div>
+                <div class="slide"><img src="https://img.freepik.com/premium-photo/cosmos-flower-cosmos-bipinnatus-use-background_42082-300.jpg" alt=""></div>
+                <div class="slide"><img src="https://img.freepik.com/free-photo/gerbera-pink-petals-black-background_23-2148268322.jpg" alt=""></div>
+                <div class="slide"><img src="https://img.freepik.com/free-photo/top-view-beautifully-colored-flowers_23-2149005613.jpg" alt=""></div>
+                <div class="slide"><img src="https://img.freepik.com/free-photo/silhouette-pink-cosmos-flowers-garden_1357-51.jpg" alt=""></div>
+            </div>  
+             <div class="controls">
+      <button class="btn prev" aria-label="Anterior">◀</button>
+      <button class="btn next" aria-label="Próximo">▶</button>
+    </div>                            
         </section>
     </main>
-    <script>
-    const titulo = document.getElementById("titulo-apresentacao");
-const mensagens = [
-    "Bem-vindo a Florart.",
-    "Flores com vasos exclusivos."
-];
-let i = 0;
-let j = 0;
-let apagando = false;
-
-function maquinaEscrever() {
-    if (!apagando) {
-        titulo.textContent += mensagens[i].charAt(j);
-        j++;
-        if (j === mensagens[i].length) {
-            setTimeout(() => { apagando = true; maquinaEscrever(); }, 1500);
-            return;
-        }
-    } else {
-        titulo.textContent = titulo.textContent.slice(0, -1);
-        if (titulo.textContent.length === 0) {
-            apagando = false;
-            i = (i + 1) % mensagens.length;
-            j = 0;
-        }
-    }
-    setTimeout(maquinaEscrever, apagando ? 50 : 100);
-}
-
-document.addEventListener("DOMContentLoaded", maquinaEscrever);
-</script>
-
+    <script src="tituloApresentacao.js"></script>
+    <script src="carousel.js"></script>
 </body>
+
 </html>
