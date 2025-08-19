@@ -445,3 +445,26 @@ body {
 }
 
 
+.icon-diferenciais {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0 2rem;
+   height: 5rem;
+   width: 5rem;
+   border-radius: 50%;
+   transition: transform 0.3s ease-in-out;
+}
+
+
+.icon-diferenciais:hover {
+   transform: scale(1.2); /* Aumenta o ícone ao passar o mouse */
+}
+
+
+/* Efeito de aumento celular */
+.icon-diferenciais:active {
+   transform: scale(1.2);
+}
+
+
