@@ -47,8 +47,6 @@ function prevSlide() {
 prevBtn.addEventListener("click", prevSlide);
 nextBtn.addEventListener("click", nextSlide);
 
-// --- AUTOPLAY ---
-setInterval(nextSlide, 2000); // troca a cada 3s
+setInterval(nextSlide, 2000); 
 
-// Inicializa
 updateSlides();
