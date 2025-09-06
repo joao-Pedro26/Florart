@@ -653,9 +653,9 @@ body {
     background: linear-gradient(90deg, #916cf1, #5a2ff4);
 }
 
-/* Scroll suave e compensação do header fixo */
+
 html { scroll-behavior: smooth; }
-.ancora { scroll-margin-top: 110px; } /* ajuste se seu header mudar de altura */
+.ancora { scroll-margin-top: 110px; }
 
 /* Rodapé */
 .rodape {
