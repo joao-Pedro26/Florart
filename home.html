@@ -20,10 +20,10 @@
         </label>
 
        <nav class="menu">
-            <a href="#" style="--i: 0">Home</a>
-            <a href="#catalogo" style="--i: 1">Catálogo</a>
-            <a href="#sobre" style="--i: 2">Sobre</a>
-            <a href="#contato" style="--i: 3">Contato</a>
+            <a href="#" id="home-menu" style="--i: 0">Home</a>
+            <a href="#catalogo" id="catalogo-menu" style="--i: 1">Catálogo</a>
+            <a href="#sobre"  id="sobre-menu" style="--i: 2">Sobre</a>
+            <a href="#contato"  id="contato-menu" style="--i: 3">Contato</a>
        </nav>
 
 
@@ -51,10 +51,10 @@
             </div> 
             <div class="divBotoes">
                 <div class="botao-catalogo">
-                     <a href="/">Catálogo</a>
+                     <a href="#catalogo">Catálogo</a>
                 </div>
                 <div class="botao-entrega">
-                    <a href="/">Entrega Expressa</a>
+                    <a href="#diferenciais">Entrega Expressa</a>
                 </div>
             </div>
             <div class="divVideo">
@@ -65,7 +65,7 @@
         </section>
         <!-- Diferenciais  -->
 
-        <section class="diferenciais">
+        <section class="diferenciais" id="diferenciais">
             <div>
                 <div class="icon-diferenciais icon1" >
                     <i class='bxr  bx-truck' id="icon-diferenciais" style="color:#004500" ></i> 
@@ -122,7 +122,7 @@
 
          <!-- Catálogo -->
 
-        <section class="catalogo" id="catalogo">
+        <section class="catalogo" id="catalogo" >
             <div class="titulo-catalogo" >
                 <h2>Nossos Produtos</h2>
                 <p>Seleção especial das nossas criações mais amadas</p>
@@ -244,6 +244,8 @@
     <script src="js/tituloApresentacao.js"></script>
     <script src="js/carrosel.js"></script>
     <script src="js/carrinho.js"></script>
+    <script src="js/menu.js"></script>
+
 <footer class="rodape">
   <div class="rodape-container">
     <section id="sobre" class="ancora">
