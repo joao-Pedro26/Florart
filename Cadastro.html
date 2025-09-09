@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cadastro e Login</title>
+  <style>
+    :root {
+      --bg: linear-gradient(to left, #000071, #5a2ff4, #916cf1, #8a0c8a, #d263ce);
+      --panel: rgba(0,0,0,0.6);
+      --muted: #e0e0e0;
+      --text: #ffffff;
+      --ring: #916cf1;
+      --success: #10b981;
+      --success-600: #059669;
+      --error: #ef4444;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100svh;
+      display: grid; place-items: center; padding: 24px;
+    }
+    .card {
+      width: 100%; max-width: 760px; background: var(--panel); backdrop-filter: blur(6px);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+    .header {
+      padding: 22px 24px; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(0,0,0,0.4);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .brand { display: flex; gap: 12px; align-items: center; }
+    .logo {
+      width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, #8a0c8a, #d263ce);
+      display: grid; place-items: center; font-weight: 800; color: white;
+      box-shadow: 0 4px 18px rgba(0,0,0,.4);
+    }
+    .brand .title { font-weight: 700; }
+    .tabs { display: grid; grid-auto-flow: column; gap: 8px; }
+    .tab {
+      background: transparent; color: var(--muted); border: 1px solid rgba(255,255,255,0.3); padding: 10px 14px;
+      border-radius: 999px; cursor: pointer; transition: .25s ease; font-weight: 600;
+    }
+    .tab.active { color: white; border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 25%, transparent); }
+    .content { display: grid; grid-template-columns: 1.2fr .8fr; }
+    @media (max-width: 860px) {
+      .content { grid-template-columns: 1fr; }
+      .aside { display: none; }
+    }
+    .panel { padding: 26px; }
+
+    .field { display: grid; gap: 8px; margin-bottom: 14px; }
+    .field label { color: var(--muted); font-size: 14px; }
+    .input {
+      background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.3); color: var(--text); border-radius: 12px;
+      padding: 12px 14px; outline: none; transition: .2s ease; font-size: 16px;
+    }
+    .input:focus { border-color: var(--ring); box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 25%, transparent); }
+
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
+
+    .btn {
+      width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid transparent;
+      background: linear-gradient(180deg, var(--success), var(--success-600)); color: white; font-weight: 700;
+      cursor: pointer; transition: transform .06s ease, box-shadow .2s ease; letter-spacing: .3px;
+      box-shadow: 0 10px 24px rgba(16,185,129,.35);
+    }
+    .btn:hover { box-shadow: 0 16px 32px rgba(16,185,129,.45); }
+    .btn:active { transform: translateY(1px) scale(.998); }
+
+    .muted { color: var(--muted); font-size: 14px; }
+    .link { color: var(--ring); text-decoration: underline; cursor: pointer; }
+
+    .aside { padding: 26px; border-left: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05);
+      display: grid; gap: 12px; align-content: start; }
+    .badge { display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.3); font-size: 12px; color: var(--muted); }
+
+    .alert { margin: 12px 0 0; padding: 12px; border-radius: 12px; font-size: 14px; display: none; }
+    .alert.ok { background: color-mix(in oklab, var(--success) 15%, transparent); border: 1px solid color-mix(in oklab, var(--success) 40%, #052e1a); color: #d1fae5; display: block; }
+    .alert.err { background: color-mix(in oklab, var(--error) 15%, transparent); border: 1px solid color-mix(in oklab, var(--error) 40%, #3f0b0b); color: #fee2e2; display: block; }
+
+    .session { display: none; padding: 26px; border-top: 1px dashed rgba(255,255,255,0.2); }
+    .session.active { display: block; }
+    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.4); font-size: 12px; }
+    .top-space { margin-top: 18px; }
+  </style>
+</head>
+<body>
+  <div class="card" id="app">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">LG</div>
+        <div>
+          <div class="title">Florart</div>
+          <div class="muted" style="font-size:12px">Cadastro + Login (localStorage)</div>
+        </div>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-tab="signup">Cadastrar</button>
+        <button class="tab" data-tab="signin">Entrar</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Main panel -->
+      <div class="panel">
+        <!-- SIGN UP -->
+        <form id="form-signup" autocomplete="off">
+          <h2>Crie sua conta</h2>
+          <p class="muted">Os dados ficam salvos apenas no seu navegador (localStorage).</p>
+          <div class="row top-space">
+            <div class="field">
+              <label for="su-name">Nome</label>
+              <input class="input" id="su-name" name="name" placeholder="Ex.: Ana Souza" required>
+            </div>
+            <div class="field">
+              <label for="su-username">Usuário</label>
+              <input class="input" id="su-username" name="username" placeholder="Ex.: anasouza" minlength="3" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="su-email">E-mail</label>
+            <input class="input" id="su-email" name="email" type="email" placeholder="voce@exemplo.com" required>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="su-pass">Senha</label>
+              <input class="input" id="su-pass" name="password" type="password" minlength="6" required>
+            </div>
+            <div class="field">
+              <label for="su-pass2">Confirmar senha</label>
+              <input class="input" id="su-pass2" name="password2" type="password" minlength="6" required>
+            </div>
+          </div>
+          <button class="btn top-space" type="submit">Cadastrar e salvar login</button>
+          <div id="su-alert" class="alert" role="status"></div>
+        </form>
+
+        <!-- SIGN IN -->
+        <form id="form-signin" autocomplete="off" style="display:none">
+          <h2>Entrar</h2>
+          <p class="muted">Use seu usuário ou e-mail para entrar.</p>
+          <div class="field top-space">
+            <label for="si-id">Usuário ou e-mail</label>
+            <input class="input" id="si-id" name="id" placeholder="anasouza ou voce@exemplo.com" required>
+          </div>
+          <div class="field">
+            <label for="si-pass">Senha</label>
+            <input class="input" id="si-pass" name="password" type="password" required>
+          </div>
+          <div class="field" style="margin-top:6px">
+            <label class="muted" style="display:flex; gap:8px; align-items:center">
+              <input type="checkbox" id="si-remember" /> Manter conectado neste navegador
+            </label>
+          </div>
+          <button class="btn top-space" type="submit">Entrar</button>
+          <div id="si-alert" class="alert" role="status"></div>
+        </form>
+
+        <!-- SESSION (dashboard) -->
+        <div id="session" class="session">
+          <h2>Bem-vindo(a), <span id="session-name"></span> 👋</h2>
+          <p class="muted">Você está logado. Esta sessão é mantida usando <code>localStorage</code>/<code>sessionStorage</code>.</p>
+          <div class="top-space" style="display:flex; gap:8px; flex-wrap:wrap">
+            <span class="pill">Usuário: <strong id="session-username"></strong></span>
+            <span class="pill">E-mail: <strong id="session-email"></strong></span>
+            <span class="pill">Login salvo: <strong id="session-persist"></strong></span>
+          </div>
+          <div class="top-space" style="display:flex; gap:10px; flex-wrap:wrap">
+            <button id="btn-logout" class="btn" style="width:auto; padding-inline:18px">Sair</button>
+            <button id="btn-forget" class="btn" style="width:auto; padding-inline:18px; background:linear-gradient(180deg,#f59e0b,#d97706); box-shadow:0 10px 24px rgba(217,119,6,.35)">Esquecer credenciais salvas</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aside -->
+      <aside class="aside">
+        <span class="badge">Dica de segurança</span>
+        <p class="muted">Este exemplo é apenas para estudo. Para apps reais, jamais salve senhas em texto plano e use um backend seguro.</p>
+        <span class="badge">Como funciona?</span>
+        <ul class="muted" style="margin:0 0 0 18px; line-height:1.6">
+          <li>Usuários ficam em <code>localStorage.users</code></li>
+          <li>Senha é armazenada com hash SHA-256</li>
+          <li>"Manter conectado" guarda a sessão em <code>localStorage</code>; caso contrário usa <code>sessionStorage</code></li>
+          <li>Você pode limpar tudo com o botão "Esquecer"</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // Utilidades -------------------------------------------------------------
+    const $ = (q, el=document) => el.querySelector(q);
+    const $$ = (q, el=document) => [...el.querySelectorAll(q)];
+
+    const storage = {
+      get users() { return JSON.parse(localStorage.getItem('users') || '[]'); },
+      set users(list) { localStorage.setItem('users', JSON.stringify(list)); },
+      setSession(user, persist=false) {
+        const data = JSON.stringify({ username: user.username, at: Date.now() });
+        (persist ? localStorage : sessionStorage).setItem('session', data);
+      },
+      clearSession() { localStorage.removeItem('session'); sessionStorage.removeItem('session'); },
+      readSession() { return JSON.parse(localStorage.getItem('session') || sessionStorage.getItem('session') || 'null'); },
+      forgetCreds() { localStorage.removeItem('users'); }
+    };
+
+    async function sha256(text) {
+      const enc = new TextEncoder().encode(text);
+      const hash = await crypto.subtle.digest('SHA-256', enc);
+      return [...new Uint8Array(hash)].map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // UI Tabs ---------------------------------------------------------------
+    const tabs = $$('.tab');
+    tabs.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+
+    function switchTab(name) {
+      tabs.forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+      $('#form-signup').style.display = name === 'signup' ? 'block' : 'none';
+      $('#form-signin').style.display = name === 'signin' ? 'block' : 'none';
+    }
+
+    // Cadastro --------------------------------------------------------------
+    $('#form-signup').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = $('#su-name').value.trim();
+      const username = $('#su-username').value.trim().toLowerCase();
+      const email = $('#su-email').value.trim().toLowerCase();
+      const pass = $('#su-pass').value;
+      const pass2 = $('#su-pass2').value;
+      const alert = $('#su-alert');
+      alert.className = 'alert'; alert.textContent = '';
+
+      if (pass !== pass2) {
+        alert.textContent = 'As senhas não coincidem.';
+        alert.classList.add('err');
+        return;
+      }
+      const users = storage.users;
+      const exists = users.some(u => u.username === username || u.email === email);
+      if (exists) {
+        alert.textContent = 'Usuário ou e-mail já cadastrado.';
+        alert.classList.add('err');
+        return;
+      }
+      const passwordHash = await sha256(pass);
+      users.push({ name, username, email, passwordHash, createdAt: Date.now() });
+      storage.users = users;
+
+      // Salva sessão persistente por padrão no cadastro
+      storage.setSession({ username }, true);
+
+      alert.textContent = 'Cadastro realizado e login salvo com sucesso!';
+      alert.classList.add('ok');
+      e.target.reset();
+      renderSession();
+    });
+
+    // Login -----------------------------------------------------------------
+    $('#form-signin').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = $('#si-id').value.trim().toLowerCase();
+      const pass = $('#si-pass').value;
+      const remember = $('#si-remember').checked;
+      const alert = $('#si-alert');
+      alert.className = 'alert'; alert.textContent = '';
+
+      const users = storage.users;
+      if (!users.length) {
+        alert.textContent = 'Nenhum usuário cadastrado neste navegador.';
+        alert.classList.add('err');
+        return;
+      }
+      const user = users.find(u => u.username === id || u.email === id);
+      if (!user) {
+        alert.textContent = 'Usuário/e-mail não encontrado.';
+        alert.classList.add('err');
+        return;
+      }
+      const passwordHash = await sha256(pass);
+      if (passwordHash !== user.passwordHash) {
+        alert.textContent = 'Senha incorreta.';
+        alert.classList.add('err');
+        return;
+      }
+      storage.setSession(user, remember);
+      alert.textContent = remember ? 'Login realizado e salvo neste navegador.' : 'Login realizado (apenas nesta sessão).';
+      alert.classList.add('ok');
+      e.target.reset();
+      renderSession();
+    });
+
+    // Sessão ---------------------------------------------------------------
+    $('#btn-logout').addEventListener('click', () => { storage.clearSession(); renderSession(); });
+    $('#btn-forget').addEventListener('click', () => { storage.forgetCreds(); storage.clearSession(); renderSession(); });
+
+    function renderSession() {
+      const session = storage.readSession();
+      const users = storage.users;
+      const sec = $('#session');
+      const logged = !!session;
+
+      if (!logged) {
+        sec.classList.remove('active');
+        $('#form-signup').style.display = $('.tab.active').dataset.tab === 'signup' ? 'block' : 'none';
+        $('#form-signin').style.display = $('.tab.active').dataset.tab === 'signin' ? 'block' : 'none';
+        return;
+      }
+
+      const user = users.find(u => u.username === session.username);
+      if (!user) { storage.clearSession(); sec.classList.remove('active'); return; }
+
+      $('#session-name').textContent = user.name;
+      $('#session-username').textContent = user.username;
+      $('#session-email').textContent = user.email;
+      const persist = localStorage.getItem('session') ? 'Sim (localStorage)' : 'Não (sessionStorage)';
+      $('#session-persist').textContent = persist;
+
+      // Mostrar dashboard, esconder formulários
+      sec.classList.add('active');
+      $('#form-signup').style.display = 'none';
+      $('#form-signin').style.display = 'none';
+    }
+
+    // Auto: se já tem sessão, mostrar dashboard
+    renderSession();
+  </script>
+</body>
+</html>
