@@ -10,36 +10,11 @@
 </head>
 <body>
     <!-- Cabeçalho -->
-    <header class="cabecalho">
-        <a href="#" ><img src="/images/logo.png" alt="logo" class="img-logo"></a>
-        
-        <input type="checkbox" id="check">
-        <label for="check" class="icons">
-            <i class='bxr  bx-menu' id="icon-menu"></i> 
-            <i class="bxr bxs-x " id="icon-fechar" ></i>
-        </label>
-
-       <nav class="menu">
-            <a href="#" id="home-menu" style="--i: 0">Home</a>
-            <a href="#catalogo" id="catalogo-menu" style="--i: 1">Catálogo</a>
-            <a href="#sobre"  id="sobre-menu" style="--i: 2">Sobre</a>
-            <a href="#contato"  id="contato-menu" style="--i: 3">Contato</a>
-       </nav>
-
-
-        <div class="icon-carrinho">
-            <button>
-            <i class='bxr  bx-cart' id="icon-carrinho"  style='color:#ffffff'></i> 
-            </button>
-        </div>
-    </header>
+        <?php include 'components/cabecalho.php';?>
     <main>
         <!-- Carrinho -->
-            <div class="overlay"></div>
-            <div class="carrinho">
-                Carrinho
-                <span class="fechar" title="Fechar Carrinho">X</span>
-            </div>
+        <?php include 'components/carrinho.php';?>
+            
         <!-- Apresentação -->
             
         <section class="apresentacao">
@@ -79,7 +54,7 @@
                 <div class="icon-diferenciais icon2">
                     <i class='bxr  bx-shield' id="icon-diferenciais" style='color:#d95d73'></i> 
                 </div>
-                <div class="texto-diferenciais ">
+                <div class="texto-diferenciais ">r
                     <h1>Segurança</h1>
                     <p>Flores saudáveis com vasos resistentes.</p>
                 </div>
@@ -127,117 +102,7 @@
                 <h2>Nossos Produtos</h2>
                 <p>Seleção especial das nossas criações mais amadas</p>
             </div>
-            <div class="produtos">
-            <div class="container-produtos">
-                <div class="img-produto">
-                    <img src="https://img.freepik.com/free-photo/top-view-pink-flower-with-drops_1112-450.jpg" alt="Foto Do Produto">
-                </div>
-                <div class="info-produtos">
-                    <div>
-                    <h3>Flor</h3>
-                    <p>Categoria</p>
-                     <div class="preco-produto"> R$00,00</div>
-                    </div>
-                    <div class="botoes">
-                        <div class="btn-comprar">
-                        <button>
-                            Comprar
-                        </button>
-                        </div>
-                        <div class="btn-add-carrinho">
-                        <button>
-                            <i class='bxr  bx-cart-plus' id="carrinho-produto" ></i> 
-                        </button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-
-                   <div class="container-produtos">
-                <div class="img-produto">
-                    <img src="https://img.freepik.com/free-photo/top-view-pink-flower-with-drops_1112-450.jpg" alt="Foto Do Produto">
-                </div>
-                <div class="info-produtos">
-                    <div>
-                    <h3>Flor</h3>
-                    <p>Categoria</p>
-                     <div class="preco-produto"> R$00,00</div>
-                    </div>
-                    <div class="botoes">
-                        <div class="btn-comprar">
-                        <button>
-                            Comprar
-                        </button>
-                        </div>
-                        <div class="btn-add-carrinho">
-                        <button>
-                            <i class='bxr  bx-cart-plus' id="carrinho-produto" ></i> 
-                        </button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-
-
-
-                 <div class="container-produtos">
-                <div class="img-produto">
-                    <img src="https://img.freepik.com/free-photo/top-view-pink-flower-with-drops_1112-450.jpg" alt="Foto Do Produto">
-                </div>
-                <div class="info-produtos">
-                    <div>
-                    <h3>Flor</h3>
-                    <p>Categoria</p>
-                     <div class="preco-produto"> R$00,00</div>
-                    </div>
-                    <div class="botoes">
-                        <div class="btn-comprar">
-                        <button>
-                            Comprar
-                        </button>
-                        </div>
-                        <div class="btn-add-carrinho">
-                        <button>
-                            <i class='bxr  bx-cart-plus' id="carrinho-produto" ></i> 
-                        </button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-
-
-
-                 <div class="container-produtos">
-                <div class="img-produto">
-                    <img src="https://img.freepik.com/free-photo/top-view-pink-flower-with-drops_1112-450.jpg" alt="Foto Do Produto">
-                </div>
-                <div class="info-produtos">
-                    <div>
-                    <h3>Flor</h3>
-                    <p>Categoria</p>
-                     <div class="preco-produto"> R$00,00</div>
-                    </div>
-                    <div class="botoes">
-                        <div class="btn-comprar">
-                        <button>
-                            Comprar
-                        </button>
-                        </div>
-                        <div class="btn-add-carrinho">
-                        <button>
-                            <i class='bxr  bx-cart-plus' id="carrinho-produto" ></i> 
-                        </button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-
-                
-                
+                 <?php include 'components/produto.php';?>
             </div>
         </section>
     </main>
