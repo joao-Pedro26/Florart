@@ -27,6 +27,12 @@ body {
     z-index: 100;
 }
 
+.img-logo {
+    position: relative;
+    margin: 0;
+    width: 60px;
+}
+
 .cabecalho::before {
     content: '';
     position: absolute;
