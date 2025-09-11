@@ -1,0 +1,131 @@
+:root {
+    --texto-primario:#2d2d2d;
+    --texto-secundario:#666666;
+}
+* {
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+main {
+    padding-top: 120px;
+}
+body {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.finaliza-compra{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 1200px;
+    margin:auto;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.div {
+    display: flex;
+    flex-direction: row;
+}
+.titulo-finaliza{
+    color: var(--texto-primario);
+    margin-top: 0;
+    width: 300px;
+    height: 60px;
+    margin-top: 60px;
+}
+
+
+.lista-produtos {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0 1rem 0rem; 
+}
+
+.produto {
+    display: flex;
+    flex-direction: row;
+    width: 630px;
+    background-color: white;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0 5px 15px;
+}
+
+
+.imagem-produto img {
+    width: 90px;
+    height: 90px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    object-fit: cover;
+    background-color: red;
+}
+
+
+.div-nome {
+    width: 100%;
+    display: flex;
+    color: var(--texto-primario);
+    text-align: left;
+    padding: 10px;
+    margin: 10px;
+}
+
+.div-quantidade {
+    width: 100%;
+    display: flex;
+    color: var(--texto-primario);
+    text-align: left;
+    padding: 10px;
+    margin: 10px;
+}
+
+.div-quantidade input {
+    width: 50px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+}
+
+.div-preco {
+    width: 100%;
+    display: flex;
+    color: var(--texto-primario);
+    text-align: left;
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.resumo-compra {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin-left: 20px;
+    width: 400px;
+    height: 300px;
+    background-color: white;
+    text-align: left;
+}
+
+.botao-finalizar {
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(90deg, #916cf1, #5a2ff4);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+}

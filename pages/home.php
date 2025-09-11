@@ -110,6 +110,7 @@
     <script src="../js/carrosel.js"></script>
     <script src="../js/carrinho.js"></script>
     <script src="../js/menu.js"></script>
+    <script src="../js/cabecalho.js"></script>
 
     <!-- Rodapé -->
         <?php include '../components/rodape.php';?>
