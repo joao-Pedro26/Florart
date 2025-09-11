@@ -102,8 +102,15 @@
                 <h2>Nossos Produtos</h2>
                 <p>Seleção especial das nossas criações mais amadas</p>
             </div>
+            <div class="produtos">
                  <?php include '../components/produto.php';?>
+                 <?php include '../components/produto.php';?>
+                 <?php include '../components/produto.php';?>
+                 <?php include '../components/produto.php';?>
+                
+                
             </div>
+
         </section>
     </main>
     <script src="../js/tituloApresentacao.js"></script>

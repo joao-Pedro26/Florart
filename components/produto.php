@@ -1,4 +1,3 @@
-<div class="produtos">
             <div class="container-produtos">
                 <div class="img-produto">
                     <img src="https://img.freepik.com/free-photo/top-view-pink-flower-with-drops_1112-450.jpg" alt="Foto Do Produto">

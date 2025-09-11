@@ -28,7 +28,9 @@ class UsuarioModel extends Database {
         
         $usuario = $stmt->fetch();
         if ($usuario && password_verify($senha, $usuario['senha'])) {
-            return $usuario; // retorna array com dados do usuário
+            return $usuario;
+             // retorna array com dados do usuário
+             //session start();
         }
         return false;
     }
