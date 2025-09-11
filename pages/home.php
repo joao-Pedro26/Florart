@@ -108,8 +108,6 @@
                  <?php include '../components/produto.php';?>
                  <?php include '../components/produto.php';?>
                  <?php include '../components/produto.php';?>
-                
-                
             </div>
 
         </section>
