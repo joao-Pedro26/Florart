@@ -10,6 +10,8 @@
         <a href="#catalogo" id="catalogo-menu" style="--i: 1">Catálogo</a>
         <a href="#sobre" id="sobre-menu" style="--i: 2">Sobre</a>
         <a href="#contato" id="contato-menu" style="--i: 3">Contato</a>
+        <a href="../pages/loginTeste.php">Login</a>
+        <a href="../pages/cadastroTeste.php">Cadastro</a>
     </nav>
     <div class="icon-carrinho">
         <button>

@@ -1,3 +1,23 @@
+<?php
+session_start();
+require_once "../public/routesUsuarios.php";
+
+$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+if ($url !== '/index.php') { // ou qualquer página estática
+    $metodoUtilizado = handleRoute();
+    if ($metodoUtilizado == true) {
+        if (isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] == true) 
+        {
+           header('Location: finaliza-compra.php');
+           exit; 
+        }
+    }
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
