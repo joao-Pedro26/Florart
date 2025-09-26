@@ -2,20 +2,19 @@
 session_start();
 require_once "../public/routesUsuarios.php";
 
-$paginaAtual = basename($_SERVER['PHP_SELF']); // home.php
+$paginaAtual = basename($_SERVER['PHP_SELF']);
 
-// Agora funciona tanto pra POST (login/cadastro) quanto pra GET (logout, etc.)
 if ($paginaAtual === 'home.php') {
     $resultado = handleRoute();
 
-    // Se for login bem-sucedido
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $resultado === true && isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) {
-        header('Location: finaliza-compra.php');
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $resultado === true && isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) 
+    {
+        header('Location: home.php');
         exit;
     }
 
-    // Se foi um POST mas falhou
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $resultado === false) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $resultado === false) 
+    {
         echo '<script>alert("Erro no processamento do formulário.");</script>';
     }
 }

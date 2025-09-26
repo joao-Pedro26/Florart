@@ -22,12 +22,12 @@
         // Se for ADMIN
         elseif (isset($_SESSION['admin']) && $_SESSION['admin'] === true) {
             echo '<a href="../pages/admin.php">Central de Controle</a>';
-            echo '<a href="../pages/home.php?route=metodos/sair">Sair</a>';
+            echo '<a href="../pages/home.php?route=acoes/sair">Sair</a>';
         } 
         // Se for USUÁRIO comum
         else {
             echo '<a href="../pages/perfil.php">Perfil</a>';
-            echo '<a href="../pages/home.php?route=metodos/sair">Sair</a>';
+            echo '<a href="../pages/home.php?route=acoes/sair">Sair</a>';
         }
         ?>
     </nav>

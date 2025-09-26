@@ -40,7 +40,7 @@ function handleRoute()
             {
                 return false;
             }
-        case 'metodos/sair':
+        case 'acoes/sair':
             if ($method === 'GET') 
             {
                 $controller = new UsuarioController();
@@ -50,6 +50,7 @@ function handleRoute()
             {
                 return false;
             }
+
         default:
             return false;
             

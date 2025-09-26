@@ -4,12 +4,6 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     header('Location: home.php');
     exit;
 }
-
-
-
-
-
-
 ?>
 
 

@@ -52,7 +52,7 @@ class UsuarioModel extends Database
     
 
     //metodo de usuarios
-    public function atualizarUsuario($id, $nome, $email, $senha = null , $telefone) 
+    public function atualizarUsuario($id, $nome, $email, $telefone, $senha = null) 
     {
         $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone";
         if ($senha) $sql .= ", senha = :senha";
