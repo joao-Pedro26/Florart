@@ -13,9 +13,8 @@ function handleRoute()
     switch ($route) 
     {
         case 'consultas/cadastrar':
-            if ($method === 'POST') 
+            if ($method === 'POST' && !empty($_POST)) 
             {
-                echo "<pre>"; print_r($_POST); echo "</pre>"; // debug
                 $nome = $_POST["nome"] ?? '';
                 $email = $_POST['email'] ?? '';
                 $senha = $_POST['senha'] ?? '';
@@ -28,7 +27,6 @@ function handleRoute()
                 return false;
             }
             
-
         case 'consultas/login':
             if ($method === 'POST') 
             {
@@ -38,9 +36,27 @@ function handleRoute()
                 
                 return $controller->loginConta($email, $senha);
             }   
+            else 
+            {
+                return false;
+            }
+        case 'metodos/sair':
+            if ($method === 'GET') 
+            {
+                $controller = new UsuarioController();
+                return $controller->lougout();
+            }   
+            else 
+            {
+                return false;
+            }
         default:
             return false;
             
     }
 }
+
+?>
+
+
 

@@ -25,7 +25,7 @@
   
   <div class="container">
     <div class="form-box login">
-      <form method="POST" action="../public/routesUsuarios.php">
+      <form method="POST" action="../pages/home.php">
         <h1>Login</h1>
         <div class="input-box">
           <input type="hidden" name="route" value="consultas/login">

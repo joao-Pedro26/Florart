@@ -19,11 +19,11 @@ class UsuarioController {
     {
     
         if (empty($nome) || empty($email) || empty($senha) || empty($telefone) ) {
-            return "Todos os campos são obrigatórios!";
+            return false;
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return "Por favor, insira um email válido!";
+            return false;
         }
 
         // Chama a model para criar usuário
@@ -39,13 +39,13 @@ class UsuarioController {
                 $_SESSION['usuario']      = $usuario['nome'];
                 $_SESSION['email']        = $usuario['email'];
                 $_SESSION['telefone']     = $usuario['telefone'];
-                $_SESSION['admin']        = false; // default
+                $_SESSION['admin']        = $usuario['admin'];
             }
             return true;
         }
         else 
         {
-            return "Erro ao cadastrar usuário.";
+            return false;
         }
     }
 
@@ -76,7 +76,7 @@ class UsuarioController {
     public function editarConta($id, $nome, $email, $senha, $telefone) 
     {
         if (empty($nome) || empty($email) || empty($telefone) || empty($senha)) {
-            return "Todos os campos são obrigatórios!";
+            return false;
         }
 
         return $this->model->atualizarUsuario($id, $nome, $email, $telefone, $senha);
@@ -85,6 +85,12 @@ class UsuarioController {
     // Excluir usuário
     public function deletarConta($id) {
         return $this->model->deletarUsuario($id);
+    }
+
+    public function lougout() {
+        session_unset();
+        session_destroy();
+        return true;
     }
 
 }

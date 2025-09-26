@@ -1,3 +1,24 @@
+<?php 
+session_start();
+if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
+    header('Location: home.php');
+    exit;
+}
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
