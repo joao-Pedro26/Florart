@@ -181,5 +181,9 @@ class UsuarioController
         return true;
     }
 
+    public function listarUsuarios() {
+        return $this->model->listarUsuarios();
+    }
+
 }
 ?>

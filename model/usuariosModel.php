@@ -80,7 +80,7 @@ class UsuarioModel extends Database
     //metodo de adms
     public function listarUsuarios() 
     {
-        $sql = "SELECT id_usuario, nome, email, telefone, admin FROM usuarios";
+        $sql = "SELECT id_usuario, nome, email, telefone, admin FROM usuario";
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
