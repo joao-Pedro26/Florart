@@ -28,7 +28,7 @@ function handleRoute()
             }
             
         case 'consultas/login':
-            if ($method === 'POST') 
+            if ($method === 'POST' && !empty($_POST)) 
             {
                 $email = $_POST['email'] ?? '';
                 $senha = $_POST['senha'] ?? '';
@@ -41,7 +41,7 @@ function handleRoute()
                 return false;
             }
         case 'acoes/sair':
-            if ($method === 'GET') 
+            if ($method === 'GET' && !empty($_GET))
             {
                 $controller = new UsuarioController();
                 return $controller->lougout();
@@ -50,6 +50,39 @@ function handleRoute()
             {
                 return false;
             }
+        
+        
+        
+        case 'consultas/atualizar':
+            if ($method === 'POST' && !empty($_POST)) 
+            {
+                $id = $_POST['id'] ?? '';
+                $nome = $_POST["nome"] ?? '';
+                $email = $_POST['email'] ?? '';
+                $senha = $_POST['senha'] ?? '';
+                $telefone = $_POST['telefone'] ?? '';
+                $controller = new UsuarioController();
+                return $controller->editarConta($id, $nome, $email, $senha, $telefone);
+            } 
+            else
+            {
+                return false;
+            }
+        
+        case 'consultas/excluir':
+            if ($method === 'POST' && !empty($_POST)) 
+            {
+                $id = $_POST['id'] ?? '';
+                $controller = new UsuarioController();
+                return $controller->deletarConta($id);
+            } 
+            else
+            {
+                return false;
+            }
+        
+            
+
 
         default:
             return false;
@@ -58,6 +91,10 @@ function handleRoute()
 }
 
 ?>
+
+
+
+
 
 
 

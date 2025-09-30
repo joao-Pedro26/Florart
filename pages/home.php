@@ -2,20 +2,25 @@
 session_start();
 require_once "../public/routesUsuarios.php";
 
-$paginaAtual = basename($_SERVER['PHP_SELF']);
+$resultado = handleRoute();
 
-if ($paginaAtual === 'home.php') {
-    $resultado = handleRoute();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $resultado === true && isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) 
-    {
+    if ($resultado === true && isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) {
         header('Location: home.php');
         exit;
     }
+    $origem = $_POST['origem'] ?? '';
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $resultado === false) 
-    {
-        echo '<script>alert("Erro no processamento do formulário.");</script>';
+
+    // Passa a mensagem de erro para a página correta
+    switch ($origem) {
+        case 'loginTeste.php':
+            header('Location: loginTeste.php');
+            exit;
+        case 'cadastroTeste.php':
+            header('cadastroTeste.php');// inclui a própria página de cadastro
+            exit;
     }
 }
 ?>
