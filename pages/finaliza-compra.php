@@ -6,13 +6,6 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
 }
 ?>
 
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -28,6 +21,8 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
      <!-- Cabeçalho -->
         <?php include '../components/cabecalho.php';?>
     <main>
+      <a href="javascript:history.back()"><i class='bxr  bx-arrow-left-stroke icon-voltar'  style='color:#5a2ff4'></i> </a> 
+
         <section class="finaliza-compra">
             <div class="titulo-finaliza">
             <h2>Finalizar Compra</h2>
@@ -74,10 +69,6 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
                  </section>
                 
                  </section>
-
-     
-    <!-- Rodapé -->
-        <?php include '../components/rodape.php';?>
 
     </main>
 </body>

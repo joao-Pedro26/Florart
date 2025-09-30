@@ -219,6 +219,7 @@ body {
     text-decoration: none;
     cursor: pointer;
     transition: background 0.2s;
+    margin-bottom: 3rem;
 }
 
 .botao-finalizar-carrinho:hover {
@@ -268,7 +269,7 @@ body {
     }
 
     #check:checked ~ .menu {
-        height: 15.3rem;
+        height: 20.6rem;
 
     }
     .menu a {
@@ -763,6 +764,7 @@ html { scroll-behavior: smooth; }
 .rodape-container{
   max-width: 1100px;
   margin: 0 auto;
+  padding: 0rem 1rem 0rem 1rem;
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 3rem;
@@ -1021,4 +1023,117 @@ a:focus-visible, button:focus-visible{
     box-shadow: 0 10px 25px rgba(0,0,0,.25);
 }
 
-/* #000071, #5a2ff4, #916cf1, #8a0c8a,#d263ce */
+/* Estilo exclusivo para página de login */
+.container-log-cad {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    padding: 5rem 0rem 5rem 0rem;
+}
+
+.logo-log-cad {
+    position: relative;
+    top: 10vh;
+    margin: 0 auto 1rem;
+    width: 80px;
+    
+}
+
+.logo-cad {
+    top: 5vh;
+}
+
+.form-login {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(145,108,241,0.12);
+    padding: 2.5rem 2rem;
+    width: 350px;
+    max-width: 95vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo-login {
+    color: #916cf1;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.input-group {
+    width: 100%;
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 1rem;
+    color: var(--texto-primario);
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #f8f8f8;
+    transition: border 0.2s;
+}
+
+.input-group input:focus {
+    border: 1.5px solid #916cf1;
+    outline: none;
+}
+
+.btn-login {
+    width: 100%;
+    background: linear-gradient(90deg, #916cf1 60%, #5a2ff4 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.9rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.2s;
+}
+
+.btn-login:hover {
+    background: linear-gradient(90deg, #5a2ff4 60%, #916cf1 100%);
+}
+
+.link-cadastro {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: .9rem;
+    color: var(--texto-secundario);
+}
+
+.link-cadastro a {
+    color: #916cf1;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 6px;
+    transition: color 0.2s;
+}
+
+.link-cadastro a:hover {
+    color: #5a2ff4;
+    text-decoration: underline;
+}
+
+.icon-voltar {
+    font-size: 4rem;
+    padding: 1.5rem;
+}
+

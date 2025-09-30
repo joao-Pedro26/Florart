@@ -1,7 +1,8 @@
 
 
 <header class="cabecalho">
-    <a href="#"><img src="/images/logo.png" alt="logo" class="img-logo"></a>
+    <a href="/"><img src="/images/logo.png" alt="logo" class="img-logo"></a>
+  
     <input type="checkbox" id="check">
     <label for="check" class="icons">
         <i class='bx bx-menu' id="icon-menu"></i> 
@@ -31,13 +32,21 @@
         }
         ?>
     </nav>
+             
 
-    <div class="icon-carrinho">
-        <button>
-            <i class='bx bx-cart' id="icon-carrinho" style='color:#ffffff'></i> 
-        </button>
-    </div>
+        <div class="icon-carrinho">
+            <button>
+                <i class="bx bx-cart" id="icon-carrinho" style="color:#ffffff"></i>
+            </button>
+        </div>
+         <script> 
+                const iconCarrinho = document.querySelector('.icon-carrinho');
+               
+                <?php if(basename($_SERVER['PHP_SELF']) === 'finaliza-compra.php'): ?>
+                    iconCarrinho.style.display = 'none';
+                <?php endif; ?>
+        </script>
 </header>
 
-
  <script src="../js/cabecalho.js"></script>
+ 

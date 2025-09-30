@@ -4,60 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro</title>
-
-  <!-- CSS principal -->
+  <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="../styles/style.css" />
-
-  <!-- CSS só da tela de login -->
   <link rel="stylesheet" href="../styles/reset.css" />
-
-  <!-- Ícones -->
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 <body>
-
-<?php include '../components/cabecalho.php';?>
-<br>
-<br>
-<br>
-<br>
 <main>
-  
-  <div class="container">
-    <div class="form-box login">
-      <form method="POST" action="../pages/home.php">
+      <a href="javascript:history.back()"><i class='bxr  bx-arrow-left-stroke icon-voltar'  style='color:#5a2ff4'></i> </a> 
 
-      <div class="teste"><h1>Cadastro</h1></div>
-        
+    <a href="/"><img src="/images/logo.png" alt="logo" class="logo-log-cad logo-cad"></a>
 
-        <div class="input-box">
-          <input type="hidden" name="route" value="consultas/cadastrar">
-          <input type="text" name="nome" placeholder="Nome completo" required />
-          <i class="bx bxs-user"></i>
+    <div class="container-cad container-log-cad ">
+      <form class="form-login" method="POST" action="../pages/home.php">
+        <input type="hidden" name="route" value="consultas/cadastrar">
+        <div class="input-group">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" required autocomplete="name">
         </div>
-
-        <div class="input-box">
-          <input type="email" name="email" placeholder="Email" required />
-          <i class="bx bxs-envelope"></i>
+        <div class="input-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required autocomplete="username">
         </div>
-
-        <div class="input-box">
-          <input type="password" name="senha" placeholder="Senha" required />
-          <i class="bx bxs-lock-alt"></i>
+        <div class="input-group">
+          <label for="telefone">Telefone</label>
+          <input type="tel" id="telefone" name="telefone" required autocomplete="tel">
         </div>
-
-        <div class="input-box">
-          <input type="telefone" name="telefone" placeholder="telefone" required />
-          <i class="bx bxs-lock-alt"></i>
+        <div class="input-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" name="senha" required autocomplete="new-password">
         </div>
-
-        <button type="submit" class="btn">Cadastrar</button>
+        <button type="submit" class="btn-login">Cadastrar</button>
+        <div class="link-cadastro">
+          <span>Já tem uma conta?</span>
+          <a href="../pages/loginTeste.php">Entrar</a>
+        </div>
       </form>
     </div>
-  </div>
-
 </main>
-
-
 </body>
 </html>

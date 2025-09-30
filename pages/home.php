@@ -21,8 +21,6 @@ if ($paginaAtual === 'home.php') {
 ?>
 
 
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -80,7 +78,7 @@ if ($paginaAtual === 'home.php') {
                 <div class="icon-diferenciais icon2">
                     <i class='bxr  bx-shield' id="icon-diferenciais" style='color:#d95d73'></i> 
                 </div>
-                <div class="texto-diferenciais ">r
+                <div class="texto-diferenciais ">
                     <h1>Segurança</h1>
                     <p>Flores saudáveis com vasos resistentes.</p>
                 </div>

@@ -4,43 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro</title>
-
-  <!-- CSS principal -->
+  <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="../styles/style.css" />
-
-  <!-- CSS só da tela de login -->
   <link rel="stylesheet" href="../styles/reset.css" />
 
-  <!-- Ícones -->
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 <body>
-
-<?php include '../components/cabecalho.php';?>
-<br>
-<br>
-<br>
-<br>
 <main>
-  
-  <div class="container">
-    <div class="form-box login">
-      <form method="POST" action="../pages/home.php">
-        <h1>Login</h1>
-        <div class="input-box">
+    <a href="javascript:history.back()"><i class='bxr  bx-arrow-left-stroke icon-voltar'  style='color:#5a2ff4'></i> </a> 
+    <div class="teste">
+    <a href="/"><img src="/images/logo.png" alt="logo" class="logo-log-cad"></a>
+
+  <div class="container-log-cad">
+    <form class="form-login" method="POST" action="../pages/home.php">
           <input type="hidden" name="route" value="consultas/login">
-          <input type="text" name="email" placeholder="Digite seu email" required>
-        </div>
-        <div class="input-box">
-          <input type="password" name="senha" placeholder="Digite sua senha" required>
-        </div>
-        <button type="submit">Entrar</button>
-      </form>
+      <div class="input-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required autocomplete="username">
+      </div>
+      <div class="input-group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn-login">Entrar</button>
+      <div class="link-cadastro">
+      <span>Não tem uma conta?</span>
+      <a href="../pages/cadastroTeste.php">Cadastre-se</a>
     </div>
+    </form>
+    </div>
+    
   </div>
-
 </main>
-
-
 </body>
 </html>
