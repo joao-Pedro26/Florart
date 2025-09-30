@@ -69,11 +69,10 @@ class UsuarioController
         } 
         catch (Exception $e) 
         {
+            error_log("Erro no cadastro: " . $e->getMessage());
             $_SESSION['erro'] = $e->getMessage(); 
-
-            
+            header('Location: ../pages/cadastroTeste.php');
             unset($_SESSION['statusLogado'], $_SESSION['usuario'], $_SESSION['email'], $_SESSION['telefone'], $_SESSION['admin']);
-
             return false;
         }
     }
@@ -123,6 +122,8 @@ class UsuarioController
         {
             error_log("Erro no login: " . $e->getMessage());
             $_SESSION['erro'] = $e->getMessage();
+            header('Location: ../pages/loginTeste.php');
+
             unset($_SESSION['statusLogado'], $_SESSION['usuario'], $_SESSION['email'], $_SESSION['telefone'], $_SESSION['admin']);
 
             return false;

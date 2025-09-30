@@ -10,18 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: home.php');
         exit;
     }
-    $origem = $_POST['origem'] ?? '';
-
-
-    // Passa a mensagem de erro para a página correta
-    switch ($origem) {
-        case 'loginTeste.php':
-            header('Location: loginTeste.php');
-            exit;
-        case 'cadastroTeste.php':
-            header('cadastroTeste.php');// inclui a própria página de cadastro
-            exit;
-    }
+   
 }
 ?>
 

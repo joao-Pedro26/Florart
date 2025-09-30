@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,6 +15,16 @@
 <body>
 <main>
     <a href="javascript:history.back()"><i class='bxr  bx-arrow-left-stroke icon-voltar'  style='color:#5a2ff4'></i> </a> 
+      <?php
+          session_start();
+          if (isset($_SESSION['erro'])): ?>
+              <div class="erro" style="color:red; text-align:center; margin:10px 0; ; position: relative; ">
+                  <?php 
+                      echo htmlspecialchars($_SESSION['erro']); 
+                      unset($_SESSION['erro']);   
+                  ?>
+              </div>
+  <?php endif; ?>
     <div class="teste">
     <a href="/"><img src="/images/logo.png" alt="logo" class="logo-log-cad"></a>
 
