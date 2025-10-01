@@ -5,26 +5,12 @@ require_once "../public/routesUsuarios.php";
 $resultado = handleRoute();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     if ($resultado === true && isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) {
         header('Location: home.php');
         exit;
-    } 
-    
-    // POST deu erro
-    $origem = $_POST['origem'] ?? '';
-    switch ($origem) {
-        case 'loginTeste.php':
-            header('Location: loginTeste.php');
-            exit;
-        case 'cadastroTeste.php':
-            header('Location: cadastroTeste.php');
-            exit;
-        default:
-            $mensagemErro = $_SESSION['erro'] ?? "Erro no processamento do formulário.";
-            echo "<script>alert('$mensagemErro');</script>";
-            unset($_SESSION['erro']);
-            break;
     }
+   
 }
 ?>
 

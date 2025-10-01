@@ -1,5 +1,14 @@
 
-<?php
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Administrativo</title>
+  <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+  <?php
 session_start();
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     header("Location: home.php");
@@ -19,15 +28,6 @@ if (isset($_GET['deletar'])) {
 
 $usuarios = $controller->listarUsuarios();
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Painel Administrativo</title>
-  <link rel="stylesheet" href="../styles/style.css">
-</head>
-<body>
-
   <?php include '../components/cabecalho.php';?>
 
   <h1>Painel Administrativo</h1>

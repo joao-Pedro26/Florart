@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,9 +11,19 @@
   <link rel="stylesheet" href="../styles/reset.css" />
 </head>
 <body>
+  
 <main>
-      <a href="javascript:history.back()"><i class='bxr  bx-arrow-left-stroke icon-voltar'  style='color:#5a2ff4'></i> </a> 
-
+    <a href="javascript:history.back()"><i class='bxr  bx-arrow-left-stroke icon-voltar'  style='color:#5a2ff4'></i> </a> 
+    <?php
+      session_start();
+      if (isset($_SESSION['erro'])): ?>
+          <div class="erro" style="color:red; text-align:center; margin:10px 0; z-index: 1000;">
+              <?php 
+                  echo htmlspecialchars($_SESSION['erro']); 
+                  unset($_SESSION['erro']); 
+              ?>
+          </div>
+  <?php endif; ?>
     <a href="/"><img src="/images/logo.png" alt="logo" class="logo-log-cad logo-cad"></a>
 
     <div class="container-cad container-log-cad ">
