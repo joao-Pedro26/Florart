@@ -24,7 +24,7 @@
               ?>
           </div>
   <?php endif; ?>
-    <a href="/"><img src="/images/logo.png" alt="logo" class="logo-log-cad logo-cad"></a>
+    <a href="   "><img src="/images/logo.png" alt="logo" class="logo-log-cad logo-cad"></a>
 
     <div class="container-cad container-log-cad ">
       <form class="form-login" method="POST" action="../pages/home.php">
