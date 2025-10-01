@@ -70,9 +70,9 @@ function handleRoute()
             }
         
         case 'consultas/excluir':
-            if ($method === 'POST' && !empty($_POST)) 
+            if ($method === 'GET' && !empty($_GET)) 
             {
-                $id = $_POST['id'] ?? '';
+                $id = $_GET['id'] ?? '';
                 $controller = new UsuarioController();
                 return $controller->deletarConta($id);
             } 
@@ -80,8 +80,16 @@ function handleRoute()
             {
                 return false;
             }
-            
-        
+        case 'consultas/listar':
+            if ($method === 'GET' && !empty($_GET)) 
+            {  
+                $controller = new UsuarioController();
+                return $controller->listarUsuarios();
+            } 
+            else
+            {
+                return false;
+            }
 
         default:
             return false;

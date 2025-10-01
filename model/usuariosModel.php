@@ -77,7 +77,7 @@ class UsuarioModel extends Database
         return $stmt->execute();
     }
 
-    //metodo de adms
+    //metodo get
     public function listarUsuarios() 
     {
         $sql = "SELECT id_usuario, nome, email, telefone, admin FROM usuario";

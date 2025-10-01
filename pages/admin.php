@@ -1,3 +1,26 @@
+<?php
+session_start();
+require_once "../public/routesUsuarios.php";
+
+if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
+    header("Location: home.php");
+    exit;
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['route']) && $_GET['route'] === 'consultas/excluir') {
+        handleRoute();
+        unset($_GET['route'], $_GET['id']);
+        header("Location: admin.php");
+        exit;
+    }
+}
+
+
+$_GET['route'] = 'consultas/listar';
+$usuarios = handleRoute();
+?>
 
 
 <!DOCTYPE html>
@@ -8,26 +31,6 @@
   <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
-  <?php
-session_start();
-if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
-    header("Location: home.php");
-    exit;
-}
-
-require_once "../controller/usuariosController.php";
-$controller = new UsuarioController;
-
-// Se veio um pedido de exclusão
-if (isset($_GET['deletar'])) {
-    $id = intval($_GET['deletar']); // protege contra injeção
-    $controller->deletarConta($id);
-    header("Location: admin.php"); // recarrega a página sem a query
-    exit;
-}
-
-$usuarios = $controller->listarUsuarios();
-?>
   <?php include '../components/cabecalho.php';?>
 
   <h1>Painel Administrativo</h1>
@@ -60,7 +63,7 @@ $usuarios = $controller->listarUsuarios();
           <td><?= $u['admin'] ? 'Sim' : 'Não' ?></td>
           <td>
             <a href="editarUsuario.php?id=<?= $u['id_usuario'] ?>" class="btn">Editar</a>
-            <a href="admin.php?deletar=<?= $u['id_usuario'] ?>" class="btn" 
+            <a href="admin.php?route=consultas/excluir&id=<?= $u['id_usuario'] ?>" class="btn" 
             onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Excluir</a>
           </td>
         </tr>
