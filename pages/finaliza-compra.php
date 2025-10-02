@@ -14,6 +14,7 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/finaliza-compra.css">
+    <link rel="stylesheet" href="../styles/header-footer.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <title>Finalizar Compra</title>
 </head>

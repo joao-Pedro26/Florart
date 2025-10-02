@@ -1,19 +1,20 @@
 <?php
-session_start();
-require_once "../public/routesUsuarios.php";
 
-$resultado = handleRoute();
+    session_start();
+    require_once "../public/routesUsuarios.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $resultado = handleRoute();
 
-    if ($resultado === true && isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) {
-        header('Location: home.php');
-        exit;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        if ($resultado === true && isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) {
+            header('Location: home.php');
+            exit;
+        }
+    
     }
-   
-}
+    
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -22,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/header-footer.css">
     <link rel="icon" href="../images/logo.png" type="">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <title>Florart</title>

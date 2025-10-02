@@ -1,74 +1,56 @@
-
 <?php
 require_once '../model/usuariosModel.php';
+require '../vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class UsuarioController 
 {
-
     protected $model;
 
-    public function __construct() {
-        
+    public function __construct() 
+    {
         $dsn = "pgsql:host=localhost;port=5432;dbname=florart;";
         $username = "postgres";
         $password = "postgres";
-
         $this->model = new UsuarioModel($dsn, $username, $password);
     }
 
-    // Cadastrar novo usuário
     public function cadastrarConta($nome, $email, $senha, $telefone) 
     {
-        try 
-        {
-            $nome     = trim($nome);
-            $email    = strtolower(trim($email));
+        try {
+            $nome = trim($nome);
+            $email = strtolower(trim($email));
             $telefone = preg_replace('/\D/', '', $telefone);
 
-            if (empty($nome) || empty($email) || empty($senha) || empty($telefone)) 
-            {
+            if (!$nome || !$email || !$senha || !$telefone) 
                 throw new Exception("Todos os campos são obrigatórios.");
-            }
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
-            {
                 throw new Exception("E-mail inválido.");
-            }
 
             if (strlen($senha) < 8) 
-            {
                 throw new Exception("A senha deve ter no mínimo 8 caracteres.");
-            }
 
             if ($this->model->getUsuarioPorEmail($email)) 
-            {
                 throw new Exception("E-mail já cadastrado.");
-            }
 
-            
-            $sucesso = $this->model->criarUsuario($nome, $email, $senha, $telefone);
-            if (!$sucesso) 
-            {
+            if (!$this->model->criarUsuario($nome, $email, $senha, $telefone)) 
                 throw new Exception("Erro ao cadastrar usuário.");
-            }
 
-            
             $usuario = $this->model->getUsuarioPorEmail($email);
-            if ($usuario) 
-            {
-                session_regenerate_id(true); // reforço de segurança
-                $_SESSION['statusLogado'] = true;
-                $_SESSION['usuario']      = $usuario['nome'];
-                $_SESSION['email']        = $usuario['email'];
-                $_SESSION['telefone']     = $usuario['telefone'];
-                $_SESSION['admin']        = $usuario['admin'];
-            }
+            session_regenerate_id(true);
+            $_SESSION = [
+                'statusLogado' => true,
+                'usuario' => $usuario['nome'],
+                'email' => $usuario['email'],
+                'telefone' => $usuario['telefone'],
+                'admin' => $usuario['admin']
+            ];
 
             return true;
 
-        } 
-        catch (Exception $e) 
-        {
+        } catch (Exception $e) {
             error_log("Erro no cadastro: " . $e->getMessage());
             $_SESSION['erro'] = $e->getMessage(); 
             header('Location: ../pages/cadastroTeste.php');
@@ -77,55 +59,33 @@ class UsuarioController
         }
     }
 
-
-
     
 
-    // Login
     public function loginConta($email, $senha) 
     {
-        try { 
-            if (empty($email) || empty($senha)) 
-            {
-                throw new Exception("E-mail ou senha vazios."); 
-            }
-
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
-            {
-                throw new Exception("Formato de e-mail inválido.");
-            }
-
-            if (($this->model->getUsuarioPorEmail($email)) === false) 
-            {
-                throw new Exception("E-mail não cadastrado.");
-            }
+        try {
+            if (!$email || !$senha) throw new Exception("E-mail ou senha vazios.");
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) throw new Exception("Formato de e-mail inválido.");
 
             $login = $this->model->login($email, $senha);
-
-            if (!$login) 
-            {
-                throw new Exception("Senha incorreta.");
-            }
+            if (!$login) throw new Exception("E-mail ou senha incorretos.");
 
             session_regenerate_id(true);
-
-            $_SESSION['statusLogado'] = true;
-            $_SESSION['usuario']      = $login['nome'];
-            $_SESSION['email']        = $login['email'];
-            $_SESSION['telefone']     = $login['telefone'];
-            $_SESSION['admin']        = $login['admin'];
+            $_SESSION = [
+                'statusLogado' => true,
+                'usuario' => $login['nome'],
+                'email' => $login['email'],
+                'telefone' => $login['telefone'],
+                'admin' => $login['admin']
+            ];
 
             return true;
 
-        } 
-        catch (Exception $e) 
-        {
-            error_log("Erro no login: " . $e->getMessage());
-            $_SESSION['erro'] = $e->getMessage();
+        } catch (Exception $e) {
+            error_log("Erro no cadastro: " . $e->getMessage());
+            $_SESSION['erro'] = $e->getMessage(); 
             header('Location: ../pages/loginTeste.php');
-
             unset($_SESSION['statusLogado'], $_SESSION['usuario'], $_SESSION['email'], $_SESSION['telefone'], $_SESSION['admin']);
-
             return false;
         }
     }
@@ -133,38 +93,14 @@ class UsuarioController
     public function editarConta($id, $nome, $email, $senha, $telefone) 
     {
         try {
-            if (empty($id) || !is_numeric($id)) 
-            {
-                throw new Exception("ID inválido.");
-            }
+            if (!$id || !is_numeric($id)) throw new Exception("ID inválido.");
+            if (!$nome) throw new Exception("Nome não pode estar vazio.");
+            if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) throw new Exception("E-mail inválido.");
+            if (!$telefone || !preg_match('/^\d{10,15}$/', $telefone)) throw new Exception("Telefone inválido.");
 
-            if (empty($nome)) 
-            {
-                throw new Exception("Nome não pode estar vazio.");
-            }
+            return $this->model->atualizarUsuario($id, $nome, $email, $telefone, $senha ?: null);
 
-            if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) 
-            {
-                throw new Exception("E-mail inválido.");
-            }
-
-            if (empty($telefone) || !preg_match('/^\d{10,15}$/', $telefone)) 
-            {
-                throw new Exception("Telefone inválido.");
-            }
-
-            if (!empty($senha)) {
-                $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-            } else {
-                $senhaHash = null;
-            }
-
-            return $this->model->atualizarUsuario($id, $nome, $email, $telefone, $senhaHash);
-
-        } 
-        catch (Exception $e) 
-        {
-            error_log("Erro ao editar conta: " . $e->getMessage());
+        } catch (Exception $e) {
             $_SESSION['erro'] = $e->getMessage();
             return false;
         }
@@ -175,16 +111,70 @@ class UsuarioController
         return $this->model->deletarUsuario($id);
     }
 
-    public function lougout() 
+    public function logout() 
     {
         session_unset();
         session_destroy();
         return true;
     }
 
-    public function listarUsuarios() {
+    public function listarUsuarios() 
+    {
         return $this->model->listarUsuarios();
     }
 
+    public function solicitarRecuperacao($email) 
+    {
+        try {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) throw new Exception("E-mail inválido.");
+
+            $token = $this->model->criarTokenRecuperacao($email);
+            if (!$token) throw new Exception("E-mail não encontrado.");
+
+            $_SESSION['sucesso'] = "Um link de recuperação foi enviado para $email.";
+            return true;
+
+        } catch (Exception $e) {
+            $_SESSION['erro'] = $e->getMessage();
+            return false;
+        }
+    }
+
+    public function redefinirSenhaConta($token, $novaSenha) 
+    {
+        try {
+            if (strlen($novaSenha) < 8) throw new Exception("A senha deve ter no mínimo 8 caracteres.");
+
+            $dados = $this->model->validarToken($token);
+            if (!$dados) throw new Exception("Token inválido ou expirado.");
+
+            return $this->model->atualizarSenha($dados['fk_usuario'], $novaSenha);
+
+        } catch (Exception $e) {
+            $_SESSION['erro'] = $e->getMessage();
+            return false;
+        }
+    }
+
+    public function criarCodigoRecuperacao($email) 
+    {
+        return $this->model->criarCodigoRecuperacao($email);
+    }
+
+    public function validarCodigo($codigo) 
+    {
+        return isset($_SESSION['recuperacao_codigo']) && $_SESSION['recuperacao_codigo'] == $codigo;
+    }
+
+    public function redefinirSenhaPorCodigo($novaSenha) 
+    {
+        if (!isset($_SESSION['recuperacao_usuario_id'])) return false;
+
+        $id = $_SESSION['recuperacao_usuario_id'];
+        $res = $this->model->atualizarSenha($id, $novaSenha);
+
+        unset($_SESSION['recuperacao_codigo'], $_SESSION['recuperacao_usuario_id'], $_SESSION['recuperacao_email'], $_SESSION['recuperacao_data']);
+        return $res;
+    }
 }
 ?>

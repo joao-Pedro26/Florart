@@ -1,107 +1,91 @@
 <?php
-
 require_once "../controller/usuariosController.php";
 
 function handleRoute() 
 {
-    
     $method = $_SERVER['REQUEST_METHOD'];
-    
-    // Pegamos a rota do POST ou GET
     $route = $_POST['route'] ?? $_GET['route'] ?? '';
+    $controller = new UsuarioController();
+
+    $postData = fn($key) => $_POST[$key] ?? '';
 
     switch ($route) 
     {
         case 'consultas/cadastrar':
-            if ($method === 'POST' && !empty($_POST)) 
-            {
-                $nome = $_POST["nome"] ?? '';
-                $email = $_POST['email'] ?? '';
-                $senha = $_POST['senha'] ?? '';
-                $telefone = $_POST['telefone'] ?? '';
-                $controller = new UsuarioController();
-                return $controller->cadastrarConta($nome, $email, $senha, $telefone);
-            } 
-            else
-            {
-                return false;
-            }
-            
+            if ($method === 'POST') return $controller->cadastrarConta($postData('nome'), $postData('email'), $postData('senha'), $postData('telefone'));
+            break;
+
         case 'consultas/login':
-            if ($method === 'POST' && !empty($_POST)) 
-            {
-                $email = $_POST['email'] ?? '';
-                $senha = $_POST['senha'] ?? '';
-                $controller = new UsuarioController();
-                
+            if ($method === 'POST') {
+
+                $email = $postData('email');
+                $senha = $postData('senha');
+
+                /* ========================================================
+                 * DEV BYPASS DE LOGIN (APENAS PARA TESTES LOCAIS)
+                 * >>>> REMOVER ESTE TRECHO NA VERSÃO FINAL <<<<<
+                 ======================================================== */
+                $DEV_BYPASS = true; // habilita/desabilita o bypass
+                if ($DEV_BYPASS && in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1','::1'])) {
+                    if ($email === 'dev@local' && $senha === 'devpass') {
+                        session_start();
+                        session_regenerate_id(true);
+                        $_SESSION['statusLogado'] = true;
+                        $_SESSION['usuario'] = 'Admin Dev';
+                        $_SESSION['email'] = $email;
+                        $_SESSION['telefone'] = '';
+                        $_SESSION['admin'] = true;
+                        return true; // bypass feito, não precisa banco
+                    }
+                }
+                /* ========================================================
+                 * FIM DO DEV BYPASS
+                 ======================================================== */
+
+                // fluxo normal de login
                 return $controller->loginConta($email, $senha);
-            }   
-            else 
-            {
-                return false;
             }
+            break;
+
         case 'acoes/sair':
-            if ($method === 'GET' && !empty($_GET))
-            {
-                $controller = new UsuarioController();
-                return $controller->lougout();
-            }   
-            else 
-            {
-                return false;
-            }
-        
-        
-        
+            if ($method === 'GET') return $controller->logout();
+            break;
+
         case 'consultas/atualizar':
-            if ($method === 'POST' && !empty($_POST)) 
-            {
-                $id = $_POST['id'] ?? '';
-                $nome = $_POST["nome"] ?? '';
-                $email = $_POST['email'] ?? '';
-                $senha = $_POST['senha'] ?? '';
-                $telefone = $_POST['telefone'] ?? '';
-                $controller = new UsuarioController();
-                return $controller->editarConta($id, $nome, $email, $senha, $telefone);
-            } 
-            else
-            {
-                return false;
-            }
-        
+            if ($method === 'POST') return $controller->editarConta($postData('id'), $postData('nome'), $postData('email'), $postData('senha'), $postData('telefone'));
+            break;
+
         case 'consultas/excluir':
-            if ($method === 'GET' && !empty($_GET)) 
-            {
-                $id = $_GET['id'] ?? '';
-                $controller = new UsuarioController();
-                return $controller->deletarConta($id);
-            } 
-            else
-            {
+            if ($method === 'POST') return $controller->deletarConta($postData('id'));
+            break;
+
+        case 'consultas/solicitarRecuperacao':
+            if ($method === 'POST') return $controller->solicitarRecuperacao($postData('email'));
+            break;
+
+        case 'consultas/redefinirSenha':
+            if ($method === 'POST') return $controller->redefinirSenhaConta($postData('token'), $postData('senha'));
+            break;
+
+        case 'consultas/validarCodigo':
+            if ($method === 'POST') {
+                $codigo = $postData('codigo');
+                if ($controller->validarCodigo($codigo)) {
+                    $_SESSION['codigo_valido'] = true;
+                    return true;
+                }
+                $_SESSION['erro'] = "Código incorreto";
                 return false;
             }
-        case 'consultas/listar':
-            if ($method === 'GET' && !empty($_GET)) 
-            {  
-                $controller = new UsuarioController();
-                return $controller->listarUsuarios();
-            } 
-            else
-            {
-                return false;
-            }
+            break;
+
+        case 'consultas/redefinirSenhaCodigo':
+            if ($method === 'POST') return $controller->redefinirSenhaPorCodigo($postData('senha'));
+            break;
 
         default:
             return false;
-            
     }
 }
-
 ?>
-
-
-
-
-
-
-
+?>

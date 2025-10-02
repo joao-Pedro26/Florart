@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     const isHome = window.location.pathname.endsWith('home.php') || window.location.pathname === '/' || window.location.pathname === '/index.php';
 

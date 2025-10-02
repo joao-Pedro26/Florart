@@ -1,0 +1,247 @@
+/* importa a mesma fonte usada no style.css geral */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
+:root{
+  --texto-primario: #2d2d2d;
+  --texto-secundario: #666666;
+  --accent1: #916cf1; /* roxo */
+  --accent2: #5a2ff4; /* azul */
+}
+
+/* aplica a fonte e reset necessário */
+html, body {
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  color: var(--texto-primario);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* =============== CORPO CENTRALIZADO + FUNDO ANIMADO =============== */
+body {
+  background-image: linear-gradient(to left,#000071, #5a2ff4, #916cf1, #8a0c8a,#d263ce);
+  background-size: 300% 100%;
+  animation: degrade-animado 5s infinite alternate;
+  min-height: 100vh;
+}
+
+/* MAIN: centraliza verticalmente o conteúdo (form) e mantém o botão abaixo do form */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* centraliza verticalmente */
+  min-height: 100vh;
+  position: relative;
+  gap: 12px; /* espaço entre form e botão */
+  padding: 28px 16px;
+}
+
+/* animação herdada do style.css */
+@keyframes degrade-animado {
+  0% { background-position-x: 0%; }
+  100% { background-position-x: 100%; }
+}
+
+/* ---------- vídeo de fundo + overlay rosada ---------- */
+.divVideo {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.divVideo .video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+}
+
+.divVideo::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(210,99,206,0.30), rgba(145,108,241,0.20));
+  mix-blend-mode: overlay;
+}
+
+/* =============== CAIXA BRANCA (FORM) =============== */
+.box-log-cad{
+  max-width: 520px;
+  width: 100%;
+  max-width: calc(520px);
+  margin: 0; /* controlado pelo main */
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 36px rgba(16, 14, 67, 0.18);
+  padding: 2rem;
+  position: relative;
+  z-index: 10; /* acima do overlay do vídeo */
+}
+
+/* header com logo e título */
+.header-log-cad{
+  display: flex;
+  flex-direction: row; /* muda de coluna para linha */
+  align-items: center; /* centraliza verticalmente a logo e o texto */
+  justify-content: center; /* centraliza horizontalmente */
+  gap: 12px; /* espaçamento entre logo e título */
+  margin-bottom: 1.8rem;
+}
+
+.logo-log-cad{
+  width: 48px;
+  height: auto;
+  cursor: pointer;
+  margin-bottom: 0; /* remove margem inferior, pois agora está em linha */
+}
+
+.titulo-log-cad{
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent1);
+  line-height: 1.2;
+  text-align: left; /* agora é ao lado, não precisa centralizar */
+  margin-top: 23px;
+}
+
+/* =============== CONTAINER DO FORMULÁRIO =============== */
+.container-log-cad{
+  width: 100%;
+}
+
+.form-login .input-group{
+  margin-bottom: 1.15rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-login label{
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--texto-primario);
+  margin-bottom: 6px;
+}
+
+.form-login input{
+  font-size: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background: #f8f8f8;
+  outline: none;
+  transition: border 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-login input:focus{
+  border: 1.5px solid var(--accent1);
+  box-shadow: 0 6px 18px rgba(145,108,241,0.08);
+}
+
+/* botão principal */
+.btn-login{
+  width: 100%;
+  padding: 0.95rem;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  background: linear-gradient(90deg, var(--accent1) 40%, var(--accent2) 100%);
+  color: #fff;
+  margin-top: 0.6rem;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.btn-login:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(90,47,244,0.12);
+}
+
+/* link de cadastro */
+.link-cadastro, .link-recuperarSenha{
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--texto-secundario);
+}
+
+.link-cadastro a, .link-recuperarSenha a{
+  color: var(--accent1);
+  font-weight: 600;
+  margin-left: 6px;
+  text-decoration: none;
+}
+
+.link-cadastro a:hover, .link-recuperarSenha a:hover{
+  color: var(--accent2);
+  text-decoration: underline;
+}
+
+/* mensagem de erro */
+.erro{
+  color: #c92a2a;
+  background: rgba(255,200,200,0.08);
+  border: 1px solid rgba(201,42,42,0.12);
+  padding: 0.55rem 0.9rem;
+  border-radius: 8px;
+  text-align: center;
+  width: calc(100% - 40px);
+  margin: 16px auto;
+  z-index: 20;
+  position: relative;
+}
+
+/* =============== BOTÃO VOLTAR =============== */
+.voltar-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px; /* distância abaixo do form */
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: white;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  transition: all 0.18s ease;
+  z-index: 30; /* sempre acima do overlay */
+  cursor: pointer;
+}
+
+.voltar-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+}
+
+.icon-voltar {
+  font-size: 1.4rem;
+  color: linear-gradient(135deg, #916cf1, #5a2ff4);
+}
+
+/* =============== RESPONSIVIDADE =============== */
+@media (max-width: 720px) {
+  main {
+    padding: 20px 12px;
+    gap: 10px;
+  }
+  .box-log-cad {
+    width: calc(100% - 36px);
+    margin: 0;
+    padding: 1.4rem;
+  }
+  .logo-log-cad { width: 48px; }
+  .titulo-log-cad { font-size: 1.6rem; }
+  .voltar-link { width: 48px; height: 48px; margin-top: 12px; }
+}

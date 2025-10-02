@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f7f7f9;
+    padding: 120px 20px 40px;
+    color: #333;
+    box-sizing: border-box; /* garante que padding não estoure a largura */
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+header {
+  background: rgba(145, 108, 241, 0.8); /* roxo transparente */
+  backdrop-filter: blur(5px); /* dá efeito de desfoque por trás, fica bonito */
+}
+
+/* Painel principal */
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 50px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2d2d2d;
+}
+
+/* Botões de troca */
+.painel-botoes {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.painel-title {
+  margin-top: 120px; /* ou ajuste conforme a necessidade */
+  margin-bottom: 20px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.tab-btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(90deg, #916cf1, #5a2ff4);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform .2s, opacity .3s;
+}
+
+.tab-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* Tabela */
+.tabela {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+  max-width: 1100px;
+  margin: 0 auto 2rem auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.tabela h2 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Botão adicionar */
+.tabela .btn-add {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(90deg, #5bc54c, #7EA672);
+  color: white;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background .3s;
+}
+
+.tabela .btn-add:hover {
+  background: linear-gradient(90deg, #4ca33f, #648e5f);
+}
+
+/* Estilo tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+table th, table td {
+  padding: 0.9rem 1rem;
+  text-align: left;
+}
+
+table thead {
+  background: linear-gradient(90deg, #916cf1, #5a2ff4);
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background: #f5f5f5;
+}
+
+table tr:hover {
+  background: #eee;
+}
+
+/* Botões de ação */
+.btn {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background .2s;
+  margin-right: 5px;
+}
+
+.btn-edit {
+  background: #ffb347;
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #e09c32;
+}
+
+.btn-delete {
+  background: #e25b5b;
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #c94a4a;
+}
+
+/* =============== MODAL DE CONFIRMAÇÃO =============== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.2);
+}
+
+.modal-content h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.modal-content p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.modal-botoes {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.modal .btn-add {
+  background: linear-gradient(90deg, #5bc54c, #7EA672);
+  color: white;
+}
+
+.modal .btn-add:hover {
+  background: linear-gradient(90deg, #4ca33f, #648e5f);
+}
+
+.modal .btn-delete {
+  background: #e25b5b;
+  color: white;
+}
+
+.modal .btn-delete:hover {
+  background: #c94a4a;
+}
+
+/* Remove borda do botão "Não" */
+.modal .no-border {
+  border: none;
+}
+
+/* Ajuste de centralização dos botões */
+.modal-botoes .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+}
+
+/* Botão de fechar (✕) no canto superior direito */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #555;
+}
+
+/* Ajuste para modal-content posicionar corretamente o botão X */
+.modal-content {
+  position: relative;
+}

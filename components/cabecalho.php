@@ -1,7 +1,7 @@
 
 
 <header class="cabecalho">
-    <a href="/"><img src="/images/logo.png" alt="logo" class="img-logo"></a>
+    <a href="/"><img src="../images/logo.png" alt="logo" class="img-logo"></a>
   
     <input type="checkbox" id="check">
     <label for="check" class="icons">
