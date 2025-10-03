@@ -53,6 +53,12 @@ class UsuarioController
         } catch (Exception $e) {
             error_log("Erro no cadastro: " . $e->getMessage());
             $_SESSION['erro'] = $e->getMessage(); 
+            $_SESSION['old_inputs'] = [
+                    'nome' => $nome,
+                    'email' => $email,
+                    'telefone' => $telefone,
+                    // NÃO salva senha
+                ];
             header('Location: ../pages/cadastroTeste.php');
             unset($_SESSION['statusLogado'], $_SESSION['usuario'], $_SESSION['email'], $_SESSION['telefone'], $_SESSION['admin']);
             return false;
@@ -83,7 +89,11 @@ class UsuarioController
 
         } catch (Exception $e) {
             error_log("Erro no cadastro: " . $e->getMessage());
-            $_SESSION['erro'] = $e->getMessage(); 
+            $_SESSION['erro'] = $e->getMessage();
+            $_SESSION['old_inputs'] = [
+                    'email' => $email,
+                    // não salvar a senha!
+                ];
             header('Location: ../pages/loginTeste.php');
             unset($_SESSION['statusLogado'], $_SESSION['usuario'], $_SESSION['email'], $_SESSION['telefone'], $_SESSION['admin']);
             return false;
