@@ -16,35 +16,7 @@ function handleRoute()
             break;
 
         case 'consultas/login':
-            if ($method === 'POST') {
-
-                $email = $postData('email');
-                $senha = $postData('senha');
-
-                /* ========================================================
-                 * DEV BYPASS DE LOGIN (APENAS PARA TESTES LOCAIS)
-                 * >>>> REMOVER ESTE TRECHO NA VERSÃO FINAL <<<<<
-                 ======================================================== */
-                $DEV_BYPASS = true; // habilita/desabilita o bypass
-                if ($DEV_BYPASS && in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1','::1'])) {
-                    if ($email === 'dev@local' && $senha === 'devpass') {
-                        session_start();
-                        session_regenerate_id(true);
-                        $_SESSION['statusLogado'] = true;
-                        $_SESSION['usuario'] = 'Admin Dev';
-                        $_SESSION['email'] = $email;
-                        $_SESSION['telefone'] = '';
-                        $_SESSION['admin'] = true;
-                        return true; // bypass feito, não precisa banco
-                    }
-                }
-                /* ========================================================
-                 * FIM DO DEV BYPASS
-                 ======================================================== */
-
-                // fluxo normal de login
-                return $controller->loginConta($email, $senha);
-            }
+            if ($method === 'POST') return $controller->loginConta($postData('email'), $postData('senha'));
             break;
 
         case 'acoes/sair':
