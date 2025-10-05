@@ -1,7 +1,7 @@
 <?php
 require_once "../controller/usuariosController.php";
 
-function handleRoute() 
+function handleRoute()
 {
     $method = $_SERVER['REQUEST_METHOD'];
     $route = $_POST['route'] ?? $_GET['route'] ?? '';
@@ -9,8 +9,7 @@ function handleRoute()
 
     $postData = fn($key) => $_POST[$key] ?? '';
 
-    switch ($route) 
-    {
+    switch ($route) {
         case 'consultas/cadastrar':
             if ($method === 'POST') return $controller->cadastrarConta($postData('nome'), $postData('email'), $postData('senha'), $postData('telefone'));
             break;
@@ -59,5 +58,3 @@ function handleRoute()
             return false;
     }
 }
-?>
-?>

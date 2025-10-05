@@ -21,43 +21,7 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Fundo gradiente animado */
-body {
-  background-image: linear-gradient(to left, #000071, #5a2ff4, #916cf1, #8a0c8a, #d263ce);
-  background-size: 300% 100%;
-  animation: degrade-animado 5s infinite alternate;
-  min-height: 100vh;
-  position: relative;
-}
 
-/* Vídeo de fundo com overlay */
-.divVideo {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.divVideo .video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.55;
-}
-
-.divVideo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(90deg, rgba(210, 99, 206, 0.3), rgba(145, 108, 241, 0.2));
-  mix-blend-mode: overlay;
-}
 
 /* Animação gradiente */
 @keyframes degrade-animado {
@@ -66,16 +30,7 @@ body {
 }
 
 /* Main centraliza a caixa do form */
-main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
-  position: relative;
-  z-index: 10;
-  width: 100%;
-}
+
 
 /* Caixa branca do form */
 .box-log-cad {
