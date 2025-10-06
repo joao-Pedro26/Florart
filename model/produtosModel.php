@@ -1,4 +1,4 @@
-<?
+<?php
 
 class ProdutosModel extends Database {
 

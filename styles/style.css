@@ -87,16 +87,18 @@ body {
     display: none;
 }
 
-.icon-carrinho {
+.icon-carrinho-perfil{
     position: relative;
+    margin-right: 1.5rem;
 }
-.icon-carrinho button{
+.icon-carrinho-perfil button{
     border: none;
     background: transparent;
     cursor: pointer;
+
 }
-#icon-carrinho {
-    font-size: 1.7rem;
+#icon-carrinho-perfil {
+    font-size: 1.75rem;
 }
 
 .carrinho {
