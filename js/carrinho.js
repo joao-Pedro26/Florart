@@ -1,4 +1,4 @@
-const btnCarrinho = document.querySelector('.icon-carrinho button');
+const btnCarrinho = document.querySelector('.icon-carrinho-perfil button');
 const carrinho = document.querySelector('.carrinho');
 const btnFechar = document.querySelector('.carrinho .fechar');
 const overlay = document.querySelector('.overlay');

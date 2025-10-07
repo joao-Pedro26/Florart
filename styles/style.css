@@ -91,11 +91,10 @@ body {
     position: relative;
     margin-right: 1.5rem;
 }
-.icon-carrinho-perfil button{
+.icon-carrinho-perfil button, a {
     border: none;
     background: transparent;
     cursor: pointer;
-
 }
 #icon-carrinho-perfil {
     font-size: 1.75rem;

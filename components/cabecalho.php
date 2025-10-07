@@ -36,13 +36,11 @@
         <button>
             <i class="bx bx-cart icon-carrinho-perfil" id="icon-carrinho-perfil" style="color:#ffffff"></i>
         </button>
-        <?php 
-        if (isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true){
-        echo "<button>
-        <i class='bxd bx-user icon-carrinho-perfil' id='icon-carrinho-perfil' style='color:#ffffff'></i>
-        </button>";
-        }
-        ?>
+        
+        <a href="/pages/loginTeste.php"> <i class='bxd bx-user icon-carrinho-perfil' id='icon-carrinho-perfil' style='color:#ffffff'></i></a>
+        
+       
+        
     </div>
     <script>
         const iconCarrinho = document.querySelector('.icon-carrinho');
