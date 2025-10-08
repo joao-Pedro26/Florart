@@ -60,7 +60,7 @@ $usuarios = $controller->listarUsuarios();
           <td><?= $u['telefone'] ?></td>
           <td><?= $u['admin'] ? 'Sim' : 'Não' ?></td>
           <td>
-            <a href="editarUsuario.php?id=<?= $u['id_usuario'] ?>" class="btn btn-edit">Editar</a>
+            <a href="editar.php?tipo&id=<?= $u['id_usuario'] ?>" class="btn btn-edit">Editar</a>
             <a href="#" 
               class="btn btn-delete"
               onclick="abrirModalExcluir(<?= $u['id_usuario'] ?>, '<?= addslashes($u['nome']) ?>', '<?= $u['telefone'] ?>'); return false;">
