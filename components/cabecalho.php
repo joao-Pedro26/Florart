@@ -13,34 +13,38 @@
         <a href="#contato" id="contato-menu" style="--i: 3">Contato</a>
 
         <?php
-        // Se NÃO está logado
-        if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
-            echo '<a href="../pages/loginTeste.php">Login</a>';
-            echo '<a href="../pages/cadastroTeste.php">Cadastro</a>';
-        }
-        // Se for ADMIN
-        elseif (isset($_SESSION['admin']) && $_SESSION['admin'] === true) {
-            echo '<a href="../pages/admin.php">Central de Controle</a>';
-            echo '<a href="../pages/home.php?route=acoes/sair">Sair</a>';
-        }
-        // Se for USUÁRIO comum
-        else {
-            echo '<a href="../pages/perfil.php">Perfil</a>';
-            echo '<a href="../pages/home.php?route=acoes/sair">Sair</a>';
+        // Se está logado
+        if (isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) {
+            // Se for ADMIN
+            if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) {
+                echo '<a href="../pages/admin.php">Central de Controle</a>';
+                echo '<a href="../pages/home.php?route=acoes/sair">Sair</a>';
+            }
+            // Se for USUÁRIO comum
+            else {
+                echo '<a href="../pages/home.php?route=acoes/sair">Sair</a>';
+            }
         }
         ?>
+
     </nav>
 
 
     <div class="icon-carrinho-perfil">
+        <?php
+        $caminhoPerfil = isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true ? 'perfil.php' : 'login.php';
+        ?>
+
+        <a href="/pages/<?= $caminhoPerfil ?>"> <i class='bxd bx-user icon-carrinho-perfil perfil' id='icon-carrinho-perfil' style='color:#ffffff'></i></a>
+
         <button>
             <i class="bx bx-cart icon-carrinho-perfil" id="icon-carrinho-perfil" style="color:#ffffff"></i>
         </button>
-        
-        <a href="/pages/loginTeste.php"> <i class='bxd bx-user icon-carrinho-perfil' id='icon-carrinho-perfil' style='color:#ffffff'></i></a>
-        
-       
-        
+
+
+
+
+
     </div>
     <script>
         const iconCarrinho = document.querySelector('.icon-carrinho');

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title>Painel Administrativo</title>
@@ -8,28 +9,32 @@
   <link rel="stylesheet" href="../styles/reset.css">
   <link rel="stylesheet" href="../styles/header-footer.css">
 </head>
+
 <body>
   <?php
-session_start();
-if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
+  if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+  }
+
+  if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     header("Location: home.php");
     exit;
-}
+  }
 
-require_once "../controller/usuariosController.php";
-$controller = new UsuarioController;
+  require_once "../controller/usuariosController.php";
+  $controller = new UsuarioController;
 
-// Se veio um pedido de exclusão
-if (isset($_GET['deletar'])) {
+  // Se veio um pedido de exclusão
+  if (isset($_GET['deletar'])) {
     $id = intval($_GET['deletar']); // protege contra injeção
     $controller->deletarConta($id);
     header("Location: admin.php"); // recarrega a página sem a query
     exit;
-}
+  }
 
-$usuarios = $controller->listarUsuarios();
-?>
-  <?php include '../components/cabecalho.php';?>
+  $usuarios = $controller->listarUsuarios();
+  ?>
+  <?php include '../components/cabecalho.php'; ?>
 
   <h1>Painel Administrativo</h1>
 
@@ -42,7 +47,7 @@ $usuarios = $controller->listarUsuarios();
   <!-- Tabela Usuários -->
   <div id="usuarios" class="tabela">
     <h2>Gerenciar Usuários</h2>
-    <a href="cadastroTeste.php" class="btn-add">+ Adicionar Usuário</a>
+    <a href="cadastro.php" class="btn-add">+ Adicionar Usuário</a>
     <table>
       <tr>
         <th>ID</th>
@@ -61,7 +66,7 @@ $usuarios = $controller->listarUsuarios();
           <td><?= $u['admin'] ? 'Sim' : 'Não' ?></td>
           <td>
             <a href="editar.php?tipo&id=<?= $u['id_usuario'] ?>" class="btn btn-edit">Editar</a>
-            <a href="#" 
+            <a href="#"
               class="btn btn-delete"
               onclick="abrirModalExcluir(<?= $u['id_usuario'] ?>, '<?= addslashes($u['nome']) ?>', '<?= $u['telefone'] ?>'); return false;">
               Excluir
@@ -106,7 +111,7 @@ $usuarios = $controller->listarUsuarios();
         <strong>Nome:</strong> ${nome}<br>
         <strong>Telefone:</strong> ${telefone}
       `;
-      
+
       btnConfirmar.href = `admin.php?deletar=${id}`;
       modal.style.display = 'flex';
     }
@@ -122,7 +127,6 @@ $usuarios = $controller->listarUsuarios();
         fecharModal();
       }
     }
-
   </script>
 
   <!-- Modal de confirmação -->
@@ -140,7 +144,8 @@ $usuarios = $controller->listarUsuarios();
   </div>
 
 
-  <?php include '../components/rodape.php';?>
+  <?php include '../components/rodape.php'; ?>
 
 </body>
+
 </html>

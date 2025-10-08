@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+  session_start();
+}
 
 // Recupera valor antigo do email se existir
 $emailValue = $_SESSION['old_inputs']['email'] ?? '';
@@ -50,7 +52,7 @@ unset($_SESSION['old_inputs']); // limpa para a próxima requisição
         <button type="submit" class="btn-login">Entrar</button>
         <div class="link-cadastro">
           <span>Não tem uma conta?</span>
-          <a href="../pages/cadastroTeste.php">Cadastre-se</a>
+          <a href="../pages/cadastro.php">Cadastre-se</a>
         </div>
         <div class="link-cadastro " style="margin-top: 0px;">
           <span>Esqueceu sua senha?</span>
