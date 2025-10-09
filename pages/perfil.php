@@ -30,7 +30,6 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
 
         </section>
     </main>
-    <?php include '../components/menu-mobile.php'; ?>
 
 </body>
 

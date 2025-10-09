@@ -13,3 +13,9 @@
     padding: 10px 0;
     z-index: 999;
 }
+
+@media (min-width: 768px) {
+  .menu-inferior {
+    display: none;
+  }
+}
