@@ -26,10 +26,12 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     <?php include '../components/cabecalho.php'; ?>
     <main class="main-perfil">
         <section class="perfil">
-            
+
 
         </section>
     </main>
+    <?php include '../components/menu-mobile.php'; ?>
+
 </body>
 
 </html>

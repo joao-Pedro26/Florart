@@ -1,0 +1,15 @@
+
+
+.menu-inferior {
+      position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(35px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 999;
+}

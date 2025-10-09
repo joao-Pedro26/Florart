@@ -144,6 +144,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Rodapé -->
     <?php include '../components/rodape.php'; ?>
+    <?php include '../components/menu-mobile.php'; ?>
+
 </body>
 
 </html>
