@@ -30,6 +30,10 @@ function handleRoute()
             if ($method === 'POST') return $controller->deletarConta($postData('id'));
             break;
 
+        case 'consultas/listarUsuarios':
+            if ($method === 'GET') return $controller->listarUsuarios();
+
+            
         case 'consultas/solicitarRecuperacao':
             if ($method === 'POST') return $controller->solicitarRecuperacao($postData('email'));
             break;

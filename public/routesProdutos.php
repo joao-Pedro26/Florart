@@ -10,7 +10,7 @@ function handleProdutoRoute()
     $postData = fn($key) => $_POST[$key] ?? '';
 
     switch ($route) {
-        case 'produtos/listar':
+        case 'produtos/listarProdutos':
             return $controller->listarProdutos();
 
         case 'produtos/cadastrar':

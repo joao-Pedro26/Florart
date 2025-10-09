@@ -10,7 +10,7 @@ class ProdutoModel extends Database
 
     public function listarProdutos()
     {
-        $sql = "SELECT id_produto, nome, descricao, imagem, tipo, valor_unitario, estoque, excluido, data_criacao 
+        $sql = "SELECT id_produto, nome, descricao, imagem, tipo, valor_unitario, excluido, data_criacao 
                 FROM produto 
                 WHERE excluido = false OR excluido IS NULL
                 ORDER BY id_produto DESC";

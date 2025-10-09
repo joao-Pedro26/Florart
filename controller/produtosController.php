@@ -7,9 +7,9 @@ class ProdutoController
 
     public function __construct()
     {
-        $dsn = "pgsql:host=localhost;port=5432;dbname=florart;";
-        $username = "postgres";
-        $password = "postgres";
+        $dsn = "pgsql:host=projetoscti.com.br;port=54432;dbname=eq5.inf2;";
+        $username = "eq5.inf2";
+        $password = "eq52335";
         $this->model = new ProdutoModel($dsn, $username, $password);
     }
 

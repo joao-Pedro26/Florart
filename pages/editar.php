@@ -1,6 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true || $_SESSION['admin'] !== true) {
+if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true || $_SESSION['admin'] !== true) 
+{
     header('Location: home.php');
     exit;
 }
@@ -10,7 +11,8 @@ require_once "../public/routesProdutos.php";
 
 
 // ========================== PROCESSAR ENVIO DO FORMULÁRIO ==========================
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
     $tipo = $_POST['tipo'] ?? '';
     $id = intval($_POST['id'] ?? 0);
 
@@ -36,7 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unset($_SESSION['erro']);
         }
     }
-    elseif ($tipo === 'produto') {
+    elseif ($tipo === 'produto') 
+    {
         $nome = trim($_POST['nome'] ?? '');
         $tipo_produto = trim($_POST['tipo_produto'] ?? '');
         $valor_unitario = $_POST['valor_unitario'] ?? 0;
@@ -45,10 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $imagem = $_FILES['imagem']['name'] ?? null;
 
         $resultado = $produtoController->editarProduto($id, $nome, $descricao, $tipo_produto, $valor_unitario, $estoque, $imagem);
-        if ($resultado) {
+        if ($resultado) 
+        {
             header("Location: admin.php?aba=produtos"); // aqui passa a aba correta
             exit;
-        } else {
+        } 
+        else 
+        {
             $erro = $_SESSION['erro'] ?? "Erro ao atualizar produto.";
             unset($_SESSION['erro']);
         }
@@ -60,19 +66,25 @@ $tipo = $_GET['tipo'] ?? '';
 $id = intval($_GET['id'] ?? 0);
 $registro = null;
 
-if ($tipo === 'usuario' && $id) {
+if ($tipo === 'usuario' && $id) 
+{
     $usuarios = $usuarioController->listarUsuarios();
-    foreach ($usuarios as $u) {
-        if ($u['id_usuario'] === $id) {
+    foreach ($usuarios as $u) 
+    {
+        if ($u['id_usuario'] === $id) 
+        {
             $registro = $u;
             break;
         }
     }
-} elseif ($tipo === 'produto' && $id) {
+} 
+elseif ($tipo === 'produto' && $id) 
+{
     $registro = $produtoController->buscarProduto($id);
 }
 
-if (!$registro) {
+if (!$registro) 
+{
     header("Location: admin.php");
     exit;
 }
