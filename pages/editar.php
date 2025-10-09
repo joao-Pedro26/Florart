@@ -2,9 +2,6 @@
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
-
-if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true || $_SESSION['admin'] !== true) {
-session_start();
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true || $_SESSION['admin'] !== true) 
 {
     header('Location: home.php');
@@ -14,8 +11,6 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true || $
 require_once "../public/routesUsuarios.php";
 require_once "../public/routesProdutos.php";
 
-
-// ========================== PROCESSAR ENVIO DO FORMULÁRIO ==========================
 if ($_SERVER['REQUEST_METHOD'] === 'POST') 
 {
     $tipo = $_POST['tipo'] ?? '';
@@ -42,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             $erro = $_SESSION['erro'] ?? "Erro ao atualizar usuário.";
             unset($_SESSION['erro']);
         }
-    } elseif ($tipo === 'produto') {
+    } 
+    elseif ($tipo === 'produto') {
     }
     elseif ($tipo === 'produto') 
     {
