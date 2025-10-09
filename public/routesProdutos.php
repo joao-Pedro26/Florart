@@ -36,7 +36,7 @@ function handleProdutoRoute()
 
         case 'produtos/excluir':
             if ($method === 'POST')
-                return $controller->deletarProduto($post('id'));
+                return $controller->deletarProduto($postData('id'));
             break;
 
         case 'produtos/buscar':

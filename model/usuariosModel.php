@@ -1,5 +1,5 @@
 <?php
-require_once 'Database.php';
+require_once 'database.php';
 
 class UsuarioModel extends Database 
 {
@@ -15,7 +15,7 @@ class UsuarioModel extends Database
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
+    
     // ====================== USUÁRIOS ======================
     public function listarUsuariosTeste() 
     {

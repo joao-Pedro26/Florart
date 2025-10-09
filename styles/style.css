@@ -13,6 +13,7 @@ body {
     min-height: 100vh;
     background-size: cover;
     background-position: center;
+    overflow-x: hidden;
 }
 
 .cabecalho {
@@ -144,10 +145,12 @@ body {
     pointer-events: auto;
 }
 
-@media (max-width:500px) {
+@media (max-width:550px) {
     .carrinho {
         width: 100vw;
     }
+
+   
 }
 
 

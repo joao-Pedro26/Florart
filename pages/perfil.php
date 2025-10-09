@@ -1,5 +1,8 @@
-<?php 
-session_start();
+<?php
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     header('Location: home.php');
     exit;
@@ -23,10 +26,11 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     <?php include '../components/cabecalho.php'; ?>
     <main class="main-perfil">
         <section class="perfil">
-        
+
 
         </section>
     </main>
+
 </body>
 
 </html>

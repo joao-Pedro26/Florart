@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+  session_start();
+}
 
 // Recupera valores antigos para reaproveitar nos inputs
 $nomeValue = $_SESSION['old_inputs']['nome'] ?? '';
@@ -74,7 +76,7 @@ unset($_SESSION['old_inputs']); // limpa para a próxima requisição
         <button type="submit" class="btn-login">Cadastrar</button>
         <div class="link-cadastro">
           <span>Já tem uma conta?</span>
-          <a href="../pages/loginTeste.php">Entrar</a>
+          <a href="../pages/login.php">Entrar</a>
         </div>
       </form>
     </div>

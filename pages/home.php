@@ -1,51 +1,57 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
-    require_once "../public/routesUsuarios.php";
+}
+require_once "../public/routesUsuarios.php";
 
-    $resultado = handleRoute();
+$resultado = handleRoute();
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        if ($resultado === true && isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) {
-            header('Location: home.php');
-            exit;
-        }
-    
+    if ($resultado === true && isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) {
+        header('Location: home.php');
+        exit;
     }
-    
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/reset.css">
-    <link rel="stylesheet" href="../styles/style.css">  
+    <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/header-footer.css">
     <link rel="icon" href="../images/logo.png" type="">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <title>Florart</title>
 </head>
+
 <body>
     <!-- Cabeçalho -->
-        <?php include '../components/cabecalho.php';?>
+    <?php include '../components/cabecalho.php'; ?>
     <main>
         <!-- Carrinho -->
-        <?php include '../components/carrinho.php';?>
-            
+        <?php include '../components/carrinho.php'; ?>
+
         <!-- Apresentação -->
-            
+
         <section class="apresentacao">
             <div class="texto-apresentacao">
-            <div>
-            <h1 id="titulo-apresentacao"></h1>
+                <div>
+                    <h1 id="titulo-apresentacao"></h1>
+                </div>
+                <h4>Descubra a beleza das flores com nossas artes exclusivas.</h4>
             </div>
-            <h4>Descubra a beleza das flores com nossas artes exclusivas.</h4>
-            </div> 
             <div class="divBotoes">
                 <div class="botao-catalogo">
-                     <a href="#catalogo">Catálogo</a>
+                    <a href="#catalogo">Catálogo</a>
                 </div>
                 <div class="botao-entrega">
                     <a href="#diferenciais">Entrega Expressa</a>
@@ -61,8 +67,8 @@
 
         <section class="diferenciais" id="diferenciais">
             <div>
-                <div class="icon-diferenciais icon1" >
-                    <i class='bxr  bx-truck' id="icon-diferenciais" style="color:#004500" ></i> 
+                <div class="icon-diferenciais icon1">
+                    <i class='bxr  bx-truck' id="icon-diferenciais" style="color:#004500"></i>
                 </div>
                 <div class="texto-diferenciais">
                     <h1>Entrega</h1>
@@ -71,7 +77,7 @@
             </div>
             <div>
                 <div class="icon-diferenciais icon2">
-                    <i class='bxr  bx-shield' id="icon-diferenciais" style='color:#d95d73'></i> 
+                    <i class='bxr  bx-shield' id="icon-diferenciais" style='color:#d95d73'></i>
                 </div>
                 <div class="texto-diferenciais ">
                     <h1>Segurança</h1>
@@ -80,7 +86,7 @@
             </div>
             <div>
                 <div class="icon-diferenciais icon3">
-                    <i class='bxr  bx-gift' id="icon-diferenciais" style='color:#9f6700'></i>  
+                    <i class='bxr  bx-gift' id="icon-diferenciais" style='color:#9f6700'></i>
                 </div>
                 <div class="texto-diferenciais">
                     <h1>Deslumbrar</h1>
@@ -89,7 +95,7 @@
             </div>
             <div>
                 <div class="icon-diferenciais icon4">
-                    <i class='bxr  bx-clock-1' id="icon-diferenciais" style='color:#b338b3'></i> 
+                    <i class='bxr  bx-clock-1' id="icon-diferenciais" style='color:#b338b3'></i>
                 </div>
                 <div class="texto-diferenciais">
                     <h1>Operação</h1>
@@ -107,25 +113,25 @@
                 <div class="slide"><img src="https://img.freepik.com/free-photo/gerbera-pink-petals-black-background_23-2148268322.jpg" alt=""></div>
                 <div class="slide"><img src="https://img.freepik.com/free-photo/top-view-beautifully-colored-flowers_23-2149005613.jpg" alt=""></div>
                 <div class="slide"><img src="https://img.freepik.com/free-photo/silhouette-pink-cosmos-flowers-garden_1357-51.jpg" alt=""></div>
-            </div>  
-             <div class="controls">
-      <button class="btn prev" aria-label="Anterior">◀</button>
-      <button class="btn next" aria-label="Próximo">▶</button>
-    </div>                            
+            </div>
+            <div class="controls">
+                <button class="btn prev" aria-label="Anterior">◀</button>
+                <button class="btn next" aria-label="Próximo">▶</button>
+            </div>
         </section>
 
-         <!-- Catálogo -->
+        <!-- Catálogo -->
 
-        <section class="catalogo" id="catalogo" >
-            <div class="titulo-catalogo" >
+        <section class="catalogo" id="catalogo">
+            <div class="titulo-catalogo">
                 <h2>Nossos Produtos</h2>
                 <p>Seleção especial das nossas criações mais amadas</p>
             </div>
             <div class="produtos">
-                 <?php include '../components/produto.php';?>
-                 <?php include '../components/produto.php';?>
-                 <?php include '../components/produto.php';?>
-                 <?php include '../components/produto.php';?>
+                <?php include '../components/produto.php'; ?>
+                <?php include '../components/produto.php'; ?>
+                <?php include '../components/produto.php'; ?>
+                <?php include '../components/produto.php'; ?>
             </div>
 
         </section>
@@ -137,6 +143,9 @@
     <script src="../js/cabecalho.js"></script>
 
     <!-- Rodapé -->
-        <?php include '../components/rodape.php';?>
+    <?php include '../components/rodape.php'; ?>
+    <?php include '../components/menu-mobile.php'; ?>
+
 </body>
+
 </html>

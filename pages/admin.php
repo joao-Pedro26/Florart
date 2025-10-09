@@ -44,6 +44,7 @@ else if ($route === 'consultas/listarUsuarios')
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <title>Painel Administrativo</title>
@@ -52,6 +53,7 @@ else if ($route === 'consultas/listarUsuarios')
   <link rel="stylesheet" href="../styles/reset.css">
   <link rel="stylesheet" href="../styles/header-footer.css">
 </head>
+
 <body>
   <?php include '../components/cabecalho.php'; ?>
 
@@ -78,4 +80,5 @@ else if ($route === 'consultas/listarUsuarios')
   <?php include '../components/rodape.php'; ?>
   
 </body>
+
 </html>
