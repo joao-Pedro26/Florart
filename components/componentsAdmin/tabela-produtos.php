@@ -1,4 +1,3 @@
-
 <div id="produtos" class="tabela">
   <h2>Gerenciar Produtos</h2>
   <a href="cadastroProduto.php" class="btn-add">+ Adicionar Produto</a>
@@ -7,7 +6,7 @@
       <th>ID</th>
       <th>Nome</th>
       <th>Preço</th>
-      <th>descrição</th>
+      <th>Descrição</th>
       <th>Ações</th>
     </tr>
     <?php if (!empty($produtos)): ?>
@@ -18,13 +17,28 @@
           <td>R$ <?= number_format($p['valor_unitario'], 2, ',', '.') ?></td>
           <td><?= htmlspecialchars($p['descricao']) ?></td>
           <td>
-            <a href="admin.php?route=produtos/atualizar&id=<?= $p['id_produto'] ?>" class="btn btn-edit">Editar</a>
-            <a href="admin.php?route=produtos/deletar&id=<?= $p['id_produto'] ?>" class="btn btn-delete">Excluir</a>
+            <a href="#"
+               class="btn btn-edit"
+               onclick='abrirModalEditar(<?= json_encode([
+                   "id" => $p["id_produto"],
+                   "nome" => $p["nome"],
+                   "descricao" => $p["descricao"],
+                   "preco" => $p["valor_unitario"]
+               ]) ?>, "produto"); return false;'>
+               Editar
+            </a>
+
+            <a href="#"
+               class="btn btn-delete"
+               onclick="abrirModalExcluir(<?= $p['id_produto'] ?>, '<?= addslashes($p['nome']) ?>', '', 'produto'); return false;">
+               Excluir
+            </a>
           </td>
         </tr>
       <?php endforeach; ?>
     <?php else: ?>
-      <tr><td colspan="5">Nenhum produto encontrado.</td></tr>
+      <tr><td colspan="5" style="text-align:center;">Nenhum produto encontrado.</td></tr>
     <?php endif; ?>
   </table>
 </div>
+

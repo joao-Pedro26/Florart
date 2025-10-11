@@ -24,19 +24,29 @@ function handleProdutoRoute()
             break;
 
         case 'produtos/editar':
-            if ($method === 'POST')
-                return $controller->editarProduto(
-                    $postData('id'),
-                    $postData('nome'),
-                    $postData('descricao'),
-                    $postData('preco'),
-                    $_FILES['imagem']['name'] ?? null
-                );
+            if ($method === 'POST') {
+                // Recebe dados do POST corretamente
+                $id = $postData('id');
+                $nome = $postData('nome');
+                $descricao = $postData('descricao');
+                $preco = $postData('preco');
+                $imagem = $_FILES['imagem']['name'] ?? null;
+
+                return $controller->editarProduto($id, $nome, $descricao, $preco, $imagem);
+            }
             break;
 
         case 'produtos/excluir':
-            if ($method === 'POST')
-                return $controller->deletarProduto($postData('id'));
+            if ($method === 'GET' || $method === 'POST') {
+                $id = $_GET['id'] ?? $_POST['id'] ?? null;
+
+                if (!$id) {
+                    echo "Erro: ID não recebido.";
+                    return false;
+                }
+
+                return $controller->deletarProduto($id);
+            }
             break;
 
         case 'produtos/buscar':

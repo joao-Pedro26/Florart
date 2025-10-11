@@ -26,8 +26,17 @@ function handleRoute()
             if ($method === 'POST') return $controller->editarConta($postData('id'), $postData('nome'), $postData('email'), $postData('senha'), $postData('telefone'));
             break;
 
-        case 'consultas/excluir':
-            if ($method === 'POST') return $controller->deletarConta($postData('id'));
+        case 'consultas/deletar':
+            if ($method === 'GET' || $method === 'POST') {
+                $id = $_GET['id'] ?? $_POST['id'] ?? null;
+
+                if (!$id) {
+                    echo "Erro: ID não recebido.";
+                    return false;
+                }
+
+                return $controller->deletarConta($id);
+            }
             break;
 
         case 'consultas/listarUsuarios':

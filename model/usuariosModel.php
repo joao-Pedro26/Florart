@@ -98,12 +98,16 @@ class UsuarioModel extends Database
     }
 
     public function deletarUsuario($id) 
-    {
-        $sql = "DELETE FROM usuario WHERE id_usuario = :id";
-        $stmt = $this->conexao->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        return $stmt->execute();
+{
+    if (empty($id) || !is_numeric($id)) {
+        throw new Exception("ID inválido recebido: " . var_export($id, true));
     }
+
+    $sql = "DELETE FROM usuario WHERE id_usuario = :id";
+    $stmt = $this->conexao->prepare($sql);
+    $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+    return $stmt->execute();
+}
 
     public function deletarUsuarioTeste($id) 
     {
