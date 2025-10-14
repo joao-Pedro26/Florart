@@ -1,44 +1,49 @@
-<?php
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}
-if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true || $_SESSION['admin'] !== true) 
-{
-    header('Location: home.php');
-    exit;
-}
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+    if (session_status() !== PHP_SESSION_ACTIVE) 
+    {
+        session_start();
+    }
+    if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true || $_SESSION['admin'] !== true) 
+    {
+        header('Location: home.php');
+        exit;
+    }
 
-require_once "../public/routesUsuarios.php";
-require_once "../public/routesProdutos.php";
+    require_once "../public/routesUsuarios.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') 
-{
-    $tipo = $_POST['tipo'] ?? '';
-    $id = intval($_POST['id'] ?? 0);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+    {
+        $tipo = $_POST['tipo'] ?? '';
+        $id = intval($_POST['id'] ?? 0);
 
-    if ($tipo === 'usuario') {
-        $nome = trim($_POST['nome'] ?? '');
-        $email = trim($_POST['email'] ?? '');
-        $telefone = preg_replace('/\D/', '', $_POST['telefone'] ?? '');
-        $admin = $_POST['admin'] ?? 0;
+        if ($tipo === 'usuario') 
+            {
+            $nome = trim($_POST['nome'] ?? '');
+            $email = trim($_POST['email'] ?? '');
+            $telefone = preg_replace('/\D/', '', $_POST['telefone'] ?? '');
+            $senha = $_POST['senha'] ?? null;
+            $admin = $_POST['admin'] ?? 0;
 
-        $resultado = $usuarioController->editarConta($id, $nome, $email, null, $telefone);
+            // Define a rota
+            $_POST['route'] = 'consultas/atualizar';
 
-        if ($resultado) {
-            // Chama os métodos do controller que agora existem
-            if ($admin) {
-                $usuarioController->tornarAdmin($id);
-            } else {
-                $usuarioController->revogarAdmin($id);
+            // Executa a rota
+            $resultado = handleRoute();
+
+            if ($resultado) 
+            {
+                header("Location: admin.php?aba=usuarios&msg=atualizado");
+                exit;
+            } 
+            else 
+            {
+                $erro = $_SESSION['erro'] ?? "Erro ao atualizar usuário.";
+                unset($_SESSION['erro']);
+                echo "<p style='color:red'>$erro</p>";
             }
-            header("Location: admin.php?aba=" . ($tipo === 'usuario' ? 'usuarios' : 'produtos'));
-            exit;
-        } else {
-            $erro = $_SESSION['erro'] ?? "Erro ao atualizar usuário.";
-            unset($_SESSION['erro']);
         }
-    } 
-    elseif ($tipo === 'produto') {
     }
     elseif ($tipo === 'produto') 
     {
@@ -61,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             unset($_SESSION['erro']);
         }
     }
-}
+
 
 // ========================== CARREGAR DADOS PARA O FORMULÁRIO ==========================
 $tipo = $_GET['tipo'] ?? '';

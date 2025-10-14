@@ -11,7 +11,8 @@ function handleProdutoRoute()
 
     switch ($route) {
         case 'produtos/listarProdutos':
-            return $controller->listarProdutos();
+            $produtos = $controller->listarProdutos();
+            return is_array($produtos) ? $produtos : [];
 
         case 'produtos/cadastrar':
             if ($method === 'POST')

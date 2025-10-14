@@ -73,6 +73,15 @@ class UsuarioModel extends Database
         return $stmt->fetch(PDO::FETCH_ASSOC);  
     }
 
+    public function getUsuarioPorId($id)
+    {
+        $sql = "SELECT * FROM usuario WHERE id_usuario = :id LIMIT 1";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getUsuarioPorEmailTeste($email) 
     {
         if ($this->conexao === null) {
@@ -122,21 +131,22 @@ class UsuarioModel extends Database
         return $stmt->execute();
     }
 
-    public function atualizarUsuario($id, $nome, $email, $telefone, $senha = null) 
-    {
-        $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone";
-        if ($senha) $sql .= ", senha = :senha";
-        $sql .= " WHERE id_usuario = :id";
+    public function atualizarUsuario($id, $nome, $email, $telefone, $senha = null)
+{
+    $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone";
+    if ($senha) $sql .= ", senha = :senha";
+    $sql .= " WHERE id_usuario = :id";
 
-        $stmt = $this->conexao->prepare($sql);
-        $stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
-        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-        $stmt->bindValue(':telefone', $telefone, PDO::PARAM_STR);
-        if ($senha) $stmt->bindValue(':senha', password_hash($senha, PASSWORD_BCRYPT), PDO::PARAM_STR);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $stmt = $this->conexao->prepare($sql);
+    $stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
+    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    $stmt->bindValue(':telefone', $telefone, PDO::PARAM_STR);
+    if ($senha) $stmt->bindValue(':senha', password_hash($senha, PASSWORD_BCRYPT), PDO::PARAM_STR);
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
-        return $stmt->execute();
-    }
+    return $stmt->execute();
+}
+
 
     public function tornarAdmin($id) 
     {

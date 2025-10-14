@@ -18,7 +18,7 @@ class ProdutoController
         return $this->model->listarProdutos();
     }
 
-    public function cadastrarProduto($nome, $descricao, $preco, $imagem = null)
+    public function cadastrarProduto($nome, $descricao, $tipo, $preco, $imagem = null)
     {
         try {
             if (!$nome || !$descricao || !$preco)
@@ -28,7 +28,7 @@ class ProdutoController
                 throw new Exception("Preço inválido.");
 
 
-            return $this->model->criarProduto($nome, $descricao, $preco, $imagem);
+            return $this->model->criarProduto($nome, $descricao, $tipo, $preco, $imagem);
 
         } catch (Exception $e) {
             $_SESSION['erro'] = $e->getMessage();

@@ -2,21 +2,27 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-if (session_status() !== PHP_SESSION_ACTIVE) {
+if (session_status() !== PHP_SESSION_ACTIVE) 
+{
     session_start();
 }
+
 require_once "../public/routesUsuarios.php";
+require_once "../public/routesProdutos.php";
+require_once "../controller/produtosController.php";
 
-$resultado = handleRoute();
+$controller = new ProdutoController();
+$produto = $controller->listarProdutos();
 
+$usuarios = handleRoute();
+
+// Se for POST e o login foi bem-sucedido
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    if ($resultado === true && isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) {
+    if (isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) {
         header('Location: home.php');
         exit;
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -128,14 +134,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p>Seleção especial das nossas criações mais amadas</p>
             </div>
             <div class="produtos">
-                <?php include '../components/produto.php'; ?>
-                <?php include '../components/produto.php'; ?>
-                <?php include '../components/produto.php'; ?>
-                <?php include '../components/produto.php'; ?>
+                <?php foreach ($produto as $p): ?>
+                    <?php 
+                        // Define a variável $produto usada dentro de produto.php
+                        $produto = $p; 
+                        include '../components/produto.php'; 
+                    ?>
+                <?php endforeach; ?>
             </div>
-
         </section>
     </main>
+    
     <script src="../js/tituloApresentacao.js"></script>
     <script src="../js/carrosel.js"></script>
     <script src="../js/carrinho.js"></script>

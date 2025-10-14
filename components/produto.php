@@ -1,24 +1,52 @@
-<div class="container-produtos">
-                <div class="img-produto">
-                    <img src="https://img.freepik.com/free-photo/top-view-pink-flower-with-drops_1112-450.jpg" alt="Foto Do Produto">
+<?php
+// Garantir que $produto existe e é array
+if (!isset($produto) || !is_array($produto)) return;
+
+// Valores padrão caso estejam vazios
+$id        = $produto['id_produto'] ?? 0;
+$nome      = htmlspecialchars($produto['nome'] ?? 'Produto sem nome');
+$descricao = htmlspecialchars($produto['descricao'] ?? '');
+$imagem    = $produto['imagem'] ?? '../imagens/produto-padrao.jpg';
+$tipo      = htmlspecialchars($produto['tipo'] ?? '');
+$preco     = isset($produto['valor_unitario']) ? number_format($produto['valor_unitario'], 2, ',', '.') : '0,00';
+
+?>
+
+<div class="container-produtos" data-id="<?= $id ?>">
+    <div class="img-produto">
+        <img src="<?= $imagem ?>" alt="<?= $nome ?>">
+    </div>
+    <div class="info-produtos">
+        <div>
+            <h3><?= $nome ?></h3>
+            <p><?= $tipo ?></p>
+            <div class="preco-produto">R$ <?= $preco ?></div>
+        </div>
+        <div class="botoes">
+            <div class="btn-comprar">
+                <button onclick="window.location.href='/pages/finaliza-compra.php?id=<?= $id ?>'">
+                    Comprar
+                </button>
+            </div>
+            <?php
+                $idJS     = isset($produto['id_produto']) ? intval($produto['id_produto']) : 0;
+                $nomeJS   = isset($produto['nome']) ? addslashes($produto['nome']) : 'Produto sem nome';
+                $precoJS  = isset($produto['valor_unitario']) ? floatval($produto['valor_unitario']) : 0;
+                $imagemJS = isset($produto['imagem']) && !empty($produto['imagem']) ? addslashes($produto['imagem']) : '../imagens/produto-padrao.jpg';
+            ?>
+            <div class="btn-add-carrinho">
+                <div class="btn-add-carrinho">
+                    <button 
+                        class="btn-add-carrinho" 
+                        data-id="<?= $idJS ?>" 
+                        data-nome="<?= $nomeJS ?>" 
+                        data-preco="<?= $precoJS ?>" 
+                        data-imagem="<?= $imagemJS ?>">
+                        <i class='bxr bx-cart-plus'></i>
+                    </button>
+
                 </div>
-                <div class="info-produtos">
-                    <div>
-                    <h3>Flor</h3>
-                    <p>Categoria</p>
-                     <div class="preco-produto"> R$00,00</div>
-                    </div>
-                    <div class="botoes">
-                        <div class="btn-comprar">
-                        <button onclick="window.location.href='/pages/finaliza-compra.php'">
-                            Comprar
-                        </button>
-                        </div>
-                        <div class="btn-add-carrinho">
-                        <button>
-                            <i class='bxr  bx-cart-plus' id="carrinho-produto" ></i> 
-                        </button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+            </div>
+        </div>
+    </div>
+</div>

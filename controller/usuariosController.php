@@ -59,7 +59,7 @@ class UsuarioController
                     'telefone' => $telefone,
                     // NÃO salva senha
                 ];
-            header('Location: ../pages/cadastroTeste.php');
+            header('Location: ../pages/cadastro.php');
             unset($_SESSION['statusLogado'], $_SESSION['usuario'], $_SESSION['email'], $_SESSION['telefone'], $_SESSION['admin']);
             return false;
         }
@@ -94,27 +94,48 @@ class UsuarioController
                     'email' => $email,
                     // não salvar a senha!
                 ];
-            header('Location: ../pages/loginTeste.php');
+            header('Location: ../pages/login.php');
             unset($_SESSION['statusLogado'], $_SESSION['usuario'], $_SESSION['email'], $_SESSION['telefone'], $_SESSION['admin']);
             return false;
         }
     }
 
-    public function editarConta($id, $nome, $email, $senha, $telefone) 
+    public function editarConta($id, $nome = null, $email = null, $senha = null, $telefone = null)
     {
         try {
-            if (!$id || !is_numeric($id)) throw new Exception("ID inválido.");
-            if (!$nome) throw new Exception("Nome não pode estar vazio.");
-            if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) throw new Exception("E-mail inválido.");
-            if (!$telefone || !preg_match('/^\d{10,15}$/', $telefone)) throw new Exception("Telefone inválido.");
+            if (!$id || !is_numeric($id)) {
+                throw new Exception("ID inválido.");
+            }
 
-            return $this->model->atualizarUsuario($id, $nome, $email, $telefone, $senha ?: null);
+            // Busca o usuário atual no banco para manter valores originais
+            $usuarioAtual = $this->model->getUsuarioPorId($id);
+            if (!$usuarioAtual) {
+                throw new Exception("Usuário não encontrado.");
+            }
 
-        } catch (Exception $e) {
-            $_SESSION['erro'] = $e->getMessage();
-            return false;
+            // Se o campo vier vazio, mantém o valor atual
+            $nome = $nome ?: $usuarioAtual['nome'];
+            $email = $email ?: $usuarioAtual['email'];
+            $telefone = $telefone ?: $usuarioAtual['telefone'];
+            $senha = $senha ?: null; // senha só atualiza se vier algo
+
+            // Validações básicas apenas dos campos enviados
+            if ($email && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                throw new Exception("E-mail inválido.");
+            }
+            if ($telefone && !preg_match('/^\d{10,15}$/', $telefone)) {
+                throw new Exception("Telefone inválido.");
+            }
+
+            return $this->model->atualizarUsuario($id, $nome, $email, $telefone, $senha);
+            } 
+            catch (Exception $e) 
+            {
+                $_SESSION['erro'] = $e->getMessage();
+                return false;
+            }
         }
-    }
+
 
     public function deletarConta($id) 
     {
@@ -127,6 +148,7 @@ class UsuarioController
         session_destroy();
         return true;
     }
+
 
     public function listarUsuarios() 
     {

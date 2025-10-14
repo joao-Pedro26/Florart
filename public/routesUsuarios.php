@@ -11,19 +11,30 @@ function handleRoute()
 
     switch ($route) {
         case 'consultas/cadastrar':
-            if ($method === 'POST') return $controller->cadastrarConta($postData('nome'), $postData('email'), $postData('senha'), $postData('telefone'));
+            if ($method === 'POST')
+                return $controller->cadastrarConta($postData('nome'), $postData('email'), $postData('senha'), $postData('telefone'));
             break;
 
         case 'consultas/login':
-            if ($method === 'POST') return $controller->loginConta($postData('email'), $postData('senha'));
+            if ($method === 'POST')
+                return $controller->loginConta($postData('email'), $postData('senha'));
             break;
 
         case 'acoes/sair':
-            if ($method === 'GET') return $controller->logout();
+            if ($method === 'GET')
+                return $controller->logout();
             break;
 
         case 'consultas/atualizar':
-            if ($method === 'POST') return $controller->editarConta($postData('id'), $postData('nome'), $postData('email'), $postData('senha'), $postData('telefone'));
+            if ($method === 'POST') {
+                return $controller->editarConta(
+                    $postData('id'),
+                    $postData('nome'),
+                    $postData('email'),
+                    $postData('senha'),
+                    $postData('telefone')
+                );
+            }
             break;
 
         case 'consultas/deletar':
