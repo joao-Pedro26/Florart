@@ -29,24 +29,26 @@ $preco     = isset($produto['valor_unitario']) ? number_format($produto['valor_u
                 </button>
             </div>
             <?php
-                $idJS     = isset($produto['id_produto']) ? intval($produto['id_produto']) : 0;
-                $nomeJS   = isset($produto['nome']) ? addslashes($produto['nome']) : 'Produto sem nome';
-                $precoJS  = isset($produto['valor_unitario']) ? floatval($produto['valor_unitario']) : 0;
-                $imagemJS = isset($produto['imagem']) && !empty($produto['imagem']) ? addslashes($produto['imagem']) : '../imagens/produto-padrao.jpg';
-            ?>
-            <div class="btn-add-carrinho">
-                <div class="btn-add-carrinho">
-                    <button 
-                        class="btn-add-carrinho" 
-                        data-id="<?= $idJS ?>" 
-                        data-nome="<?= $nomeJS ?>" 
-                        data-preco="<?= $precoJS ?>" 
-                        data-imagem="<?= $imagemJS ?>">
-                        <i class='bxr bx-cart-plus'></i>
-                    </button>
+                if (isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true && $_SESSION['admin'] === false) 
+                {
+                    $idJS     = isset($produto['id_produto']) ? intval($produto['id_produto']) : 0;
+                    $nomeJS   = isset($produto['nome']) ? addslashes($produto['nome']) : 'Produto sem nome';
+                    $precoJS  = isset($produto['valor_unitario']) ? floatval($produto['valor_unitario']) : 0;
+                    $imagemJS = isset($produto['imagem']) && !empty($produto['imagem']) ? addslashes($produto['imagem']) : '../imagens/produto-padrao.jpg';
 
-                </div>
-            </div>
+                    echo '<div class="btn-add-carrinho">
+                        <button 
+                            class="btn-add-carrinho" 
+                            data-id="' . $idJS . '" 
+                            data-nome="' . $nomeJS . '" 
+                            data-preco="' . $precoJS . '" 
+                            data-imagem="' . $imagemJS . '">
+                            <i class="bxr bx-cart-plus"></i>
+                        </button> 
+                    </div>';
+                }
+            ?>
         </div>
     </div>
 </div>
+

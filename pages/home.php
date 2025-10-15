@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
+
+$carrinho = $_SESSION['carrinho'] ?? [];
 ?>
 
 <!DOCTYPE html>
@@ -144,6 +146,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </section>
     </main>
+    <script>
+        // Inicializa o carrinho JS com os dados da sessão PHP
+        const carrinhoInicial = <?php echo json_encode($carrinho); ?>;
+        localStorage.setItem("carrinho", JSON.stringify(carrinhoInicial));
+    </script>
     
     <script src="../js/tituloApresentacao.js"></script>
     <script src="../js/carrosel.js"></script>
