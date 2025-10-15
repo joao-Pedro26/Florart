@@ -1,7 +1,6 @@
 <?php
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}
+session_start();
+require_once '../controller/compraController.php';
 
 // Redireciona se não estiver logado
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
@@ -9,10 +8,32 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     exit;
 }
 
-// Pega o carrinho da sessão
 $carrinho = $_SESSION['carrinho'] ?? [];
-?>
+$controller = new CompraController();
+$mensagem = '';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar'])) {
+    if (!empty($carrinho)) {
+        try {
+            $idCompra = $controller->finalizarCompra(); // Cria compra e limpa carrinho
+            $mensagem = "Compra finalizada com sucesso! ID da compra: $idCompra";
+        } catch (Exception $e) {
+            $mensagem = "Erro ao finalizar compra: " . $e->getMessage();
+        }
+    } else {
+        $mensagem = "Seu carrinho está vazio!";
+    }
+}
+
+// Calcula total de itens e valor
+$totalItens = 0;
+$totalValor = 0;
+foreach ($carrinho as $produto) {
+    $subtotal = $produto['preco'] * $produto['quantidade'];
+    $totalItens += $produto['quantidade'];
+    $totalValor += $subtotal;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -29,7 +50,7 @@ $carrinho = $_SESSION['carrinho'] ?? [];
     <?php include '../components/cabecalho.php'; ?>
     <main>
         <a href="javascript:history.back()">
-            <i class='bxr bx-arrow-left-stroke icon-voltar' style='color:#5a2ff4'></i>
+            <i class='bx bx-arrow-back icon-voltar' style='color:#5a2ff4'></i>
         </a>
 
         <section class="finaliza-compra">
@@ -37,19 +58,17 @@ $carrinho = $_SESSION['carrinho'] ?? [];
                 <h2>Finalizar Compra</h2>
             </div>
 
+            <?php if ($mensagem): ?>
+                <p class="mensagem-compra"><?= htmlspecialchars($mensagem) ?></p>
+            <?php endif; ?>
+
             <section class="div">
                 <section class="lista-produtos">
                     <?php if (!empty($carrinho)): ?>
-                        <?php
-                        $totalItens = 0;
-                        $totalValor = 0;
-                        foreach ($carrinho as $produto):
+                        <?php foreach ($carrinho as $produto): 
                             $subtotal = $produto['preco'] * $produto['quantidade'];
-                            $totalItens += $produto['quantidade'];
-                            $totalValor += $subtotal;
                         ?>
                         <div class="produto">
-                            <input type="checkbox" name="produto" checked>
                             <div class="imagem-produto">
                                 <img src="<?= htmlspecialchars($produto['imagem']) ?>" alt="<?= htmlspecialchars($produto['nome']) ?>">
                             </div>
@@ -57,7 +76,7 @@ $carrinho = $_SESSION['carrinho'] ?? [];
                                 <h4><?= htmlspecialchars($produto['nome']) ?></h4>
                             </div>
                             <div class="div-quantidade">
-                                <input type="number" name="quantidade" min="1" value="<?= (int)$produto['quantidade'] ?>" disabled>
+                                <input type="number" min="1" value="<?= (int)$produto['quantidade'] ?>" disabled>
                             </div>
                             <div class="div-preco">
                                 <p>R$ <?= number_format($subtotal, 2, ',', '.') ?></p>
@@ -71,9 +90,18 @@ $carrinho = $_SESSION['carrinho'] ?? [];
 
                 <section class="resumo-compra">
                     <h3>Resumo da Compra</h3>
-                    <p>Total de Itens: <?= $totalItens ?? 0 ?></p>
-                    <p>Valor Total: R$ <?= number_format($totalValor ?? 0, 2, ',', '.') ?></p>
-                    <button class="botao-finalizar">Finalizar Compra</button>
+                    <p>Total de Itens: <?= $totalItens ?></p>
+                    <p>Valor Total: R$ <?= number_format($totalValor, 2, ',', '.') ?></p>
+
+                    <?php if (!empty($carrinho)): ?>
+                        <form method="POST">
+                            <button class="botao-finalizar" name="finalizar">Finalizar Compra</button>
+                        </form>
+                    <?php else: ?>
+                        <a href="home.php">
+                            <button class="botao-finalizar">Voltar à loja</button>
+                        </a>
+                    <?php endif; ?>
                 </section>
             </section>
         </section>

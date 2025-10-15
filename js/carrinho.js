@@ -19,7 +19,7 @@ overlay.addEventListener('click', () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetch('pages/pegar_carrinho.php')
+    fetch('pegar_carrinho.php')
     .then(res => res.json())
     .then(data => {
         if (data.carrinho && data.carrinho.length > 0) {

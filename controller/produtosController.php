@@ -7,6 +7,7 @@ class ProdutoController
 
     public function __construct()
     {
+        
         $dsn = "pgsql:host=projetoscti.com.br;port=54432;dbname=eq5.inf2;";
         $username = "eq5.inf2";
         $password = "eq52335";

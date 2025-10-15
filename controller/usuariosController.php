@@ -45,7 +45,8 @@ class UsuarioController
                 'usuario' => $usuario['nome'],
                 'email' => $usuario['email'],
                 'telefone' => $usuario['telefone'],
-                'admin' => $usuario['admin']
+                'admin' => $usuario['admin'],
+                'id'           => $usuario['id_usuario']
             ];
 
             return true;
