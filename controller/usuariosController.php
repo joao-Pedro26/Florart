@@ -51,7 +51,8 @@ class UsuarioController
                 'usuario' => $usuario['nome'],
                 'email' => $usuario['email'],
                 'telefone' => $usuario['telefone'],
-                'admin' => $usuario['admin']
+                'admin' => $usuario['admin'],
+                'id'           => $usuario['id_usuario']
             ];
 
             return true;
@@ -79,13 +80,20 @@ class UsuarioController
             $login = $this->model->login($email, $senha);
             if (!$login) throw new \Exception("E-mail ou senha incorretos.");
 
+            // Salva o carrinho antigo, caso já exista na sessão (antes de regenerar)
+            $carrinho_antigo = $_SESSION['carrinho'] ?? [];
+
+            // Regenera ID da sessão para segurança
             session_regenerate_id(true);
+
+            // Cria nova sessão com dados do usuário
             $_SESSION = [
                 'statusLogado' => true,
-                'usuario' => $login['nome'],
-                'email' => $login['email'],
-                'telefone' => $login['telefone'],
-                'admin' => $login['admin']
+                'usuario'      => $login['nome'],
+                'email'        => $login['email'],
+                'telefone'     => $login['telefone'],
+                'admin'        => $login['admin'],
+                'id'           => $login['id_usuario']
             ];
 
             return true;
@@ -97,10 +105,10 @@ class UsuarioController
                 'email' => $email
             ];
             header('Location: ../pages/login.php');
-            unset($_SESSION['statusLogado'], $_SESSION['usuario'], $_SESSION['email'], $_SESSION['telefone'], $_SESSION['admin']);
-            return false;
+            exit; // garante que o script pare aqui
         }
     }
+
 
     public function editarConta($id, $nome = null, $email = null, $senha = null, $telefone = null)
     {

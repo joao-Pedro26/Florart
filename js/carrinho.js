@@ -18,6 +18,17 @@ overlay.addEventListener('click', () => {
     overlay.classList.remove('ativo');
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    fetch('pegar_carrinho.php')
+    .then(res => res.json())
+    .then(data => {
+        if (data.carrinho && data.carrinho.length > 0) {
+            localStorage.setItem("carrinho", JSON.stringify(data.carrinho));
+            atualizarCarrinho();
+        }
+    });
+});
+//metodos funcionais
 document.querySelectorAll(".btn-add-carrinho button").forEach(btn => {
     btn.addEventListener("click", () => {
         const produto = {
@@ -38,6 +49,7 @@ document.querySelectorAll(".btn-add-carrinho button").forEach(btn => {
 
         localStorage.setItem("carrinho", JSON.stringify(carrinho));
         atualizarCarrinho();
+        salvarCarrinhoNoServidor();
     });
 });
 
@@ -80,6 +92,7 @@ function atualizarCarrinho() {
             carrinho.splice(idx, 1);
             localStorage.setItem("carrinho", JSON.stringify(carrinho));
             atualizarCarrinho();
+            salvarCarrinhoNoServidor();
         });
     });
 
@@ -91,9 +104,25 @@ function atualizarCarrinho() {
             if (acao === "diminuir" && carrinho[idx].quantidade > 1) carrinho[idx].quantidade -= 1;
             localStorage.setItem("carrinho", JSON.stringify(carrinho));
             atualizarCarrinho();
+            salvarCarrinhoNoServidor();
         });
     });
 }
 
-// Inicializa carrinho ao carregar a página
-document.addEventListener("DOMContentLoaded", atualizarCarrinho);
+function salvarCarrinhoNoServidor() {
+    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    fetch('salvar_carrinho.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ carrinho: carrinho })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data.mensagem))
+    .catch(err => console.error(err));
+}
+
+document.querySelectorAll(".quantidade-btn, .remover-item, .btn-add-carrinho button")
+.forEach(el => el.addEventListener("click", salvarCarrinhoNoServidor));
+
+

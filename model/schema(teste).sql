@@ -40,14 +40,14 @@ CREATE TABLE Produto (
 -- TABELA: COMPRA
 CREATE TABLE Compra (
     id_compra SERIAL PRIMARY KEY,
-    fk_usuario INTEGER NOT NULL,
-    data_compra TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    sessao VARCHAR(100),
-    acrescimo_total NUMERIC(4,2) NOT NULL DEFAULT 0 CHECK (acrescimo_total >= -9999.99),
-    status_compra status NOT NULL DEFAULT 'pendente',
+    fk_usuario INTEGER NOT NULL, 1
+    data_compra TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    sessao VARCHAR(100), 2
+    acrescimo_total NUMERIC(4,2) NOT NULL DEFAULT 0 CHECK (acrescimo_total >= -9999.99), 3
+    status_compra status NOT NULL DEFAULT 'pendente', 4
         -- lógica : carrinho > reservado > pendente > pago > entregue
         --                                     ... > cancelado > ...
-    FOREIGN KEY (fk_usuario) REFERENCES Usuario(id_usuario) ON DELETE CASCADE
+    FOREIGN KEY (fk_usuario) REFERENCES Usuario(id_usuario) ON DELETE CASCADE 5
 );
 
 -- TABELA DE ASSOCIAÇÃO: COMPRA_PRODUTO

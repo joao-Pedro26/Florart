@@ -2,36 +2,20 @@
 session_start();
 require_once "../public/routesUsuarios.php";
 require_once "../public/routesProdutos.php";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo '<pre>';
-    print_r($_POST);
-    print_r($_FILES);
-    echo '</pre>';
-}
 
-// ---------------------
-// Validação de login
-// ---------------------
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     header("Location: home.php");
     exit;
 }
 
-// ---------------------
-// Rota e aba ativa
-// ---------------------
 $route = $_GET['route'] ?? 'consultas/listarUsuarios';
 $_GET['route'] = $route;
 
-// Inicializa para evitar warnings
 $abaAtiva = '';
 
-// Pegar ID se existir
+
 $id = intval($_GET['id'] ?? 0);
 
-// ---------------------
-// Tratar exclusão de usuário ou produto
-// ---------------------
 if (($route === 'consultas/deletar' || $route === 'produtos/excluir') && $id) {
     if ($route === 'consultas/deletar') handleRoute();
     if ($route === 'produtos/excluir') handleProdutoRoute();
@@ -41,22 +25,17 @@ if (($route === 'consultas/deletar' || $route === 'produtos/excluir') && $id) {
     exit;
 }
 
-// ---------------------
-// Tratar atualização de usuário ou produto
-// ---------------------
+
 if (($route === 'consultas/atualizar' || $route === 'produtos/editar') && $_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($route === 'consultas/atualizar') handleRoute();
     if ($route === 'produtos/editar') handleProdutoRoute();
 
-    // Redireciona para a lista correspondente
     $redirect = ($route === 'consultas/atualizar') ? 'consultas/listarUsuarios' : 'produtos/listarProdutos';
     header("Location: admin.php?route={$redirect}");
     exit;
 }
 
-// ---------------------
-// Carregar dados para a aba correta
-// ---------------------
+
 if ($route === 'produtos/listarProdutos') {
     $produtos = handleProdutoRoute();
     $abaAtiva = 'produtos';
