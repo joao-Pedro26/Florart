@@ -53,29 +53,12 @@ function handleRoute()
         case 'consultas/listarUsuarios':
             if ($method === 'GET') return $controller->listarUsuarios();
 
-            
-        case 'consultas/solicitarRecuperacao':
-            if ($method === 'POST') return $controller->solicitarRecuperacao($postData('email'));
+        case 'consultas/enviarLinkRecuperacao':
+            $controller->enviarLinkRecuperacao($_POST['email']);
             break;
 
         case 'consultas/redefinirSenha':
-            if ($method === 'POST') return $controller->redefinirSenhaConta($postData('token'), $postData('senha'));
-            break;
-
-        case 'consultas/validarCodigo':
-            if ($method === 'POST') {
-                $codigo = $postData('codigo');
-                if ($controller->validarCodigo($codigo)) {
-                    $_SESSION['codigo_valido'] = true;
-                    return true;
-                }
-                $_SESSION['erro'] = "Código incorreto";
-                return false;
-            }
-            break;
-
-        case 'consultas/redefinirSenhaCodigo':
-            if ($method === 'POST') return $controller->redefinirSenhaPorCodigo($postData('senha'));
+            $controller->redefinirSenha($_POST['token'], $_POST['senha']);
             break;
 
         default:
