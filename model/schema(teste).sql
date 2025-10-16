@@ -98,15 +98,6 @@ CREATE TABLE Log_Status (
     -- FOREIGN KEY (fk_usuario_responsavel) REFERENCES Usuario(id_usuario) ON DELETE SET NULL
 );
 
-CREATE TABLE RecuperacaoSenha (
-    id_recuperacao SERIAL PRIMARY KEY,
-    fk_usuario INTEGER NOT NULL,
-    token VARCHAR(255) UNIQUE NOT NULL,
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    usado BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (fk_usuario) REFERENCES Usuario(id_usuario) ON DELETE CASCADE
-);
-
 -- ===========================
 -- VIEW: VALOR TOTAL DA COMPRA
 -- ===========================
