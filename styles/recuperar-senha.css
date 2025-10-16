@@ -1,4 +1,4 @@
-/* recuperar-senha.css */
+/* recuperar-senha.css atualizado */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
 
 :root {
@@ -8,7 +8,6 @@
   --accent2: #5a2ff4;
 }
 
-/* Reset e fonte */
 html, body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -21,18 +20,6 @@ html, body {
   overflow-x: hidden;
 }
 
-
-
-/* Animação gradiente */
-@keyframes degrade-animado {
-  0% { background-position-x: 0%; }
-  100% { background-position-x: 100%; }
-}
-
-/* Main centraliza a caixa do form */
-
-
-/* Caixa branca do form */
 .box-log-cad {
   background: #fff;
   border-radius: 14px;
@@ -50,7 +37,6 @@ html, body {
   margin: 0 auto 1rem auto;
 }
 
-/* Título do form */
 .titulo-log-cad {
   font-size: 2rem;
   font-weight: 700;
@@ -59,20 +45,19 @@ html, body {
   margin-bottom: 1.5rem;
 }
 
-/* Formulário */
-form {
+/* GRUPO DE INPUT + LABEL */
+.input-group {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-/* Labels */
 label {
   font-weight: 500;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  color: var(--texto-secundario);
 }
 
-/* Inputs comuns */
 input[type="email"], input[type="password"] {
   width: 100%;
   font-size: 1rem;
@@ -91,8 +76,8 @@ input[type="email"]:focus, input[type="password"]:focus {
   background: #fff;
 }
 
-/* Botão */
 button {
+  width: 100%;
   padding: 0.95rem;
   border-radius: 10px;
   border: none;
@@ -102,6 +87,7 @@ button {
   background: linear-gradient(90deg, var(--accent1) 40%, var(--accent2) 100%);
   color: #fff;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
+  margin-top: 1rem;
 }
 
 button:hover {
@@ -109,7 +95,6 @@ button:hover {
   box-shadow: 0 10px 26px rgba(90, 47, 244, 0.12);
 }
 
-/* Mensagem de erro */
 .erro {
   color: #c92a2a;
   background: rgba(255, 200, 200, 0.08);
@@ -117,33 +102,9 @@ button:hover {
   padding: 0.55rem 0.9rem;
   border-radius: 8px;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
-/* Inputs de código */
-.codigo-inputs {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-}
-
-.codigo-inputs input {
-  width: 80px;
-  height: 50px;
-  text-align: center;
-  font-size: 1.3rem;
-  font-weight: 600;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #f8f8f8;
-  transition: border 0.15s ease, box-shadow 0.15s ease;
-}
-
-.codigo-inputs input:focus {
-  border: 1.5px solid var(--accent2);
-  box-shadow: 0 6px 18px rgba(90, 47, 244, 0.08);
-}
-
-/* Header com logo e título lado a lado */
 .header-log-cad {
   display: flex;
   align-items: center;
@@ -168,18 +129,17 @@ button:hover {
   text-align: left;
 }
 
-
-/* =============== BOTÃO VOLTAR =============== */
 .voltar-link {
-  position: relative;
+  position: absolute;
+  top: 20px;
+  left: 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: white;
+  background: #fff;
   text-decoration: none;
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   transition: all 0.18s ease;
@@ -193,17 +153,11 @@ button:hover {
 }
 
 .icon-voltar {
-  font-size: 1.4rem;
+  font-size: 2.5rem;
   color: #5a2ff4;
 }
 
-/* =============== RESPONSIVIDADE =============== */
 @media (max-width: 480px) {
-  .codigo-inputs input {
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
-  }
   .box-log-cad {
     padding: 1.5rem;
   }
