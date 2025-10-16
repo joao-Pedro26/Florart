@@ -28,6 +28,8 @@ body {
     z-index: 100;
 }
 
+
+
 .img-logo {
     position: relative;
     margin: 0;
@@ -61,6 +63,24 @@ body {
 .cabecalho:hover::after {
     left: 100%;
 }
+
+@media (max-width: 768px) {
+  .esconder {
+    display: none;
+  }
+
+  .img-logo {
+    width: 50px;
+
+  }
+
+  .cabecalho {
+    padding: 0;
+  }
+}
+
+
+
 .logo{
     font-size: 2rem;
     font-weight: 700;
@@ -100,6 +120,8 @@ body {
 #icon-carrinho-perfil {
     font-size: 1.75rem;
 }
+
+
 
 .carrinho {
     position: fixed;
@@ -245,7 +267,7 @@ body {
 
 @media (max-width:992px) {
     .cabecalho {
-        padding: 1.3rem 5%;
+        padding: 0.44rem 5%;
     }
 }
 
@@ -715,17 +737,18 @@ body {
 }
 
 .btn-comprar :first-child {
-   width: 150px;
+   width: 200px;
    height: 40px;
-   border-radius: 20px;
-
+   border-radius: 19px;
+   font-size: 1.7rem;
 }
+
 
 #carrinho-produto{
     font-size: 1.5rem;
 }
 
-.btn-add-carrinho button {
+.btn-add-carrinho  {
     border-radius: 50%;
     width: 40px;
     height: 40px;

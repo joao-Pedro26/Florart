@@ -1,11 +1,16 @@
-const btnCarrinho = document.querySelector('.icon-carrinho-perfil button');
+const btnCarrinhoTopo = document.querySelector('header .icon-carrinho-perfil button');
+const btnCarrinhoInferior = document.querySelector('.menu-inferior .icon-carrinho-perfil button')
 const carrinho = document.querySelector('.carrinho');
 const btnFechar = document.querySelector('.carrinho .fechar');
 const overlay = document.querySelector('.overlay');
 
-btnCarrinho.addEventListener('click', () => {
-    carrinho.classList.add('ativo');
-    overlay.classList.add('ativo');
+[btnCarrinhoTopo, btnCarrinhoInferior].forEach(btn => {
+  if (btn) {
+    btn.addEventListener('click', () => {
+      carrinho.classList.add('ativo');
+      overlay.classList.add('ativo');
+    });
+  }
 });
 
 btnFechar.addEventListener('click', () => {
@@ -29,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 //metodos funcionais
-document.querySelectorAll(".btn-add-carrinho button").forEach(btn => {
+document.querySelectorAll(".btn-add-carrinho").forEach(btn => {
     btn.addEventListener("click", () => {
         const produto = {
             id: btn.dataset.id,

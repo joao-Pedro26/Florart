@@ -23,32 +23,25 @@ $preco     = isset($produto['valor_unitario']) ? number_format($produto['valor_u
             <div class="preco-produto">R$ <?= $preco ?></div>
         </div>
         <div class="botoes">
-            <div class="btn-comprar">
-                <button onclick="window.location.href='/pages/finaliza-compra.php?id=<?= $id ?>'">
-                    Comprar
-                </button>
-            </div>
-            <?php
-                if (isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true && $_SESSION['admin'] === false) 
-                {
-                    $idJS     = isset($produto['id_produto']) ? intval($produto['id_produto']) : 0;
-                    $nomeJS   = isset($produto['nome']) ? addslashes($produto['nome']) : 'Produto sem nome';
-                    $precoJS  = isset($produto['valor_unitario']) ? floatval($produto['valor_unitario']) : 0;
-                    $imagemJS = isset($produto['imagem']) && !empty($produto['imagem']) ? addslashes($produto['imagem']) : '../imagens/produto-padrao.jpg';
 
-                    echo '<div class="btn-add-carrinho">
+            <?php
+
+            $idJS     = isset($produto['id_produto']) ? intval($produto['id_produto']) : 0;
+            $nomeJS   = isset($produto['nome']) ? addslashes($produto['nome']) : 'Produto sem nome';
+            $precoJS  = isset($produto['valor_unitario']) ? floatval($produto['valor_unitario']) : 0;
+            $imagemJS = isset($produto['imagem']) && !empty($produto['imagem']) ? addslashes($produto['imagem']) : '../imagens/produto-padrao.jpg';
+
+            echo '<div class="btn-comprar">
                         <button 
                             class="btn-add-carrinho" 
                             data-id="' . $idJS . '" 
                             data-nome="' . $nomeJS . '" 
                             data-preco="' . $precoJS . '" 
                             data-imagem="' . $imagemJS . '">
-                            <i class="bxr bx-cart-plus"></i>
+                            <i class="bxr bx-cart-plus icon-carrinho"></i>
                         </button> 
                     </div>';
-                }
             ?>
         </div>
     </div>
 </div>
-

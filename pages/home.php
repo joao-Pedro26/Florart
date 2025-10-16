@@ -35,7 +35,6 @@ $carrinho = $_SESSION['carrinho'] ?? [];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" href="../styles/header-footer.css">
     <link rel="icon" href="../images/logo.png" type="">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <title>Florart</title>
@@ -151,7 +150,7 @@ $carrinho = $_SESSION['carrinho'] ?? [];
         const carrinhoInicial = <?php echo json_encode($carrinho); ?>;
         localStorage.setItem("carrinho", JSON.stringify(carrinhoInicial));
     </script>
-    
+    <?php include '../components/menu-mobile.php'; ?>
     <script src="../js/tituloApresentacao.js"></script>
     <script src="../js/carrosel.js"></script>
     <script src="../js/carrinho.js"></script>
@@ -160,7 +159,6 @@ $carrinho = $_SESSION['carrinho'] ?? [];
 
     <!-- Rodapé -->
     <?php include '../components/rodape.php'; ?>
-    <?php include '../components/menu-mobile.php'; ?>
 
 </body>
 

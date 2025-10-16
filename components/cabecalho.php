@@ -30,7 +30,7 @@
     </nav>
 
 
-    <div class="icon-carrinho-perfil">
+    <div class="icon-carrinho-perfil esconder">
         <?php
         $caminhoPerfil = isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true ? 'perfil.php' : 'login.php';
         ?>
@@ -40,9 +40,6 @@
         <button>
             <i class="bx bx-cart icon-carrinho-perfil" id="icon-carrinho-perfil" style="color:#ffffff"></i>
         </button>
-
-
-
 
 
     </div>

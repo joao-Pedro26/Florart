@@ -50,6 +50,7 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
                 </div>
         </section>
     </main>
+    <?php include '../components/menu-mobile.php'; ?>
 
 </body>
 
