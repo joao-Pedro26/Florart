@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const menu = document.getElementById('menu-inferior');
+  const menu = document.getElementById('home-menu-inferior');
   const menuItems = document.querySelectorAll('.menu-item');
   const currentPath = window.location.pathname.replace(/\/$/, "");
   const currentHash = window.location.hash;
