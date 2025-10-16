@@ -15,29 +15,30 @@
     <tbody>
       <?php if (!empty($produtos)): ?>
         <?php foreach ($produtos as $p): ?>
-          <tr>
-            <td><?= $p['id_produto'] ?></td>
-            <td><?= htmlspecialchars($p['nome']) ?></td>
-            <td>R$ <?= number_format($p['valor_unitario'], 2, ',', '.') ?></td>
-            <td><?= htmlspecialchars($p['descricao']) ?></td>
-            <td class="acoes">
-              <button class="btn btn-edit"
-                      onclick='abrirModalEditar(<?= json_encode([
-                          "id" => $p["id_produto"],
-                          "nome" => $p["nome"],
-                          "descricao" => $p["descricao"],
-                          "preco" => $p["valor_unitario"]
-                      ]) ?>, "produto")'>
-                Editar
-              </button>
+        <tr>
+          <td><?= htmlspecialchars($p['id_produto']) ?></td>
+          <td><?= htmlspecialchars($p['nome']) ?></td>
+          <td>R$ <?= number_format($p['valor_unitario'], 2, ',', '.') ?></td>
+          <td><?= htmlspecialchars($p['tipo']) ?></td>
+          <td>
+            <button 
+              class="btn-editar-produto"
+              data-id="<?= htmlspecialchars($p['id_produto']) ?>"
+              data-nome="<?= htmlspecialchars($p['nome']) ?>"
+              data-preco="<?= htmlspecialchars($p['valor_unitario']) ?>"
+              data-categoria="<?= htmlspecialchars($p['tipo']) ?>"
+              data-imagem="<?= htmlspecialchars($p['imagem']) ?>">
+              Editar
+            </button>
 
-              <button class="btn btn-delete"
-                      onclick="abrirModalDeletar('produto', <?= $p['id_produto'] ?>, '<?= addslashes($p['nome']) ?>')">
-                Excluir
-              </button>
-            </td>
-          </tr>
-        <?php endforeach; ?>
+            <button 
+              onclick="abrirModalExcluir('Deseja realmente excluir o produto <?= htmlspecialchars($p['nome']) ?>?', 
+              () => { window.location.href='admin.php?route=produtos/excluir&id=<?= $p['id_produto'] ?>'; })">
+              Excluir
+            </button>
+          </td>
+        </tr>
+      <?php endforeach; ?>
       <?php else: ?>
         <tr><td colspan="5" class="vazio">Nenhum produto encontrado.</td></tr>
       <?php endif; ?>

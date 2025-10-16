@@ -67,24 +67,19 @@ else if ($route === 'consultas/listarUsuarios') {
   </div>
 
   <?php 
-      if ($abaAtiva === 'usuarios') {
+      if ($abaAtiva === 'usuarios') 
+      {
           include '../components/componentsAdmin/tabela-usuarios.php';
       } 
-      else if ($abaAtiva === 'produtos') {
+      else if ($abaAtiva === 'produtos') 
+      {
           include '../components/componentsAdmin/tabela-produtos.php';
       } 
-      else {
+      else 
+      {
           echo "<p style='text-align:center; margin:20px;'>Selecione uma aba acima para gerenciar dados.</p>";
       }
-
-      // Modal de exclusão
-      include '../components/componentsAdmin/modalExcluir.php'; 
-
-      // Modal de edição
-      include '../components/componentsAdmin/modalEditar.php';
   ?>
-
   <?php include '../components/rodape.php'; ?>
-  <script src="../js/admin.js"></script>
 </body>
 </html>
