@@ -1,9 +1,9 @@
-<div id="modalEditar" class="modal">
+<div id="modalEditarUsuarios" class="modal">
   <div class="modal-conteudo">
     <span id="fecharEditar" class="fechar">&times;</span>
     <h2>Editar Usuário</h2>
 
-    <form id="formEditar" method="POST" action="admin.php?route=consultas/atualizar">
+    <form id="formEditarUsuarios" method="POST" action="admin.php?route=consultas/atualizar">
       <input type="hidden" name="tipo" value="usuario">
       <input type="hidden" name="id" id="editarIdUsuario">
 

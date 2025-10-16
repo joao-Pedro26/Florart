@@ -121,9 +121,7 @@ table tr:nth-child(even) {
   background: #f5f5f5;
 }
 
-table tr:hover {
-  background: #eee;
-}
+
 
 /* Botões de ação */
 .btn {
@@ -134,20 +132,22 @@ table tr:hover {
   font-weight: 500;
   text-decoration: none;
   transition: background .2s;
+  border: 0.5px solid rgb(104, 90, 90)k;
   margin-right: 5px;
 }
 
 .btn-edit {
   background: #ffb347;
-  color: white;
+
+  color: rgb(255, 255, 255);
 }
 
 .btn-edit:hover {
-  background: #e09c32;
+  background: #f8cb00;
 }
 
 .btn-delete {
-  background: #e25b5b;
+  background: #e90202;
   color: white;
 }
 
@@ -155,96 +155,3 @@ table tr:hover {
   background: #c94a4a;
 }
 
-/* =============== MODAL DE CONFIRMAÇÃO =============== */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0px 6px 20px rgba(0,0,0,0.2);
-}
-
-.modal-content h3 {
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-}
-
-.modal-content p {
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-  color: #555;
-}
-
-.modal-botoes {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.modal .btn-add {
-  background: linear-gradient(90deg, #5bc54c, #7EA672);
-  color: white;
-}
-
-.modal .btn-add:hover {
-  background: linear-gradient(90deg, #4ca33f, #648e5f);
-}
-
-.modal .btn-delete {
-  background: #e25b5b;
-  color: white;
-}
-
-.modal .btn-delete:hover {
-  background: #c94a4a;
-}
-
-/* Remove borda do botão "Não" */
-.modal .no-border {
-  border: none;
-}
-
-/* Ajuste de centralização dos botões */
-.modal-botoes .btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 70px;
-}
-
-/* Botão de fechar (✕) no canto superior direito */
-.modal-close {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  background: transparent;
-  border: none;
-  font-size: 1.3rem;
-  font-weight: bold;
-  cursor: pointer;
-  color: #999;
-  transition: color 0.2s;
-}
-
-.modal-close:hover {
-  color: #555;
-}
-
-/* Ajuste para modal-content posicionar corretamente o botão X */
-.modal-content {
-  position: relative;
-}

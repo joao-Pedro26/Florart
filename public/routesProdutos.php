@@ -29,11 +29,11 @@ function handleProdutoRoute()
                 // Recebe dados do POST corretamente
                 $id = $postData('id');
                 $nome = $postData('nome');
-                $descricao = $postData('descricao');
-                $preco = $postData('preco');
+                $tipo = $postData('tipo');
+                $preco = $postData('valor_unitario');
                 $imagem = $_FILES['imagem']['name'] ?? null;
 
-                return $controller->editarProduto($id, $nome, $descricao, $preco, $imagem);
+                return $controller->editarProduto($id, $nome, $tipo, $preco, $imagem);
             }
             break;
 

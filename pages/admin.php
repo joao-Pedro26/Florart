@@ -85,6 +85,6 @@ else if ($route === 'consultas/listarUsuarios') {
   ?>
 
   <?php include '../components/rodape.php'; ?>
-  <script src="../js/javascriptAdmin/admin.js"></script>
+  <script src="../js/admin.js"></script>
 </body>
 </html>
