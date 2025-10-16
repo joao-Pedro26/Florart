@@ -1,8 +1,14 @@
 <?php
 session_start();
 require_once '../controller/compraController.php';
+$compraFinalizada = $_SESSION['compra_finalizada'] ?? null;
+if ($compraFinalizada) {
+    unset($_SESSION['compra_finalizada']); // para mostrar só uma vez
+}
+date_default_timezone_set('America/Sao_Paulo');
 
-// Redireciona se não estiver logado
+
+// Redireciona se não estiver   logado
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     header('Location: home.php');
     exit;
@@ -16,7 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar'])) {
     if (!empty($carrinho)) {
         try {
             $idCompra = $controller->finalizarCompra(); // Cria compra e limpa carrinho
-            $mensagem = "Compra finalizada com sucesso! ID da compra: $idCompra";
+            $_SESSION['compra_finalizada'] = [
+                'id' => $idCompra,
+                'data' => date('d/m/Y H:i')
+            ];
+            header("Location: finaliza-compra.php");
+            exit;
+
         } catch (Exception $e) {
             $mensagem = "Erro ao finalizar compra: " . $e->getMessage();
         }
@@ -42,6 +54,7 @@ foreach ($carrinho as $produto) {
     <link rel="stylesheet" href="../styles/reset.css">
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/finaliza-compra.css">
+    <link rel="stylesheet" href="../styles/modal.css">
     <link rel="stylesheet" href="../styles/header-footer.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <title>Finalizar Compra</title>
@@ -106,5 +119,30 @@ foreach ($carrinho as $produto) {
             </section>
         </section>
     </main>
+    <?php if ($compraFinalizada): ?>
+        <div class="modal-compra" id="modalCompra">
+            <div class="modal-conteudo">
+                <h2>🎉 Compra Finalizada!</h2>
+                <p><strong>ID da compra:</strong> <?= htmlspecialchars($compraFinalizada['id']) ?></p>
+                <p><strong>Data:</strong> <?= htmlspecialchars($compraFinalizada['data']) ?></p>
+                <button id="btnFecharModal">Fechar</button>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('modalCompra');
+            const btnFechar = document.getElementById('btnFecharModal');
+            if (modal && btnFechar) {
+                modal.style.display = 'flex';
+                btnFechar.addEventListener('click', () => {
+                    modal.style.opacity = '0';
+                    setTimeout(() => modal.remove(), 300);
+                });
+            }
+        });
+        </script>
+
 </body>
 </html>

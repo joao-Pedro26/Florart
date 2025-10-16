@@ -15,11 +15,16 @@ class CompraModel extends Database
 
             // 1️⃣ Cria a compra
             $stmt = $this->conexao->prepare("
-                INSERT INTO compra (fk_usuario, status_compra)
-                VALUES (:fk_usuario, 'pendente')
+                INSERT INTO compra (fk_usuario, status_compra, sessao)
+                VALUES (:fk_usuario, 'reservado', :sessao)
                 RETURNING id_compra
             ");
-            $stmt->execute([':fk_usuario' => $idUsuario]);
+
+            $stmt->execute([
+                ':fk_usuario' => $idUsuario,
+                ':sessao' => session_id()
+            ]);
+            
             $idCompra = $stmt->fetchColumn();
 
             if (!$idCompra) {

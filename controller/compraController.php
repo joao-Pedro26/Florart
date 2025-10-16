@@ -34,6 +34,8 @@ class CompraController
             // Limpa o carrinho da sessão
             unset($_SESSION['carrinho']);
 
+           
+
             return $idCompra;
 
         } catch (Exception $e) {
