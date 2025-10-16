@@ -1,17 +1,36 @@
 
 
 .menu-inferior {
-      position: fixed;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, .1);
     backdrop-filter: blur(35px);
     display: flex;
-    justify-content: space-around;
     align-items: center;
     padding: 10px 0;
     z-index: 999;
+}
+
+
+
+.icon-carrinho-perfil button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.tamanho {
+    font-size: 20px;
+}
+
+.menu-item {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  flex: 1;
 }
 
 @media (min-width: 768px) {
