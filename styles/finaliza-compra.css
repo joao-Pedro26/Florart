@@ -146,10 +146,10 @@ body {
     align-items: center;
   }
   .resumo-compra {
-    position: absolute;
+    position: fixed;
+    bottom: 0;
     width: 100%;
     margin-left: 0;
-    top: 80vh;
     height: auto;
   }
   .lista-produtos {

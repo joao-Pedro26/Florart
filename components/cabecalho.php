@@ -35,7 +35,7 @@
         $caminhoPerfil = isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true ? 'perfil.php' : 'login.php';
         ?>
 
-        <a href="/pages/<?= $caminhoPerfil ?>"> <i class='bxd bx-user icon-carrinho-perfil perfil' id='icon-carrinho-perfil' style='color:#ffffff'></i></a>
+        <a href="/pages/<?= $caminhoPerfil ?>"> <i class='bxd bx-user icon-carrinho-perfil perfil-icon' id='icon-carrinho-perfil' style='color:#ffffff'></i></a>
 
         <button>
             <i class="bx bx-cart icon-carrinho-perfil" id="icon-carrinho-perfil" style="color:#ffffff"></i>

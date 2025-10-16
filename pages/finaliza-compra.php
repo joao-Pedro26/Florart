@@ -57,6 +57,7 @@ foreach ($carrinho as $produto) {
     <link rel="stylesheet" href="../styles/modal.css">
     <link rel="stylesheet" href="../styles/header-footer.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+
     <title>Finalizar Compra</title>
 </head>
 <body>
