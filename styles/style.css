@@ -1061,7 +1061,6 @@ a:focus-visible, button:focus-visible{
 }
 
 .logo-log-cad {
-    position: relative;
     top: 10vh;
     margin: 0 auto 1rem;
     width: 80px;
@@ -1191,6 +1190,7 @@ a:focus-visible, button:focus-visible{
     padding-top: 3.5rem;
     font-weight: 600;
     color: var(--texto-primario);
+    padding-bottom: 0.8rem
     
 }
 
@@ -1198,16 +1198,18 @@ a:focus-visible, button:focus-visible{
     display: flex;
     padding-top: 2.5rem;
     flex-direction: column;
-    padding: 3.5rem;
+    padding: 2rem;
     border-radius: 5%;
     box-shadow: rgba(145, 108, 241, 0.12) 0px 8px 32px;
+
 }
 
 .dados-usuario label {
     font-size: 1rem;
     color: var(--texto-primario);
     margin-bottom: 0.3rem;
-    font-weight: 500
+    font-weight: 500;
+
 
 }
 
@@ -1232,4 +1234,62 @@ a:focus-visible, button:focus-visible{
     margin-left: 90%;
     font-size: 1.7rem;
     padding-right: 1.4rem ;
+}
+
+.produto {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    width: 630px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 100px;
+}
+
+.produto table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* espaço entre linhas */
+
+}
+
+
+.produto th {
+    background-color: #f8f8f8;
+    text-align: left;
+    padding: 10px 15px;
+    border-bottom: 2px solid #ddd;
+    font-weight: 600;
+}
+
+
+.produto td {
+    background-color: #fff;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.produto tr:last-child td {
+    border-bottom: none;
+}
+
+
+
+@media (max-width: 600px) {
+    .produto {
+        padding: 10px;
+        border-radius: 6px;
+        width: 350px;
+
+    }   
+   
+    .produto th,
+    .produto td {
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+
+  
 }
