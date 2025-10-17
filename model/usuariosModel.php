@@ -10,7 +10,7 @@ class UsuarioModel extends Database
 
     public function listarUsuarios() 
     {
-        $sql = "SELECT id_usuario, nome, email, telefone, admin FROM usuario";
+        $sql = "SELECT id_usuario, nome, email, telefone, admin FROM usuario ORDER BY id_usuario ASC";
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -74,9 +74,9 @@ class UsuarioModel extends Database
         return $stmt->execute();
     }
 
-    public function atualizarUsuario($id, $nome, $email, $telefone, $senha)
+    public function atualizarUsuario($id, $nome, $email, $telefone, $senha, $admin)
     {
-        $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone";
+        $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone, admin = :admin";
         if ($senha) $sql .= ", senha = :senha";
         $sql .= " WHERE id_usuario = :id";
 
@@ -84,6 +84,7 @@ class UsuarioModel extends Database
         $stmt->bindValue(':nome', $nome, PDO::PARAM_STR);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
         $stmt->bindValue(':telefone', $telefone, PDO::PARAM_STR);
+        $stmt->bindValue(':admin', $admin, PDO::PARAM_BOOL);
         if ($senha) $stmt->bindValue(':senha', password_hash($senha, PASSWORD_BCRYPT), PDO::PARAM_STR);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 

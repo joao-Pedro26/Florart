@@ -2,6 +2,7 @@
 session_start();
 require_once "../public/routesUsuarios.php";
 require_once "../public/routesProdutos.php";
+require_once "../public/routesCompras.php";
 
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     header("Location: home.php");
@@ -44,6 +45,10 @@ else if ($route === 'consultas/listarUsuarios') {
     $usuarios = handleRoute();
     $abaAtiva = 'usuarios';
 }
+else if ($route === 'compras/listarCompras') {
+    $compras = handleCompraRoute();
+    $abaAtiva = 'compras';
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -64,6 +69,7 @@ else if ($route === 'consultas/listarUsuarios') {
   <div class="painel-botoes">
     <a class="tab-btn" href="admin.php?route=consultas/listarUsuarios">Usuários</a>
     <a class="tab-btn" href="admin.php?route=produtos/listarProdutos">Produtos</a>
+    <a class="tab-btn" href="admin.php?route=compras/listarCompras">Compras</a>
   </div>
 
   <?php 
@@ -75,11 +81,13 @@ else if ($route === 'consultas/listarUsuarios') {
       {
           include '../components/componentsAdmin/tabela-produtos.php';
       } 
-      else 
-      {
-          echo "<p style='text-align:center; margin:20px;'>Selecione uma aba acima para gerenciar dados.</p>";
+      else if ($abaAtiva === 'compras') {
+        include '../components/componentsAdmin/tabela-compras.php';
+      } 
+      else {
+        echo "<p style='text-align:center; margin:20px;'>Selecione uma aba acima para gerenciar dados.</p>";
       }
   ?>
-  <?php include '../components/rodape.php'; ?>
+
 </body>
 </html>

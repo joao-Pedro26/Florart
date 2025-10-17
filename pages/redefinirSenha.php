@@ -48,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container-recuperar" style="display:flex; align-items:center; justify-content:center; min-height:100vh;">
   <div class="box-log-cad">
     <div class="header-log-cad">
-      <img src="../images/logo.png" alt="Logo" class="logo-log-cad">
       <h1 class="titulo-log-cad">Redefinir Senha</h1>
     </div>
 

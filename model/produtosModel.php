@@ -13,7 +13,7 @@ class ProdutoModel extends Database
         $sql = "SELECT id_produto, nome, descricao, imagem, tipo, valor_unitario, excluido, data_criacao 
                 FROM produto 
                 WHERE excluido = false OR excluido IS NULL
-                ORDER BY id_produto DESC";
+                ORDER BY id_produto ASC";
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -33,7 +33,7 @@ class ProdutoModel extends Database
         return $stmt->execute();
     }
 
-    public function atualizarProduto($id, $nome, $descricao, $tipo, $valor_unitario, $estoque, $imagem = null)
+    public function atualizarProduto($id, $nome, $descricao, $tipo, $valor_unitario, $imagem = null)
     {
         $sql = "UPDATE produto 
                 SET nome = :nome, descricao = :descricao, tipo = :tipo, valor_unitario = :valor_unitario";

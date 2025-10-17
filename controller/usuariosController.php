@@ -113,7 +113,7 @@ class UsuarioController
     }
 
 
-    public function editarConta($id, $nome = null, $email = null, $senha = null, $telefone = null)
+    public function editarConta($id, $nome = null, $email = null, $telefone = null, $senha = null, $admin = null)
     {
         try {
             if (!$id || !is_numeric($id)) {
@@ -125,10 +125,11 @@ class UsuarioController
                 throw new \Exception("Usuário não encontrado.");
             }
 
-            $nome = $nome ?: $usuarioAtual['nome'];
-            $email = $email ?: $usuarioAtual['email'];
+            $nome = trim($nome) ?: $usuarioAtual['nome'];
+            $email = trim($email) ?: $usuarioAtual['email'];
             $telefone = $telefone ?: $usuarioAtual['telefone'];
             $senha = $senha ?: null;
+            $admin = is_null($admin) ? $usuarioAtual['admin'] : (bool)$admin;
 
             if ($email && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 throw new \Exception("E-mail inválido.");
@@ -137,7 +138,7 @@ class UsuarioController
                 throw new \Exception("Telefone inválido.");
             }
 
-            return $this->model->atualizarUsuario($id, $nome, $email, $telefone, $senha);
+            return $this->model->atualizarUsuario($id, $nome, $email, $telefone, $senha, $admin);
         } catch (\Exception $e) {
             $_SESSION['erro'] = $e->getMessage();
             return false;
@@ -217,7 +218,7 @@ class UsuarioController
         // $link = "http://eq5.inf2.projetoscti.com.br/redefinir.php?token=$token";
         // link correto é o que está comentado
 
-        $assunto = 'Recuperação de Senha - Florart';
+        $assunto = 'Recuperar Senha - Florart';
         $mensagem = "
             <h4>Redefinir sua senha</h4>
             <p><strong>Olá, {$nome}</strong>,</p>

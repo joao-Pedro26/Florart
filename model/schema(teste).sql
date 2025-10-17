@@ -1,9 +1,6 @@
 -- Criar tipo ENUM para status da compra
 CREATE TYPE status AS ENUM (
-    'carrinho',
     'reservado',
-    'pendente',
-    'pago',
     'entregue',
     'cancelado'
 );

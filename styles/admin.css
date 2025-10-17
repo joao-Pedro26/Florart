@@ -16,7 +16,8 @@ body {
 }
 
 header {
-  background: rgba(145, 108, 241, 0.8); /* roxo transparente */
+  background: linear-gradient(90deg, #E3A0E0, #DC98DA, #D791D5, #D28AD0, #BD78C9, 
+  #B673C6, #9F5CAA, #AD5BB6, #AF52A5, #A55B9F, #B865B2, #DC98DA);
   backdrop-filter: blur(5px); /* dá efeito de desfoque por trás, fica bonito */
 }
 
@@ -53,12 +54,14 @@ h1 {
   color: white;
   font-weight: 500;
   cursor: pointer;
+  text-decoration: none;
   transition: transform .2s, opacity .3s;
 }
 
 .tab-btn:hover {
   opacity: 0.9;
   transform: translateY(-2px);
+  text-decoration: none;
 }
 
 /* Tabela */
@@ -121,9 +124,32 @@ table tr:nth-child(even) {
   background: #f5f5f5;
 }
 
+/* ==================== SCROLL HORIZONTAL PARA AS TABELAS ==================== */
 
+.tabela-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
 
-/* Botões de ação */
+.tabela-scroll table {
+  min-width: 800px; /* ajustável: força largura mínima para que o scroll funcione */
+}
+
+.tabela-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tabela-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.tabela-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ==================== BOTÕES DE AÇÃO ==================== */
+
 .btn {
   display: inline-block;
   padding: 0.4rem 0.8rem;
@@ -131,27 +157,34 @@ table tr:nth-child(even) {
   font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
-  transition: background .2s;
-  border: 0.5px solid rgb(104, 90, 90)k;
+  transition: background 0.2s ease-in-out;
   margin-right: 5px;
+  margin-bottom: 4px;
+  border: none; /* <-- remove borda antiga */
 }
 
+/* Botão editar */
 .btn-edit {
-  background: #ffb347;
-
-  color: rgb(255, 255, 255);
-}
-
-.btn-edit:hover {
-  background: #f8cb00;
-}
-
-.btn-delete {
-  background: #e90202;
+  background: #FFA500; /* Laranja */
   color: white;
 }
-
-.btn-delete:hover {
-  background: #c94a4a;
+.btn-edit:hover {
+  background: #e69500;
 }
 
+/* Botão excluir/cancelar */
+.btn-delete {
+  background: #E74C3C; /* Vermelho mais suave */
+  color: white;
+}
+.btn-delete:hover {
+  background: #C0392B;
+}
+
+td.acoes {
+  white-space: nowrap; /* impede quebra de linha */
+}
+
+td.acoes .btn {
+  margin-right: 8px;
+}

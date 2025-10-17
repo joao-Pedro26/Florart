@@ -1,0 +1,186 @@
+/* Estilo base do container */
+.container-editar {
+  max-width: 350px;
+  margin: 80px auto;
+  background: #fff;
+  padding: 30px 35px;
+  border: 1px solid black;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  position: relative;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Textarea */
+.container-editar textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  resize: vertical;
+  min-height: 80px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container-editar textarea:focus {
+  border-color: #5a2ff4;
+  outline: none;
+}
+
+/* Select */
+.container-editar select {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container-editar select:focus {
+  border-color: #5a2ff4;
+  outline: none;
+}
+
+/* File input */
+.container-editar input[type="file"] {
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+
+/* Título */
+.container-editar h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #5a2ff4;
+  font-size: 26px;
+}
+
+/* Labels */
+.container-editar label {
+  display: block;
+  margin-bottom: 6px;
+  margin-top: 16px;
+  color: #000;
+  font-weight: 500;
+}
+
+/* Campos de input */
+.container-editar input[type="text"],
+.container-editar input[type="password"],
+.container-editar input[type="email"],
+.container-editar input[type="number"] {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.2s;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+.container-editar input:focus {
+  border-color: #5a2ff4;
+  outline: none;
+}
+
+/* Botões */
+.form-botoes {
+  text-align: center; /* Centraliza o conteúdo interno */
+}
+
+.container-editar .btn-salvar {
+  display: inline-block;
+  width: 48%;
+  padding: 12px 0;
+  border-radius: 8px;
+  background-color: #5a2ff4;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 25px;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+}
+
+.container-editar .btn-salvar:hover {
+  background-color: #4523c3;
+}
+
+/* Voltar com ícone */
+.voltar-link {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fff;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  transition: all 0.18s ease;
+  z-index: 30;
+  cursor: pointer;
+}
+
+.voltar-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+}
+
+.icon-voltar {
+  font-size: 2.5rem;
+  color: #5a2ff4;
+}
+
+/* ==================== MENSAGENS DE ERRO ==================== */
+
+.erro {
+  background-color: #ffe3e3;
+  color: #b30000;
+  padding: 12px 16px;
+  border: 1px solid #ffcccc;
+  border-radius: 8px;
+  text-align: center;
+  margin: 10px auto;
+  max-width: 480px;
+}
+
+.alert {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    max-width: 400px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.alert-error, .alert-erro {
+    background-color: #ffe6e6;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+}
+
+.alert-success, .alert-sucesso {
+    background-color: #e6ffe6;
+    color: #009900;
+    border: 1px solid #009900;
+}

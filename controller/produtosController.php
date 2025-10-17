@@ -37,13 +37,14 @@ class ProdutoController
         }
     }
 
-    public function editarProduto($id, $nome, $descricao, $preco, $imagem = null)
+    public function editarProduto($id, $nome, $descricao, $tipo, $valor_unitario, $imagem = null)
     {
         try {
             if (!$id || !is_numeric($id))
                 throw new Exception("ID inválido.");
 
-            return $this->model->atualizarProduto($id, $nome, $descricao, $preco, $imagem);
+            // Passa todos os parâmetros para o método do model que atualiza o produto
+            return $this->model->atualizarProduto($id, $nome, $descricao, $tipo, $valor_unitario, $imagem);
         } catch (Exception $e) {
             $_SESSION['erro'] = $e->getMessage();
             return false;

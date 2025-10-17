@@ -80,4 +80,68 @@ class CompraModel extends Database
         }
     }
 
+    public function buscarCompras()
+    {
+        $stmt = $this->conexao->query("
+            SELECT 
+                c.id_compra, 
+                u.nome AS nome_usuario, 
+                c.status_compra, 
+                c.data_compra,
+                v.valor_total
+            FROM compra c
+            JOIN usuario u ON c.fk_usuario = u.id_usuario
+            LEFT JOIN Valor_Total_Compra v ON c.id_compra = v.id_compra
+            ORDER BY c.data_compra DESC
+        ");
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscarComprasComItens() {
+        $sql = "SELECT c.id_compra, u.nome AS nome_usuario, c.data_compra, c.status_compra, vt.valor_total
+                FROM Compra c
+                JOIN Usuario u ON u.id_usuario = c.fk_usuario
+                LEFT JOIN Valor_Total_Compra vt ON vt.id_compra = c.id_compra
+                ORDER BY c.data_compra DESC";
+
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->execute();
+        $compras = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $ids = array_column($compras, 'id_compra');
+        if (count($ids) > 0) {
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+
+            $sqlItens = "SELECT cp.fk_compra, p.nome, cp.quantidade
+                         FROM compra_produto cp
+                         JOIN Produto p ON p.id_produto = cp.fk_produto
+                         WHERE cp.fk_compra IN ($placeholders)";
+
+            $stmtItens = $this->conexao->prepare($sqlItens);
+            $stmtItens->execute($ids);
+            $itens = $stmtItens->fetchAll(PDO::FETCH_ASSOC);
+
+            $itensPorCompra = [];
+            foreach ($itens as $item) {
+                $itensPorCompra[$item['fk_compra']][] = $item;
+            }
+        } else {
+            $itensPorCompra = [];
+        }
+
+        foreach ($compras as &$compra) {
+            $id = $compra['id_compra'];
+            if (!empty($itensPorCompra[$id])) {
+                $listaItens = array_map(function($i) {
+                    return $i['nome'] . " (x" . $i['quantidade'] . ")";
+                }, $itensPorCompra[$id]);
+                $compra['itens_comprados'] = implode(', ', $listaItens);
+            } else {
+                $compra['itens_comprados'] = '';
+            }
+        }
+        return $compras;
+    }
+
 }

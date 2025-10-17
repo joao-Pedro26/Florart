@@ -31,8 +31,9 @@ function handleRoute()
                     $postData('id'),
                     $postData('nome'),
                     $postData('email'),
+                    $postData('telefone'),
                     $postData('senha'),
-                    $postData('telefone')
+                    $postData('admin')
                 );
             }
             break;

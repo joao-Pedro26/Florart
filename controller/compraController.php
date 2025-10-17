@@ -43,5 +43,22 @@ class CompraController
         }
     }
 
+    public function listarCompras()
+    {
+        return $this->model->buscarComprasComItens();
+    }
+
+    public function cancelarCompra($idCompra)
+    {
+        if (!$idCompra || !is_numeric($idCompra)) {
+            throw new Exception("ID da compra inválido.");
+        }
+
+        try {
+            return $this->model->atualizarStatus($idCompra, 'cancelado');
+        } catch (Exception $e) {
+            throw new Exception("Erro ao cancelar a compra: " . $e->getMessage());
+        }
+    }
 
 }
