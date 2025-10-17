@@ -10,7 +10,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 // Redireciona se não estiver   logado
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
-    header('Location: home.php');
+    header('Location: login.php');
     exit;
 }
 
