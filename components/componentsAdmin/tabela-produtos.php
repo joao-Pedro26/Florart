@@ -21,14 +21,8 @@
           <td>R$ <?= number_format($p['valor_unitario'], 2, ',', '.') ?></td>
           <td><?= htmlspecialchars($p['tipo']) ?></td>
           <td>
-            <button 
-              class="btn-editar-produto"
-              data-id="<?= htmlspecialchars($p['id_produto']) ?>"
-              data-nome="<?= htmlspecialchars($p['nome']) ?>"
-              data-preco="<?= htmlspecialchars($p['valor_unitario']) ?>"
-              data-categoria="<?= htmlspecialchars($p['tipo']) ?>"
-              data-imagem="<?= htmlspecialchars($p['imagem']) ?>">
-              Editar
+            <button class="btn-editar-produto">
+              <a href="formEditarProdutos.php?id=<?= $p['id_produto'] ?>" class="btn-editar">Editar</a>
             </button>
 
             <button 

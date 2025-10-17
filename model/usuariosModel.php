@@ -74,7 +74,7 @@ class UsuarioModel extends Database
         return $stmt->execute();
     }
 
-    public function atualizarUsuario($id, $nome, $email, $telefone, $senha = null)
+    public function atualizarUsuario($id, $nome, $email, $telefone, $senha)
     {
         $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone";
         if ($senha) $sql .= ", senha = :senha";

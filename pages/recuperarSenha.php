@@ -51,7 +51,6 @@ $token = $_GET['token'] ?? null;
     <div class="box-log-cad">
 
       <div class="header-log-cad">
-        <img src="../images/logo.png" alt="Logo" class="logo-log-cad">
         <h1 class="titulo-log-cad">Recuperar Senha</h1>
       </div>
 
@@ -61,7 +60,7 @@ $token = $_GET['token'] ?? null;
         </div>
       <?php endif; ?>
 
-      <p style="text-align:center; margin-bottom:1.2rem; color:#444;">
+      <p style="text-align:justify; margin-bottom:1.2rem; color:#444;">
         Digite o e-mail cadastrado e enviaremos um link para redefinir sua senha.
       </p>
 

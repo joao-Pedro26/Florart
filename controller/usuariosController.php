@@ -71,6 +71,9 @@ class UsuarioController
         }
     } 
 
+    public function getUsuarioPorID($id) {
+        return  $usuario = $this->model->getUsuarioPorID($id);
+    } 
     public function loginConta($email, $senha) 
     {
         try {

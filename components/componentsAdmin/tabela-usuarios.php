@@ -23,19 +23,13 @@
             <td><?= htmlspecialchars($u['telefone']) ?></td>
             <td><?= $u['admin'] ? 'Sim' : 'Não' ?></td>
             <td class="acoes">
-              <button class="btn-editar-usuario"
-                data-id="<?= $usuario['id'] ?>"
-                data-nome="<?= htmlspecialchars($usuario['nome']) ?>"
-                data-email="<?= htmlspecialchars($usuario['email']) ?>"
-                data-telefone="<?= htmlspecialchars($usuario['telefone']) ?>">
-                Editar
-            </button>
-
-            <button onclick="abrirModalExcluir('Deseja realmente excluir este produto?', () => {
-              window.location.href='admin.php?route=produtos/excluir&id=<?= $produto['id'] ?>';
-            })">
+              <button class="btn-editar-usuario" ><a href="formEditarUsuarios.php?id=<?= $u['id_usuario'] ?>" class="btn-editar">Editar</a></button>
+              <button 
+              onclick="abrirModalExcluir('Deseja realmente excluir o produto <?= htmlspecialchars($p['nome']) ?>?', 
+              () => { window.location.href='admin.php?route=produtos/excluir&id=<?= $p['id_produto'] ?>'; })">
               Excluir
             </button>
+            
 
             </td>
           </tr>
