@@ -24,18 +24,18 @@ function handleProdutoRoute()
                 );
             break;
 
-        case 'produtos/editar':
-            if ($method === 'POST') {
-                // Recebe dados do POST corretamente
-                $id = $postData('id');
-                $nome = $postData('nome');
-                $tipo = $postData('tipo');
-                $preco = $postData('valor_unitario');
-                $imagem = $_FILES['imagem']['name'] ?? null;
+        // case 'produtos/editar':
+        //     if ($method === 'POST') {
+        //         // Recebe dados do POST corretamente
+        //         $id = $postData('id');
+        //         $nome = $postData('nome');
+        //         $tipo = $postData('tipo');
+        //         $preco = $postData('valor_unitario');
+        //         $imagem = $_FILES['imagem']['name'] ?? null;
 
-                return $controller->editarProduto($id, $nome, $tipo, $preco, $imagem);
-            }
-            break;
+        //         return $controller->editarProduto($id, $nome, $tipo, $preco, $imagem);
+        //     }
+        //     break;
 
         case 'produtos/excluir':
             if ($method === 'GET' || $method === 'POST') {

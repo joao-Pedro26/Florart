@@ -25,18 +25,18 @@ function handleRoute()
                 return $controller->logout();
             break;
 
-        case 'consultas/atualizar':
-            if ($method === 'POST') {
-                return $controller->editarConta(
-                    $postData('id'),
-                    $postData('nome'),
-                    $postData('email'),
-                    $postData('telefone'),
-                    $postData('senha'),
-                    $postData('admin')
-                );
-            }
-            break;
+        // case 'consultas/atualizar':
+        //     if ($method === 'POST') {
+        //         return $controller->editarConta(
+        //             $postData('id'),
+        //             $postData('nome'),
+        //             $postData('email'),
+        //             $postData('telefone'),
+        //             $postData('senha'),
+        //             $postData('admin')
+        //         );
+        //     }
+        //     break;
 
         case 'consultas/deletar':
             if ($method === 'GET' || $method === 'POST') {

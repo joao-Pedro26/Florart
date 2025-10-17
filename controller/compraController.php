@@ -55,7 +55,11 @@ class CompraController
         }
 
         try {
-            return $this->model->atualizarStatus($idCompra, 'cancelado');
+            $affected = $this->model->atualizarStatus($idCompra, 'cancelado');
+            if ($affected === 0) {
+                throw new Exception("Nenhuma compra foi atualizada, verifique o ID.");
+            }
+            return true;
         } catch (Exception $e) {
             throw new Exception("Erro ao cancelar a compra: " . $e->getMessage());
         }

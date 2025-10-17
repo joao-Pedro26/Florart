@@ -12,7 +12,9 @@ function handleCompraRoute() {
         case 'compras/cancelar':
             $id = $_GET['id'] ?? null;
             if ($id) {
-                return $controller->cancelarCompra($id);
+                $controller->cancelarCompra($id);
+                header("Location: admin.php?route=compras/listarCompras");
+                exit();
             }
             break;
 

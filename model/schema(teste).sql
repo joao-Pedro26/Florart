@@ -42,8 +42,8 @@ CREATE TABLE Compra (
     sessao VARCHAR(100), 2
     acrescimo_total NUMERIC(4,2) NOT NULL DEFAULT 0 CHECK (acrescimo_total >= -9999.99), 3
     status_compra status NOT NULL DEFAULT 'pendente', 4
-        -- lógica : carrinho > reservado > pendente > pago > entregue
-        --                                     ... > cancelado > ...
+        -- lógica : reservado > entregue
+        --          ... > cancelado > ...
     FOREIGN KEY (fk_usuario) REFERENCES Usuario(id_usuario) ON DELETE CASCADE 5
 );
 

@@ -29,12 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = $controller->editarProduto($id, $nome, $descricao, $tipo, $preco, $imagem);
 
     if ($resultado) {
-        $mensagem = "Produto atualizado com sucesso!";
-        $tipoMensagem = "sucesso";
-        // Atualiza os dados para refletir no form
-        $produto = $controller->buscarProduto($id);
+        // Redireciona para admin.php após salvar com sucesso
+        header('Location: ../pages/admin.php?route=consultas/listarProdutos');
+        exit;
     } else {
-        // A mensagem de erro está em $_SESSION['erro'], se preferir pode capturar aqui
         $mensagem = $_SESSION['erro'] ?? "Erro ao atualizar o produto.";
         $tipoMensagem = "erro";
         unset($_SESSION['erro']);

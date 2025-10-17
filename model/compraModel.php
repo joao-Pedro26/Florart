@@ -80,6 +80,7 @@ class CompraModel extends Database
         }
     }
 
+    // não está sendo utilizado no momento
     public function buscarCompras()
     {
         $stmt = $this->conexao->query("
@@ -103,7 +104,7 @@ class CompraModel extends Database
                 FROM Compra c
                 JOIN Usuario u ON u.id_usuario = c.fk_usuario
                 LEFT JOIN Valor_Total_Compra vt ON vt.id_compra = c.id_compra
-                ORDER BY c.data_compra DESC";
+                ORDER BY c.data_compra ASC";
 
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();

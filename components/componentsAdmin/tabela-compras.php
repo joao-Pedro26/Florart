@@ -27,13 +27,10 @@
                 <td><?= htmlspecialchars($c['itens_comprados']) ?></td>
                 <td class="acoes">
                     <?php if ($c['status_compra'] !== 'cancelado'): ?>
-                        <a
-                        href="#"
-                        class="btn btn-delete"
-                        onclick="abrirModalExcluir('Deseja realmente cancelar a compra ID <?= $c['id_compra'] ?>?',
-                            () => { window.location.href='admin.php?route=compras/cancelar&id=<?= $c['id_compra'] ?>'; })"
-                        >
-                        Cancelar
+                        <a href="admin.php?route=compras/cancelar&id=<?= $c['id_compra'] ?>" 
+                          class="btn btn-delete"
+                          onclick="return confirm('Tem certeza que deseja cancelar a compra ID <?= $c['id_compra'] ?>?');">
+                          Cancelar
                         </a>
                     <?php else: ?>
                         <em>Cancelada</em>

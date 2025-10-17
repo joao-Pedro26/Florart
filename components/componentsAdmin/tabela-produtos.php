@@ -11,6 +11,7 @@
           <th>ID</th>
           <th>Nome</th>
           <th>Preço</th>
+          <th>Tipo</th>
           <th>Descrição</th>
           <th>Ações</th>
         </tr>
@@ -23,16 +24,14 @@
             <td><?= htmlspecialchars($p['nome']) ?></td>
             <td>R$ <?= number_format($p['valor_unitario'], 2, ',', '.') ?></td>
             <td><?= htmlspecialchars($p['tipo']) ?></td>
+            <td><?= htmlspecialchars($p['descricao'])?></td>
             <td class="acoes">
               <a href="form-editar-produtos.php?id=<?= $p['id_produto'] ?>" class="btn btn-edit">Editar</a>
-              <a
-                href="#"
-                class="btn btn-delete"
-                onclick="abrirModalExcluir('Deseja realmente excluir o produto <?= htmlspecialchars($p['nome']) ?>?',
-                () => { window.location.href='admin.php?route=produtos/excluir&id=<?= $p['id_produto'] ?>'; })"
-              >
-                Excluir
-              </a>
+              <!-- <a href="admin.php?route=produtos/excluir&id=<?= $p['id_produto']?>" class="btn btn-delete">Deletar</a> -->
+              <a href="admin.php?route=produtos/excluir&id=<?= $p['id_produto']?>"  class="btn btn-delete"
+                  onclick="return confirm('Tem certeza que deseja deletar este produto?');">
+                  Deletar
+                </a>
             </td>
           </tr>
         <?php endforeach; ?>

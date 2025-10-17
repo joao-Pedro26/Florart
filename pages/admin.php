@@ -1,55 +1,54 @@
 <?php
-session_start();
-require_once "../public/routesUsuarios.php";
-require_once "../public/routesProdutos.php";
-require_once "../public/routesCompras.php";
+  session_start();
+  require_once "../public/routesUsuarios.php";
+  require_once "../public/routesProdutos.php";
+  require_once "../public/routesCompras.php";
 
-if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
-    header("Location: home.php");
-    exit;
-}
+  if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
+      header("Location: home.php");
+      exit;
+  }
 
-$route = $_GET['route'] ?? 'consultas/listarUsuarios';
-$_GET['route'] = $route;
+  $route = $_GET['route'] ?? 'consultas/listarUsuarios';
+  $_GET['route'] = $route;
 
-$abaAtiva = '';
-
-
-$id = intval($_GET['id'] ?? 0);
-
-if (($route === 'consultas/deletar' || $route === 'produtos/excluir') && $id) {
-    if ($route === 'consultas/deletar') handleRoute();
-    if ($route === 'produtos/excluir') handleProdutoRoute();
-
-    $redirect = ($route === 'consultas/deletar') ? 'consultas/listarUsuarios' : 'produtos/listarProdutos';
-    header("Location: admin.php?route={$redirect}");
-    exit;
-}
+  $abaAtiva = '';
 
 
-if (($route === 'consultas/atualizar' || $route === 'produtos/editar') && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($route === 'consultas/atualizar') handleRoute();
-    if ($route === 'produtos/editar') handleProdutoRoute();
+  $id = intval($_GET['id'] ?? 0);
 
-    $redirect = ($route === 'consultas/atualizar') ? 'consultas/listarUsuarios' : 'produtos/listarProdutos';
-    header("Location: admin.php?route={$redirect}");
-    exit;
-}
+  if (($route === 'consultas/deletar' || $route === 'produtos/excluir') && $id) {
+      if ($route === 'consultas/deletar') handleRoute();
+      if ($route === 'produtos/excluir') handleProdutoRoute();
 
+      $redirect = ($route === 'consultas/deletar') ? 'consultas/listarUsuarios' : 'produtos/listarProdutos';
+      header("Location: admin.php?route={$redirect}");
+      exit;
+  }
 
-if ($route === 'produtos/listarProdutos') {
-    $produtos = handleProdutoRoute();
-    $abaAtiva = 'produtos';
-} 
-else if ($route === 'consultas/listarUsuarios') {
-    $usuarios = handleRoute();
-    $abaAtiva = 'usuarios';
-}
-else if ($route === 'compras/listarCompras') {
-    $compras = handleCompraRoute();
-    $abaAtiva = 'compras';
-}
+  if (($route === 'consultas/atualizar' || $route === 'produtos/editar') && $_SERVER['REQUEST_METHOD'] === 'POST') {
+      if ($route === 'consultas/atualizar') handleRoute();
+      if ($route === 'produtos/editar') handleProdutoRoute();
+
+      $redirect = ($route === 'consultas/atualizar') ? 'consultas/listarUsuarios' : 'produtos/listarProdutos';
+      header("Location: admin.php?route={$redirect}");
+      exit;
+  }
+
+  if ($route === 'produtos/listarProdutos') {
+      $produtos = handleProdutoRoute();
+      $abaAtiva = 'produtos';
+  } 
+  else if ($route === 'consultas/listarUsuarios') {
+      $usuarios = handleRoute();
+      $abaAtiva = 'usuarios';
+  }
+  else if ($route === 'compras/listarCompras') {
+      $compras = handleCompraRoute();
+      $abaAtiva = 'compras';
+  }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

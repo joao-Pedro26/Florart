@@ -27,13 +27,10 @@
               <td><?= $u['admin'] ? 'Sim' : 'Não' ?></td>
               <td class="acoes">
                 <a href="form-editar-usuarios.php?id=<?= $u['id_usuario'] ?>" class="btn btn-edit">Editar</a>
-                <a
-                  href="#"
+                <a href="admin.php?route=consultas/deletar&id=<?= $u['id_usuario']?>" 
                   class="btn btn-delete"
-                  onclick="abrirModalExcluir('Deseja realmente excluir o usuário <?= htmlspecialchars($u['nome']) ?>?',
-                  () => { window.location.href='admin.php?route=usuarios/excluir&id=<?= $u['id_usuario'] ?>'; })"
-                >
-                  Excluir
+                  onclick="return confirm('Tem certeza que deseja deletar este usuário?');">
+                  Deletar
                 </a>
               </td>
             </tr>
