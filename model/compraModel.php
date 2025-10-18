@@ -156,7 +156,7 @@ class CompraModel extends Database
                     WHERE c.fk_usuario = :id
                     GROUP BY c.id_compra
                     ORDER BY c.data DESC";
-        $stmt = $this->conexao->prepare($sql_pedidos);
+        $stmt = $this->conexao->prepare($sql);
         $stmt->execute([':id' => $idUsuario]);
         $pedidosUsuario = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
