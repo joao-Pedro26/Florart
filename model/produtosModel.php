@@ -19,16 +19,15 @@ class ProdutoModel extends Database
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function criarProduto($nome, $descricao, $tipo, $valor_unitario, $estoque, $imagem = null)
+    public function criarProduto($nome, $descricao, $tipo, $valor_unitario, $imagem)
     {
-        $sql = "INSERT INTO produto (nome, descricao, tipo, valor_unitario, estoque, imagem, data_criacao)
-                VALUES (:nome, :descricao, :tipo, :valor_unitario, :estoque, :imagem, NOW())";
+        $sql = "INSERT INTO produto (nome, descricao, tipo, valor_unitario, imagem)
+                VALUES (:nome, :descricao, :tipo, :valor_unitario, :imagem)";
         $stmt = $this->conexao->prepare($sql);
         $stmt->bindValue(':nome', $nome);
         $stmt->bindValue(':descricao', $descricao);
         $stmt->bindValue(':tipo', $tipo);
         $stmt->bindValue(':valor_unitario', $valor_unitario);
-        $stmt->bindValue(':estoque', $estoque);
         $stmt->bindValue(':imagem', $imagem);
         return $stmt->execute();
     }

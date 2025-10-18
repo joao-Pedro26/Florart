@@ -9,7 +9,7 @@
       exit;
   }
 
-  $route = $_GET['route'] ?? 'consultas/listarUsuarios';
+  $route = $_GET['route'];
   $_GET['route'] = $route;
 
   $abaAtiva = '';
@@ -17,9 +17,10 @@
 
   $id = intval($_GET['id'] ?? 0);
 
-  if (($route === 'consultas/deletar' || $route === 'produtos/excluir') && $id) {
+  if (($route === 'consultas/deletar' || $route === 'produtos/excluir') || $route ==='compras/cancelar' && $id) {
       if ($route === 'consultas/deletar') handleRoute();
       if ($route === 'produtos/excluir') handleProdutoRoute();
+      if ($route ==='compras/cancelar') handleCompraRoute();
 
       $redirect = ($route === 'consultas/deletar') ? 'consultas/listarUsuarios' : 'produtos/listarProdutos';
       header("Location: admin.php?route={$redirect}");
@@ -34,6 +35,8 @@
       header("Location: admin.php?route={$redirect}");
       exit;
   }
+
+ 
 
   if ($route === 'produtos/listarProdutos') {
       $produtos = handleProdutoRoute();

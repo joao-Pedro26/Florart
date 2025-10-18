@@ -1,7 +1,7 @@
 <div id="produtos" class="tabela">
 
   <h2>Gerenciar Produtos</h2>
-  <a href="cadastroProduto.php" class="btn-add">+ Adicionar Produto</a>
+  <a href="../../pages/cadastroProduto.php" class="btn-add">+ Adicionar Produto</a>
 
   <div class="tabela-scroll">
 
@@ -27,7 +27,7 @@
             <td><?= htmlspecialchars($p['descricao'])?></td>
             <td class="acoes">
               <a href="form-editar-produtos.php?id=<?= $p['id_produto'] ?>" class="btn btn-edit">Editar</a>
-              <!-- <a href="admin.php?route=produtos/excluir&id=<?= $p['id_produto']?>" class="btn btn-delete">Deletar</a> -->
+
               <a href="admin.php?route=produtos/excluir&id=<?= $p['id_produto']?>"  class="btn btn-delete"
                   onclick="return confirm('Tem certeza que deseja deletar este produto?');">
                   Deletar

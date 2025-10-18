@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($resultado) {
         // Redireciona para admin.php após salvar com sucesso
-        header('Location: ../pages/admin.php?route=consultas/listarProdutos');
+        header('Location: admin.php?route=consultas/listarUsuarios');
         exit;
     } else {
         $mensagem = $_SESSION['erro'] ?? "Erro ao atualizar o produto.";
