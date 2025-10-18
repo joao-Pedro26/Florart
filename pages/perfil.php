@@ -1,7 +1,20 @@
 <?php
+
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
+
+require_once "../controller/usuariosController.php";
+require_once "../controller/compraController.php";
+
+
+$controllerUsuario = new UsuarioController();
+
+$usuario = $controllerUsuario->getUsuarioPorID($_SESSION['id'] ?? 0);
+
+$controllerCompra = new CompraController();
+
+$pedidos = $controllerCompra->listarCompras();
 
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     header('Location: home.php');
@@ -36,15 +49,15 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
                 </div>
                 <label>Email:</label>
                 <div class="campo">
-                    <p>joao@gmail.com</p>
+                    <p><?=$usuario['email']?></p>
                 </div>
                 <label>Nome:</label>
                 <div class="campo">
-                    <p>Joao</p>
+                    <p><?=$usuario['nome']?></p>
                 </div>
                 <label>Telefone:</label>
                 <div class="campo">
-                    <p>14997973331 </p>
+                    <p><?=$usuario['telefone']?></p>
                 </div>
 
             </div>
@@ -65,8 +78,8 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Flor #2232</td>
-                                    <td>34-56-3455</td>
+                                    <td><?=$pedidos['id_compra'] ?></td>
+                                    <td><?=$pedidos['data_compra'] ?></td>
                                     <td>34535</td>
                                     <td>35345,36</td>
                                     <td>Cancelado</td>

@@ -145,4 +145,38 @@ class CompraModel extends Database
         return $compras;
     }
 
+
+    public function getComprasPorUsuario($idUsuario)
+{
+    try {
+        // Busca todas as compras do usuário, com total e status
+            $sql= "SELECT c.id_compra, c.data, c.status, SUM(cp.quantidade) AS total_quantidade, SUM(cp.quantidade * cp.valor_unitario) AS preco_total
+                    FROM compra AS c
+                    JOIN compra_produto AS cp ON c.id_compra = cp.fk_compra
+                    WHERE c.fk_usuario = :id
+                    GROUP BY c.id_compra
+                    ORDER BY c.data DESC";
+        $stmt = $this->conexao->prepare($sql_pedidos);
+        $stmt->execute([':id' => $idUsuario]);
+        $pedidosUsuario = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
+        $stmt->execute();
+        $compras = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Se não houver compras, retorna um array vazio
+        if (!$compras) {
+            return [];
+        }
+
+        return $compras;
+
+    } catch (Exception $e) {
+        throw new Exception("Erro ao buscar compras do usuário: " . $e->getMessage());
+    }
+}
+
+
+
 }

@@ -65,4 +65,11 @@ class CompraController
         }
     }
 
+
+       public function getComprasPorUsuario() 
+    {
+        $idUsuario = $_SESSION['id'];
+        return $this->model->getComprasPorUsuario($idUsuario);
+    }
+
 }
