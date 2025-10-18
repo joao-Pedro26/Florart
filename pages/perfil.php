@@ -14,7 +14,7 @@ $usuario = $controllerUsuario->getUsuarioPorID($_SESSION['id'] ?? 0);
 
 $controllerCompra = new CompraController();
 
-$pedidos = $controllerCompra->listarCompras();
+$pedidos = $controllerCompra->getComprasPorUsuario($_SESSION['id'] ?? 0);
 
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     header('Location: home.php');
@@ -62,33 +62,40 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
 
             </div>
         </section>
-            <section class="perfil" >
+            <section class="perfil">
                 <h2>Meus Pedidos</h2>
-            
-                    <div class="produto">
-                        <table>
-                            <thead>
+                <div class="produto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pedido Nº</th>
+                                <th>Data</th>
+                                <th>Quantidade</th>
+                                <th>Valor Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($pedidos)): ?>
+                                <?php foreach ($pedidos as $pedido): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($pedido['id_compra']) ?></td>
+                                        <td><?= htmlspecialchars($pedido['data_compra']) ?></td>
+                                        <td><?= htmlspecialchars($pedido['quantidade_total'] ?? 0) ?></td>
+                                        <td>R$ <?= number_format($pedido['valor_total'] ?? 0, 2, ',', '.') ?></td>
+                                        <td><?= htmlspecialchars($pedido['status_compra']) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
                                 <tr>
-                                    <th>Pedido Nº</th>
-                                    <th>Data</th>
-                                    <th>Quantidade</th>
-                                    <th>Valor Total</th>
-                                    <th>Status</th>
+                                    <td colspan="5">Nenhum pedido encontrado.</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><?=$pedidos['id_compra'] ?></td>
-                                    <td><?=$pedidos['data_compra'] ?></td>
-                                    <td>34535</td>
-                                    <td>35345,36</td>
-                                    <td>Cancelado</td>
-                                </tr>
-                            </tbody>
-
-                        </table>     
+                            <?php endif; ?>
+                        </tbody>
+                    </table>     
                 </div>
             </section>
+
     </main>
     <?php include '../components/menu-mobile.php'; ?>
 

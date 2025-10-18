@@ -66,9 +66,8 @@ class CompraController
     }
 
 
-       public function getComprasPorUsuario() 
+    public function getComprasPorUsuario($idUsuario) 
     {
-        $idUsuario = $_SESSION['id'];
         return $this->model->getComprasPorUsuario($idUsuario);
     }
 

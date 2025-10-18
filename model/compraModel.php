@@ -150,14 +150,14 @@ class CompraModel extends Database
 {
     try {
         // Busca todas as compras do usuário, com total e status
-            $sql= "SELECT c.id_compra, c.data, c.status, SUM(cp.quantidade) AS total_quantidade, SUM(cp.quantidade * cp.valor_unitario) AS preco_total
+            $sql= "SELECT c.id_compra, c.data_compra, c.status_compra, SUM(cp.quantidade) AS total_quantidade, SUM(cp.quantidade * cp.valor_unitario) AS preco_total
                     FROM compra AS c
                     JOIN compra_produto AS cp ON c.id_compra = cp.fk_compra
-                    WHERE c.fk_usuario = :id
+                    WHERE c.fk_usuario = :idUsuario
                     GROUP BY c.id_compra
-                    ORDER BY c.data DESC";
+                    ORDER BY c.data_compra DESC";
         $stmt = $this->conexao->prepare($sql);
-        $stmt->execute([':id' => $idUsuario]);
+        $stmt->execute([':idUsuario' => $idUsuario]);
         $pedidosUsuario = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $stmt = $this->conexao->prepare($sql);
