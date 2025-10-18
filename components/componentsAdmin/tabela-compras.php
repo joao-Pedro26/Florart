@@ -27,9 +27,7 @@
                 <td><?= htmlspecialchars($c['itens_comprados']) ?></td>
                 <td class="acoes">
                     <?php if ($c['status_compra'] !== 'cancelado'): ?>
-                        <a href="admin.php?route=compras/cancelar&id=<?= $c['id_compra'] ?>" 
-                          class="btn btn-delete"
-                          onclick="return confirm('Tem certeza que deseja cancelar a compra ID <?= $c['id_compra'] ?>?');">
+                        <a href="admin.php?route=compras/cancelar&id=<?= $c['id_compra'] ?>" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja cancelar a compra ID <?= $c['id_compra'] ?>?');">
                           Cancelar
                         </a>
                     <?php else: ?>

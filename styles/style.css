@@ -1293,3 +1293,47 @@ a:focus-visible, button:focus-visible{
 
   
 }
+
+/* Estilo para o link do Instagram */
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #FF5733;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.instagram-link:hover {
+  color: #FF4500;
+  transform: scale(1.1);
+}
+
+.instagram-link i {
+  font-size: 1.5rem;
+}
+
+/* Estilo para o botão do Instagram com degradê verde */
+.btn-instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(90deg, #32CD32, #228B22);
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-instagram:hover {
+  background: linear-gradient(90deg, #228B22, #32CD32);
+  transform: translateY(-2px);
+}
+
+.btn-instagram i {
+  font-size: 1.5rem;
+}

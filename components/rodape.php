@@ -13,17 +13,13 @@
     <section id="contato" class="ancora">
       <h3>Contato</h3>
       <ul class="lista-contato">
-        <li><i class="bx bxs-phone-call"></i>(14) 997522691</li>
-        <li><i class="bx bxs-envelope"></i> florartt@gmail.com</li>
+        <li><i class="bx bxs-envelope"></i> florartbauru@gmail.com</li>
         <li><i class="bx bxs-map"></i> Av. nações Unidas, 58-50 — Bauru, SP</li>
       </ul>
 
       <div class="acoes-contato">
-        <a class="btn-whats" href="https://wa.me/5514997522691" target="_blank" rel="noopener">
-          <i class="bx bxl-whatsapp"></i> Falar no WhatsApp
-        </a>
-        <a class="btn-email" href="mailto:contato@florart.com">
-          <i class="bx bxs-paper-plane"></i> Enviar e-mail
+        <a href="https://www.instagram.com/__florart_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="btn-instagram">
+          <i class="bx bxl-instagram"></i> Visite nosso Instagram
         </a>
       </div>
 
@@ -32,6 +28,6 @@
   </div>
 
   <div class="rodape-copy">
-    <p>© <span id="ano-copy"></span> Florartt — Todos os direitos reservados.</p>
+    <p>© <span id="ano-copy"></span> Florart — Todos os direitos reservados.</p>
   </div>
 </footer>

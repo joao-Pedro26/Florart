@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = $controller->editarConta($id, $nome, $email, $telefone, $senha, $admin);
 
     if ($resultado) {
-        header('Location: ../pages/admin.php?route=consultas/listarUsuarios');
+        header('Location: admin.php?route=consultas/listarUsuarios');
         exit;
     } else {
         $_SESSION['erro'] = "Erro ao atualizar usuário.";
@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>Editar Usuário</h1>
 
     <form method="POST" class="form-editar">
+      <input type="hidden" name="admin" value="0">
       <label for="nome">Nome:</label>
       <input type="text" name="nome" id="nome" value="<?= htmlspecialchars($usuario['nome']) ?>" required>
 

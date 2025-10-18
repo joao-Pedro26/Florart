@@ -19,7 +19,7 @@ class ProdutoController
         return $this->model->listarProdutos();
     }
 
-    public function cadastrarProduto($nome, $descricao, $tipo, $preco, $imagem = null)
+    public function cadastrarProduto($nome, $descricao, $tipo, $preco, $imagem)
     {
         try {
             if (!$nome || !$descricao || !$preco)
@@ -27,6 +27,27 @@ class ProdutoController
 
             if (!is_numeric($preco) || $preco <= 0)
                 throw new Exception("Preço inválido.");
+
+                 $caminhoImagem = null;
+
+            if (!empty($_FILES['imagem']['name'])) {
+                $nomeArquivo = basename($_FILES['imagem']['name']);
+                $pastaDestino = "../images/"; // caminho da pasta onde salvará as imagens
+                $caminhoImagem = $pastaDestino . $nomeArquivo;
+
+                // Cria a pasta se não existir
+                if (!file_exists($pastaDestino)) {
+                    mkdir($pastaDestino, 0777, true);
+                }
+
+                // Move o arquivo temporário para a pasta final
+                if (!move_uploaded_file($_FILES['imagem']['tmp_name'], $caminhoImagem)) {
+                    throw new Exception("Erro ao fazer upload da imagem.");
+                }
+            }
+
+            // Salva no banco o caminho relativo (ex: 'imagens/foto.jpg')
+            $caminhoBanco = $caminhoImagem ? 'images/' . $nomeArquivo : null;
 
 
             return $this->model->criarProduto($nome, $descricao, $tipo, $preco, $imagem);

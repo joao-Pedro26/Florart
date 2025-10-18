@@ -129,7 +129,7 @@ class UsuarioController
             $email = trim($email) ?: $usuarioAtual['email'];
             $telefone = $telefone ?: $usuarioAtual['telefone'];
             $senha = $senha ?: null;
-            $admin = is_null($admin) ? $usuarioAtual['admin'] : (bool)$admin;
+            $admin = (bool)$_POST['admin'];
 
             if ($email && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 throw new \Exception("E-mail inválido.");

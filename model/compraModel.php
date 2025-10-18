@@ -63,7 +63,7 @@ class CompraModel extends Database
 
             // Atualiza o status da compra diretamente
             $update = $this->conexao->prepare("
-                UPDATE Compra 
+                UPDATE compra 
                 SET status_compra = :novo 
                 WHERE id_compra = :id
             ");
