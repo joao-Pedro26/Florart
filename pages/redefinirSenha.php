@@ -41,9 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-<a href="javascript:history.back()" class="voltar-link">
-  <i class='bx bx-chevron-left icon-voltar'></i>
-</a>
+    <a href="javascript:history.back()"><i class='bxr  bx-arrow-left-stroke icon-voltar' style='color:#5a2ff4'></i> </a>
+
 
 <div class="container-recuperar" style="display:flex; align-items:center; justify-content:center; min-height:100vh;">
   <div class="box-log-cad">

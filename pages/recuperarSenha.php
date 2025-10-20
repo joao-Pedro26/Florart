@@ -35,16 +35,16 @@ $token = $_GET['token'] ?? null;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Recuperar Senha</title>
-  <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="../styles/reset.css" />
   <link rel="stylesheet" href="../styles/recuperar-senha.css" />
+  <link rel="stylesheet" href="../styles/style.css">
+  <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+
 </head>
 
 <body>
   <!-- Botão voltar no canto superior esquerdo -->
-<a href="javascript:history.back()" class="voltar-link">
-  <i class='bx bx-chevron-left icon-voltar'></i>
-</a>
+    <a href="javascript:history.back()"><i class='bxr  bx-arrow-left-stroke icon-voltar' style='color:#5a2ff4'></i> </a>
 
   <!-- Container centralizado -->
   <div class="container-recuperar" style="display:flex; align-items:center; justify-content:center; min-height:100vh;">
