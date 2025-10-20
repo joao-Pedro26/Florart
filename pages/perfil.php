@@ -17,7 +17,7 @@ $controllerCompra = new CompraController();
 $pedidos = $controllerCompra->getComprasPorUsuario($_SESSION['id'] ?? 0);
 
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
-    header('Location: home.php');
+    header('Location: login.php');
     exit;
 }
 ?>
@@ -81,8 +81,8 @@ if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
                                     <tr>
                                         <td><?= htmlspecialchars($pedido['id_compra']) ?></td>
                                         <td><?= htmlspecialchars($pedido['data_compra']) ?></td>
-                                        <td><?= htmlspecialchars($pedido['quantidade_total'] ?? 0) ?></td>
-                                        <td>R$ <?= number_format($pedido['valor_total'] ?? 0, 2, ',', '.') ?></td>
+                                        <td><?= htmlspecialchars($pedido['total_quantidade'] ?? 0) ?></td>
+                                        <td>R$ <?= number_format($pedido['preco_total'] ?? 0, 2, ',', '.') ?></td>
                                         <td><?= htmlspecialchars($pedido['status_compra']) ?></td>
                                     </tr>
                                 <?php endforeach; ?>

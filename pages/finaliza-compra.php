@@ -140,6 +140,8 @@ foreach ($carrinho as $produto) {
                 btnFechar.addEventListener('click', () => {
                     modal.style.opacity = '0';
                     setTimeout(() => modal.remove(), 300);
+                    window.location.href = 'home.php';
+
                 });
             }
         });

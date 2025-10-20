@@ -214,8 +214,8 @@ class UsuarioController
         $token = $usuario['senha']; // ⚠️ Aqui você está usando a hash da senha como token, mas vamos manter por simplicidade.
         $nome = $usuario['nome'];
 
-        $link = "http://localhost:3000/pages/redefinirSenha.php?token=$token";
-        // $link = "http://eq5.inf2.projetoscti.com.br/redefinir.php?token=$token";
+        //$link = "http://localhost:3000/pages/redefinirSenha.php?token=$token";
+        $link = "http://eq5.inf2.projetoscti.com.br/pages/redefinirSenha.php?token=$token";
         // link correto é o que está comentado
 
         $assunto = 'Recuperar Senha - Florart';

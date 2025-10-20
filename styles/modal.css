@@ -21,13 +21,13 @@
 }
 
 .modal-conteudo h2 {
-    color: #2e8b57;
+    color: #5a2ff4;
     margin-bottom: 1rem;
 }
 
 .modal-conteudo button {
     margin-top: 1rem;
-    background: #2e8b57;
+    background: linear-gradient(90deg, #916cf1, #7a55ff);
     color: white;
     border: none;
     border-radius: .5rem;
