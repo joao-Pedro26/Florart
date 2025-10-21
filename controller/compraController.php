@@ -23,13 +23,13 @@ class CompraController
 
         $idUsuario = $_SESSION['id'];
         $carrinho = $_SESSION['carrinho'] ?? [];
-
+        $acrescimoTotal = $_SESSION['acrescimo_total'];
         if (empty($carrinho)) {
             throw new Exception("Carrinho vazio.");
         }
 
         try {
-            $idCompra = $this->model->criarCompra($idUsuario, $carrinho);
+            $idCompra = $this->model->criarCompra($idUsuario, $carrinho, $acrescimoTotal);
 
             // Limpa o carrinho da sessão
             unset($_SESSION['carrinho']);

@@ -2,13 +2,10 @@
 session_start();
 require_once '../controller/compraController.php';
 $compraFinalizada = $_SESSION['compra_finalizada'] ?? null;
-if ($compraFinalizada) {
-    unset($_SESSION['compra_finalizada']); // para mostrar só uma vez
-}
+if ($compraFinalizada) unset($_SESSION['compra_finalizada']);
+
 date_default_timezone_set('America/Sao_Paulo');
 
-
-// Redireciona se não estiver   logado
 if (!isset($_SESSION['statusLogado']) || $_SESSION['statusLogado'] !== true) {
     header('Location: login.php');
     exit;
@@ -21,7 +18,13 @@ $mensagem = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar'])) {
     if (!empty($carrinho)) {
         try {
-            $idCompra = $controller->finalizarCompra(); // Cria compra e limpa carrinho
+            // 🔹 Captura o acréscimo enviado pelo formulário
+            $acrescimoTotal = floatval($_POST['acrescimo_total'] ?? 0);
+            $_SESSION["acrescimo_total"] = $_POST['acrescimo_total'] ?? 0;
+
+            // 🔹 Envia o valor como parâmetro para o controller
+            $idCompra = $controller->finalizarCompra($acrescimoTotal);
+
             $_SESSION['compra_finalizada'] = [
                 'id' => $idCompra,
                 'data' => date('d/m/Y H:i')
@@ -37,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar'])) {
     }
 }
 
-// Calcula total de itens e valor
 $totalItens = 0;
 $totalValor = 0;
 foreach ($carrinho as $produto) {
@@ -57,7 +59,6 @@ foreach ($carrinho as $produto) {
     <link rel="stylesheet" href="../styles/modal.css">
     <link rel="stylesheet" href="../styles/header-footer.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
-
     <title>Finalizar Compra</title>
 </head>
 <body>
@@ -104,10 +105,16 @@ foreach ($carrinho as $produto) {
                 <section class="resumo-compra">
                     <h3>Resumo da Compra</h3>
                     <p>Total de Itens: <?= $totalItens ?></p>
-                    <p>Valor Total: R$ <?= number_format($totalValor, 2, ',', '.') ?></p>
+                    <p>Valor Total: <span id="valorTotal">R$ <?= number_format($totalValor, 2, ',', '.') ?></span></p>
+
+                    <!-- 🔹 Novo campo para acréscimo/desconto -->
+            
+
+                    <p><strong>Total Final:</strong> <span id="valorFinal">R$ <?= number_format($totalValor, 2, ',', '.') ?></span></p>
 
                     <?php if (!empty($carrinho)): ?>
-                        <form method="POST">
+                        <form method="POST" id="formFinalizar">
+                            <input type="hidden" name="acrescimo_total" id="inputHiddenAcrescimo" value="0">
                             <button class="botao-finalizar" name="finalizar">Finalizar Compra</button>
                         </form>
                     <?php else: ?>
@@ -119,6 +126,7 @@ foreach ($carrinho as $produto) {
             </section>
         </section>
     </main>
+
     <?php if ($compraFinalizada): ?>
         <div class="modal-compra" id="modalCompra">
             <div class="modal-conteudo">
@@ -128,8 +136,36 @@ foreach ($carrinho as $produto) {
                 <button id="btnFecharModal">Fechar</button>
             </div>
         </div>
-        <?php endif; ?>
+    <?php endif; ?>
 
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('modalCompra');
+        const btnFechar = document.getElementById('btnFecharModal');
+        if (modal && btnFechar) {
+            modal.style.display = 'flex';
+            btnFechar.addEventListener('click', () => {
+                modal.style.opacity = '0';
+                setTimeout(() => modal.remove(), 300);
+            });
+        }
+
+        // 🔹 Atualiza total dinamicamente
+        const acrescimoInput = document.getElementById('acrescimo_total');
+        const valorTotalEl = document.getElementById('valorTotal');
+        const valorFinalEl = document.getElementById('valorFinal');
+        const inputHidden = document.getElementById('inputHiddenAcrescimo');
+
+        const valorBase = <?= $totalValor ?>;
+
+        acrescimoInput.addEventListener('input', () => {
+            const acrescimo = parseFloat(acrescimoInput.value) || 0;
+            const totalFinal = valorBase + acrescimo;
+            valorFinalEl.textContent = "R$ " + totalFinal.toFixed(2).replace('.', ',');
+            inputHidden.value = acrescimo; // envia o valor para o PHP
+        });
+    });
+    </script>
         <script>
         document.addEventListener('DOMContentLoaded', () => {
             const modal = document.getElementById('modalCompra');

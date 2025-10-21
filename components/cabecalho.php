@@ -17,7 +17,7 @@
         if (isset($_SESSION['statusLogado']) && $_SESSION['statusLogado'] === true) {
             // Se for ADMIN
             if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) {
-                echo '<a href="../pages/admin.php">Central de Controle</a>';
+                echo '<a href="../pages/admin.php?route=consultas/listarUsuarios">Central de Controle</a>';
                 echo '<a href="../pages/home.php?route=acoes/sair">Sair</a>';
             }
             // Se for USUÁRIO comum

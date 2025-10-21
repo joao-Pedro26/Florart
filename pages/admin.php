@@ -9,9 +9,10 @@
       exit;
   }
 
-  $route = $_GET['route'];
-  $_GET['route'] = $route;
+  
 
+  $route = $_GET['route'];
+  
   $abaAtiva = '';
 
 

@@ -8,21 +8,22 @@ class CompraModel extends Database
         parent::__construct($dsn, $username, $password);
     }
 
-    public function criarCompra($idUsuario, $carrinho)
+    public function criarCompra($idUsuario, $carrinho, $acrescimoTotal)
     {
         try {
             $this->conexao->beginTransaction();
 
             // 1️⃣ Cria a compra
             $stmt = $this->conexao->prepare("
-                INSERT INTO compra (fk_usuario, status_compra, sessao)
-                VALUES (:fk_usuario, 'reservado', :sessao)
+                INSERT INTO compra (fk_usuario, status_compra, sessao, acrescimo_total)
+                VALUES (:fk_usuario, 'reservado', :sessao, :acrescimo_total)
                 RETURNING id_compra
             ");
 
             $stmt->execute([
                 ':fk_usuario' => $idUsuario,
-                ':sessao' => session_id()
+                ':sessao' => session_id(),
+                ':acrescimo_total' => $acrescimoTotal
             ]);
             
             $idCompra = $stmt->fetchColumn();
@@ -89,12 +90,11 @@ class CompraModel extends Database
                 u.nome AS nome_usuario, 
                 c.status_compra, 
                 c.data_compra,
-                v.valor_total
+                COALESCE(v.valor_total, 0) + COALESCE(c.acrescimo_total, 0) AS valor_compra_final
             FROM compra c
             JOIN usuario u ON c.fk_usuario = u.id_usuario
             LEFT JOIN Valor_Total_Compra v ON c.id_compra = v.id_compra
-            ORDER BY c.data_compra DESC
-        ");
+            ORDER BY c.data_compra DESC;");
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -150,12 +150,19 @@ class CompraModel extends Database
 {
     try {
         // Busca todas as compras do usuário, com total e status
-            $sql= "SELECT c.id_compra, c.data_compra, c.status_compra, SUM(cp.quantidade) AS total_quantidade, SUM(cp.quantidade * cp.valor_unitario) AS preco_total
-                    FROM compra AS c
-                    JOIN compra_produto AS cp ON c.id_compra = cp.fk_compra
-                    WHERE c.fk_usuario = :idUsuario
-                    GROUP BY c.id_compra
-                    ORDER BY c.data_compra DESC";
+            $sql= "SELECT 
+                    c.id_compra, 
+                    c.data_compra, 
+                    c.status_compra,
+                    SUM(cp.quantidade) AS total_quantidade,
+                    SUM(cp.quantidade * cp.valor_unitario) + COALESCE(c.acrescimo_total, 0) AS preco_total
+                FROM compra AS c
+                JOIN compra_produto AS cp ON c.id_compra = cp.fk_compra
+                WHERE c.fk_usuario = :idUsuario
+                GROUP BY c.id_compra, c.data_compra, c.status_compra, c.acrescimo_total
+                ORDER BY c.data_compra DESC;
+                ";
+
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute([':idUsuario' => $idUsuario]);
         $pedidosUsuario = $stmt->fetchAll(PDO::FETCH_ASSOC);

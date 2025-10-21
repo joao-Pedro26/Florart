@@ -20,6 +20,7 @@ $preco     = isset($produto['valor_unitario']) ? number_format($produto['valor_u
         <div>
             <h3><?= $nome ?></h3>
             <p><?= $tipo ?></p>
+            <p id='descricao'><?= $descricao ?></p>
             <div class="preco-produto">R$ <?= $preco ?></div>
         </div>
         <div class="botoes">
